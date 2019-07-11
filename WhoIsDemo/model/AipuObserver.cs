@@ -148,61 +148,6 @@ namespace WhoIsDemo.model
 
         }
 
-        //private void ObserverFrame()
-        //{
-        //    var observable = Observable.Create<Bitmap>(async observer =>
-        //    {
-        //        observer.OnNext(await GetFrameAsync());
-        //    });
-        //    observable
-        //        .Where(res => res != null)
-        //        .Delay(TimeSpan.FromSeconds(1))
-        //        .Repeat()
-        //        .Subscribe(
-        //            res => Frame = res
-        //        );
-        //}
-
-        //private Task<Bitmap> GetFrameAsync()
-        //{
-
-        //    return Task.Run(() =>
-        //    {
-        //        semaphore.WaitAsync();
-
-                                
-        //        if (aipu.GetFrame() != null)
-        //        {
-        //            try
-        //            {
-        //                Bitmap bmp = (Bitmap)aipu.GetFrame().Clone();
-
-        //                var data = bmp.LockBits(new Rectangle(Point.Empty, bmp.Size), 
-        //                    System.Drawing.Imaging.ImageLockMode.WriteOnly, 
-        //                    System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-        //                bmp.UnlockBits(data);
-        //                //MemoryStream ms = new MemoryStream();
-        //                //bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-        //                //Bitmap b = new Bitmap(bmp.Width, bmp.Height, 
-        //                //    System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-
-        //                //Thread.Sleep(200);
-        //                semaphore.Release(1);
-        //                return bmp;
-        //            }
-        //            catch (System.AccessViolationException ex)
-        //            {
-
-        //                Console.WriteLine(ex.Message);
-        //            }
-
-        //        }
-                
-        //        semaphore.Release(1);
-        //        return null;
-
-        //    });
-        //}
 
         public Bitmap ResizeBitmap(Bitmap bmp)
         {
