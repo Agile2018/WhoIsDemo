@@ -43,6 +43,7 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnFast = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -67,6 +68,7 @@
             // 
             // splitContainer.Panel2
             // 
+            this.splitContainer.Panel2.Controls.Add(this.btnFast);
             this.splitContainer.Panel2.Controls.Add(this.label4);
             this.splitContainer.Panel2.Controls.Add(this.label2);
             this.splitContainer.Panel2.Controls.Add(this.dgvNew);
@@ -194,6 +196,7 @@
             this.imbVideo.Location = new System.Drawing.Point(12, 48);
             this.imbVideo.Name = "imbVideo";
             this.imbVideo.Size = new System.Drawing.Size(576, 360);
+            this.imbVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imbVideo.TabIndex = 2;
             this.imbVideo.TabStop = false;
             // 
@@ -239,6 +242,17 @@
             this.btnStart.Text = "Inicio";
             this.btnStart.UseVisualStyleBackColor = true;
             // 
+            // btnFast
+            // 
+            this.btnFast.BackgroundImage = global::WhoIsDemo.Properties.Resources.fast;
+            this.btnFast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFast.Location = new System.Drawing.Point(609, 426);
+            this.btnFast.Name = "btnFast";
+            this.btnFast.Size = new System.Drawing.Size(51, 51);
+            this.btnFast.TabIndex = 10;
+            this.btnFast.UseVisualStyleBackColor = true;
+            // 
             // frmIdentify
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,5 +292,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvNew;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button btnFast;
     }
 }

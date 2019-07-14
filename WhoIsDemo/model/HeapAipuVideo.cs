@@ -48,38 +48,21 @@ namespace WhoIsDemo.model
 
         }
 
-        public void RunVideo(int indexVideo)
+  
+        public void SetWorkMode(int indexVideo, int mode)
         {
             if (indexVideo < listAipuVideo.Count && indexVideo > -1)
             {
-                listAipuVideo[indexVideo].RunVideo();
+                listAipuVideo[indexVideo].SetWorkMode(mode);
             }
 
         }
 
-        public void StopVideo(int indexVideo)
+        public void SetFrame(int indexVideo, byte[] data, int rows, int cols)
         {
             if (indexVideo < listAipuVideo.Count && indexVideo > -1)
             {
-                listAipuVideo[indexVideo].StopVideo();
-            }
-
-        }
-
-        public void LapseReadImage(int indexVideo, int lapse)
-        {
-            if (indexVideo < listAipuVideo.Count && indexVideo > -1)
-            {
-                listAipuVideo[indexVideo].SetLapseReadFrame(lapse);
-            }
-
-        }
-
-        public void IndexWriteImage(int indexVideo, int index)
-        {
-            if (indexVideo < listAipuVideo.Count && indexVideo > -1)
-            {
-                listAipuVideo[indexVideo].SetIndexImage(index);
+                listAipuVideo[indexVideo].SetFrame(data, rows, cols);
             }
 
         }

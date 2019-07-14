@@ -16,6 +16,7 @@ namespace WhoIsDemo.form
     public partial class frmConfiguration : Form
     {
         #region variables
+        public string strNameMenu;
         private RegistryValueDataReader registryValueDataReader = new RegistryValueDataReader();
         ManagerControlView managerControlView = new ManagerControlView();
         private StatusStrip status;
@@ -75,6 +76,11 @@ namespace WhoIsDemo.form
                     .SetValueTextStatusStrip(StringResource.complete, 0, this.status);
             }
 
+        }
+
+        private void frmConfiguration_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            managerControlView.EnabledOptionMenu(strNameMenu, mdiMain.NAME);
         }
     }
 }

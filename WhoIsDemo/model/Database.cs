@@ -19,6 +19,7 @@ namespace WhoIsDemo.model
         private string nameDatabase;
         private MongoClient client;
         private IClientSessionHandle session;
+        private IMongoDatabase database;
         private IMongoCollection<PersonDb> users;
         private IMongoCollection<Image> images;
         #endregion
@@ -29,11 +30,16 @@ namespace WhoIsDemo.model
             
         }
 
+        ~Database()
+        {
+            session.Dispose();
+            
+        }
         public void Connect()
         {
             client = new MongoClient(connection);
             session = client.StartSession();
-           
+            database = session.Client.GetDatabase(nameDatabase);
             ////var image = client.GetDatabase("dbass").GetCollection<BsonDocument>("image");
             //var image = session.Client.GetDatabase("dbass")
             //    .GetCollection<Image>("image");
@@ -82,6 +88,23 @@ namespace WhoIsDemo.model
             var result = images.Find(filter).Limit(1).SingleAsync();            
             return result.Result;
 
+           
+        }
+
+        public bool DropDatabase()
+        {
+            try
+            {
+                session.Client.DropDatabase(nameDatabase);
+                return true;
+            }
+            catch (MongoException exception)
+            {
+
+                Console.WriteLine(exception.Message);
+                return false;
+            }
+            
            
         }
 

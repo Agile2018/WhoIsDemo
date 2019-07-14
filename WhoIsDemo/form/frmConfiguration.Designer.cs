@@ -468,6 +468,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConfiguration";
             this.Text = "frmConfiguration";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmConfiguration_FormClosing);
             this.Load += new System.EventHandler(this.frmConfiguration_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

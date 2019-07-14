@@ -117,19 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="app_name" xml:space="preserve">
-    <value>WhoIs Desktop</value>
-  </data>
-  <data name="complete" xml:space="preserve">
-    <value>Operation Completed.</value>
-  </data>
-  <data name="error" xml:space="preserve">
-    <value>Error in task.</value>
-  </data>
-  <data name="ip_video_empty" xml:space="preserve">
-    <value>The IP Video Empty</value>
-  </data>
-  <data name="value_key_epty" xml:space="preserve">
-    <value>The value Key is empty</value>
-  </data>
 </root>

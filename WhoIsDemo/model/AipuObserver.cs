@@ -80,7 +80,7 @@ namespace WhoIsDemo.model
             this.aipu = workAipu;
             ObserverError();
             ObserverUser();
-            //ObserverFrame();
+            
         }
 
         ~AipuObserver()

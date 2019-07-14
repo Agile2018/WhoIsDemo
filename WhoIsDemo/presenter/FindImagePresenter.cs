@@ -55,6 +55,8 @@ namespace WhoIsDemo.presenter
         }
         public void Connect()
         {
+            Connection = "mongodb://localhost:27017";
+            NameDatabase = "dbass";
             findImage.Connect();
         }
 

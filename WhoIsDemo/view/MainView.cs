@@ -97,20 +97,20 @@ namespace WhoIsDemo.view
 
         private void ExecuteVideo()
         {
-            Task t = this.RunVideo();
-            if (t.IsCompleted)
-            {
-                t.Dispose();
+            //Task t = this.RunVideo();
+            //if (t.IsCompleted)
+            //{
+            //    t.Dispose();
 
-            }
+            //}
         }
 
-        private async Task RunVideo()
-        {
-            await Task.Factory.StartNew(() =>
-                 loadVideoPresenter.RunVideo());
+        //private async Task RunVideo()
+        //{
+        //    await Task.Factory.StartNew(() =>
+        //         loadVideoPresenter.RunVideo());
 
-        }
+        //}
 
         private void PostSubscriptionReactive()
         {

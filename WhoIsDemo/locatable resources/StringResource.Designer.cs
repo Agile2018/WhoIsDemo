@@ -79,6 +79,15 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error in task..
+        /// </summary>
+        internal static string error {
+            get {
+                return ResourceManager.GetString("error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The IP Video Empty.
         /// </summary>
         internal static string ip_video_empty {

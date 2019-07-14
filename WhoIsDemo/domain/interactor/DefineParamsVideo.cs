@@ -17,21 +17,21 @@ namespace WhoIsDemo.domain.interactor
         public DefineParamsVideo(int index)
         {
             indexVideo = index;
-        }
-
-        public void DefineLapseRead(int lapse)
-        {
-            HeapAipuVideo.Instance.LapseReadImage(indexVideo, lapse);
-        }
-
-        public void IndexWriteImage(int index)
-        {
-            HeapAipuVideo.Instance.IndexWriteImage(indexVideo, index);
-        }
+        }        
 
         public void RemoveVideo()
         {
             HeapAipuVideo.Instance.RemoveVideo(indexVideo);
+        }
+
+        public void WorkMode(int mode)
+        {
+            HeapAipuVideo.Instance.SetWorkMode(indexVideo, mode);
+        }
+
+        public void SendFrame(byte[] data, int rows, int cols)
+        {
+            HeapAipuVideo.Instance.SetFrame(indexVideo, data, rows, cols);
         }
         #endregion
     }

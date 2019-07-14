@@ -61,8 +61,17 @@ namespace WhoIsDemo
         private void configuraciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmConfiguration frmWork = new frmConfiguration() { MdiParent = this };
+            frmWork.strNameMenu = "configuraciónToolStripMenuItem";
+            configuraciónToolStripMenuItem.Enabled = false;
             frmWork.Show();
         }
-        
+
+        private void baseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmToolDatabase frmWork = new frmToolDatabase() { MdiParent = this };
+            frmWork.strNameMenu = "baseDeDatosToolStripMenuItem";
+            baseDeDatosToolStripMenuItem.Enabled = false;
+            frmWork.Show();
+        }
     }
 }
