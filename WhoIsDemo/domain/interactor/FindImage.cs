@@ -31,9 +31,11 @@ namespace WhoIsDemo.domain.interactor
         {
             
             Image imageDb = database.GetImageByUser(idFace);
-            
-            ImageBase64 = imageDb.data_64;
-            
+            if (imageDb != null)
+            {
+                ImageBase64 = imageDb.data_64;
+            }
+                        
         }
 
         public string Connection {

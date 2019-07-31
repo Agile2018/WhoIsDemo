@@ -98,7 +98,11 @@ namespace WhoIsDemo.presenter
             }
             catch (System.AccessViolationException ex)
             {
-                Console.WriteLine("Error Access Violation");
+                Console.WriteLine("Error Access Violation. " + ex.Message);
+            }
+            catch (System.ArgumentException ax)
+            {
+                Console.WriteLine("Error Access Violation. " + ax.Message);
             }
             finally
             {

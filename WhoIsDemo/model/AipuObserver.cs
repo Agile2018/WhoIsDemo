@@ -97,7 +97,7 @@ namespace WhoIsDemo.model
             });
             subscriptionError = observableError
                 .Where(res => res != ErrorBiometrics && res != null)
-                .Concat(Observable.Empty<string>().Delay(TimeSpan.FromSeconds(1)))
+                .Delay(TimeSpan.FromSeconds(1))
                 .Repeat()
                 .Subscribe(
                     res => ErrorBiometrics = res
@@ -128,12 +128,12 @@ namespace WhoIsDemo.model
                 observer.OnNext(await GetUserAsync());
             });
             subscriptionUser = observableUser
-                .Where(res => res != UserJson && !string.IsNullOrEmpty(res)) // 
-                .Concat(Observable.Empty<string>().Delay(TimeSpan.FromSeconds(0.2)))
+                .Where(res => res != UserJson && !string.IsNullOrEmpty(res))                 
+                .Delay(TimeSpan.FromSeconds(0.2))
                 .Repeat()
                 .Subscribe(
                     res => UserJson = res
-                );
+                ); //.Concat(Observable.Empty<string>().Delay(TimeSpan.FromSeconds(0.2)))
 
         }
 
@@ -141,13 +141,11 @@ namespace WhoIsDemo.model
         {
             return Task.Run(() =>
             {
-                Console.WriteLine("OBSERVO.......");
+                Console.WriteLine("OBSERVANDO-------");
                 return aipu.GetUser;
-                
             });
 
         }
-
 
         public Bitmap ResizeBitmap(Bitmap bmp)
         {
@@ -210,7 +208,7 @@ namespace WhoIsDemo.model
         {
             this.aipu = null;
             subscriptionUser.Dispose();
-            subscriptionError.Dispose();
+            subscriptionError.Dispose();            
         }
 
 

@@ -34,7 +34,7 @@ namespace WhoIsDemo.presenter
         private void SubscriptionReactive()
         {
             subscriptionUser = hearUser.subjectUser.Subscribe(
-                usr => LaunchUser(usr),
+                usr => LaunchUser(usr), 
                 () => Console.WriteLine("Operation Completed."));
         }
 

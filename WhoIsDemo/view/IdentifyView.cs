@@ -1,5 +1,6 @@
 ﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -70,6 +71,7 @@ namespace WhoIsDemo.view
         private int rowNewPerson = 0;
         private int colummNewPerson = 0;
         private string ipVideo;
+        
         #endregion
 
         #region methods
@@ -124,6 +126,8 @@ namespace WhoIsDemo.view
             //createVideoPresenter.ExecuteCreate();
         }
 
+
+
         private void SubscriptionReactive()
         {
             subscriptionCreateVideo = createVideoPresenter.subjectIndex.Subscribe(
@@ -159,7 +163,7 @@ namespace WhoIsDemo.view
             loadVideoPresenter.ExecuteLoadVideo();
             
             Cursor.Current = Cursors.Default;
-            managerControlView.StopProgressStatusStrip(1, this.status);
+            //managerControlView.StopProgressStatusStrip(1, this.status);
         }
 
         private void InvokeGridForImage(Bitmap image)
@@ -271,13 +275,18 @@ namespace WhoIsDemo.view
         }
   
         
-        private async Task CreateVideo()
-        {
-            await Task.Factory.StartNew(() =>
-                 this.status.Invoke(new Action(() => 
-                 createVideoPresenter.ExecuteCreate())));
-            
-        }
+        //private async Task CreateVideo()
+        //{
+        //    await Task.Factory.StartNew(() =>
+        //         this.status.Invoke(new Action(() =>
+        //         createVideoPresenter.ExecuteCreate())));
+
+        //    //await Task.Run(() =>
+        //    //{
+        //    //    createVideoPresenter.ExecuteCreate();
+
+        //    //});
+        //}
         
         private void PostSubscriptionReactive()
         {
@@ -307,7 +316,7 @@ namespace WhoIsDemo.view
 
         private void btnStart_MouseDown(object sender, MouseEventArgs e)
         {
-            managerControlView.StartProgressStatusStrip(1, this.status);
+            //managerControlView.StartProgressStatusStrip(1, this.status);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -317,12 +326,13 @@ namespace WhoIsDemo.view
             if (!string.IsNullOrEmpty(IpVideo))
             {
                 InitCapture();
-                Task t = this.CreateVideo();
-                if (t.IsCompleted)
-                {
-                    t.Dispose();
+                createVideoPresenter.ExecuteCreate();
+                //Task t = this.CreateVideo();
+                //if (t.IsCompleted)
+                //{
+                //    t.Dispose();
 
-                }
+                //}
                 btnStart.Enabled = false;
                 btnStop.Enabled = true;
             }
@@ -408,15 +418,15 @@ namespace WhoIsDemo.view
 
         private void InitCapture()
         {
-            capture = new VideoCapture("rtsp://root:admin@192.168.0.10:554/axis-media/media.amp?videocodec=h264&resolution=640x480");
-            //capture = new VideoCapture(IpVideo);
-            Size size = new Size(640, 480);
+            //capture = new VideoCapture("rtsp://root:admin@192.168.0.10:554/axis-media/media.amp?videocodec=h264&resolution=640x480");
+            capture = new VideoCapture(IpVideo);
+            //Size size = new Size(640, 480);
             //capture = new VideoCapture("rtsp://admin:admin@192.168.0.10:554/");
-            //capture = new VideoCapture("video.mp4"); /cam/realmonitor?resolution=640x480
-            capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameWidth, size.Width);
-            capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameHeight, size.Height);            
+            //capture = new VideoCapture("video.mp4"); ///cam/realmonitor?resolution=640x480
+            //capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameWidth, size.Width);
+            //capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameHeight, size.Height);            
             capture.ImageGrabbed += ProcessFrame;
-            
+            //Application.Idle += ProcessFrame;
             //capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Fps, 40);            
             if (capture != null)
             {
@@ -436,24 +446,22 @@ namespace WhoIsDemo.view
 
         private void CaptureFrame()
         {
+            Mat frame = new Mat();
             try
-            {
-                Mat frame = new Mat();
-                
-
+            {                                
                 if (capture.Retrieve(frame, 0))
-                {
-                    this.form.Invoke(new Action(() => this.imbVideo.Image = frame));
-                    
+                {                    
+                    this.imbVideo.Invoke(new Action(() => this.imbVideo.Image = frame));
+                    //this.imbVideo.Image = frame;
                     //GC.SuppressFinalize(bitmap);
-                                      
-
-                    CvInvoke.WaitKey(1);
+                    
+                    //CvInvoke.Imshow("VIDEO", frame);
+                    //CvInvoke.WaitKey(1);
 
                 }
                 if (!flagProccessSave && frame != null)
                 {
-                    this.TaskWriteImage(frame);
+                    Task t = this.TaskWriteImage(frame);
                 }
                 
             }
@@ -467,6 +475,7 @@ namespace WhoIsDemo.view
                 this.status.Invoke(new Action(() => managerControlView
                 .SetValueTextStatusStrip(ex.Message, 0, this.status)));
             }
+            
         }
 
         private void ProcessFrame(object sender, EventArgs e)
@@ -519,10 +528,8 @@ namespace WhoIsDemo.view
             handle.Free();
          
             loadVideoPresenter.SendFrame(data, clone.Height, clone.Width);
-            
-            flagProccessSave = false;
             clone.Dispose();
-
+            flagProccessSave = false;            
         }
 
         public void CaptureStop()
@@ -542,17 +549,38 @@ namespace WhoIsDemo.view
                 this.imbVideo.Invoke(new Action(() =>
                         this.imbVideo.Dispose()));
                 this.capture.Dispose();
-                if (loadVideoPresenter.IsRunVideo) loadVideoPresenter.RemoveVideo();
+                if (loadVideoPresenter.IsRunVideo)
+                {
+                    System.Threading.Thread closeLibrary = new System
+                        .Threading.Thread(new System.Threading
+                        .ThreadStart(loadVideoPresenter.RemoveVideo));
+                    closeLibrary.Start();
+
+                }
 
                 if (subscriptionCreateVideo != null)  subscriptionCreateVideo.Dispose();
                 if (subscriptionHearInvalid != null) subscriptionHearInvalid.Dispose();
                 if (subscriptionHearUser != null) subscriptionHearUser.Dispose();
                 if (subscriptionFindImage != null) subscriptionFindImage.Dispose();
-                
+                listPersonSlider.Clear();
+                listPersonRepeat.Clear();
+                listPersonNew.Clear();                
+
             }
             managerControlView.EnabledOptionMenu((this.form as frmIdentify)
                     .strNameMenu, mdiMain.NAME);
+            this.splitContainer.Dispose();
+            this.btnStart.Dispose();
+            this.btnStop.Dispose();
+            this.btnRestart.Dispose();
+            this.btnClose.Dispose();
+            this.btnFast.Dispose();
+            this.dgvImages.Dispose();
+            this.dgvRepeat.Dispose();
+            this.dgvNew.Dispose();
             this.form.Dispose();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
       

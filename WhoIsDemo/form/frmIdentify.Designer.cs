@@ -32,6 +32,7 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvImages = new System.Windows.Forms.DataGridView();
+            this.btnFast = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvNew = new System.Windows.Forms.DataGridView();
@@ -43,7 +44,6 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnFast = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -117,6 +117,17 @@
             this.dgvImages.Size = new System.Drawing.Size(1235, 280);
             this.dgvImages.TabIndex = 0;
             // 
+            // btnFast
+            // 
+            this.btnFast.BackgroundImage = global::WhoIsDemo.Properties.Resources.fast;
+            this.btnFast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFast.Location = new System.Drawing.Point(609, 426);
+            this.btnFast.Name = "btnFast";
+            this.btnFast.Size = new System.Drawing.Size(51, 51);
+            this.btnFast.TabIndex = 10;
+            this.btnFast.UseVisualStyleBackColor = true;
+            
             // label4
             // 
             this.label4.AutoSize = true;
@@ -241,17 +252,6 @@
             this.btnStart.TabIndex = 1;
             this.btnStart.Text = "Inicio";
             this.btnStart.UseVisualStyleBackColor = true;
-            // 
-            // btnFast
-            // 
-            this.btnFast.BackgroundImage = global::WhoIsDemo.Properties.Resources.fast;
-            this.btnFast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnFast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFast.Location = new System.Drawing.Point(609, 426);
-            this.btnFast.Name = "btnFast";
-            this.btnFast.Size = new System.Drawing.Size(51, 51);
-            this.btnFast.TabIndex = 10;
-            this.btnFast.UseVisualStyleBackColor = true;
             // 
             // frmIdentify
             // 

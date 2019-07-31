@@ -37,7 +37,8 @@ namespace WhoIsDemo.form
             identifyView.IpVideo = ipVideo;
 
         }
-        
+
+       
     }
 
 }

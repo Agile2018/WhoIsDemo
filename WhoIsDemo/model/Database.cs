@@ -82,13 +82,24 @@ namespace WhoIsDemo.model
 
         public Image GetImageByUser(int idFace)
         {
+            try
+            {
+                var filter = Builders<Image>.Filter.Eq("id_face", idFace);
+                var result = images.Find(filter).Limit(1).SingleAsync();
+                return result.Result;
+            }
+            catch (InvalidOperationException ex)
+            {
 
-            
-            var filter = Builders<Image>.Filter.Eq("id_face", idFace);
-            var result = images.Find(filter).Limit(1).SingleAsync();            
-            return result.Result;
+                Console.WriteLine(ex.Message);
+            }
+            catch (System.AggregateException ax)
+            {
 
-           
+                Console.WriteLine(ax.Message);
+            }
+            return null;
+          
         }
 
         public bool DropDatabase()

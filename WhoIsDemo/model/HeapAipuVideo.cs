@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using ASSLibrary;
 
 namespace WhoIsDemo.model
@@ -30,13 +31,23 @@ namespace WhoIsDemo.model
             listObserver.Add(aipuObserver);            
             return listAipuVideo.Count - 1;
         }
-
+        
         public void LoadConfiguration(int indexVideo, string nameFile)
         {
-            if(indexVideo < listAipuVideo.Count && indexVideo > -1)
+            try
             {
-                listAipuVideo[indexVideo].LoadConfiguration(nameFile);
+                if (indexVideo < listAipuVideo.Count && indexVideo > -1)
+                {
+                    listAipuVideo[indexVideo].LoadConfiguration(nameFile);
+                }
             }
+            catch (SEHException sehException)
+            {
+
+                Console.WriteLine(sehException.Message);
+            }
+            
+            
         }
 
         public void InitLibrary(int indexVideo)
@@ -94,10 +105,13 @@ namespace WhoIsDemo.model
         {
             if (indexVideo < listAipuVideo.Count && indexVideo > -1)
             {
+                listAipuVideo[indexVideo].Terminate();
                 listAipuVideo[indexVideo].Dispose();
                 listObserver[indexVideo].Dispose();
                 listAipuVideo.RemoveAt(indexVideo);
                 listObserver.RemoveAt(indexVideo);
+                listAipuVideo.Clear();
+                listObserver.Clear();
             }
         }
         #endregion
