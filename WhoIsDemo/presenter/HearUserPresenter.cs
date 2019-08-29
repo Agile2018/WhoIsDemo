@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
 using WhoIsDemo.domain.interactor;
 using WhoIsDemo.model;
 
@@ -12,28 +8,26 @@ namespace WhoIsDemo.presenter
 {
     class HearUserPresenter
     {
-        #region variables
-        HearUser hearUser;
+        #region variables        
         IDisposable subscriptionUser;
-        
+        int idVideo = 0;
+
         public Subject<Person> subjectUser = new Subject<Person>();
+
+        public int IdVideo { get => idVideo; set => idVideo = value; }
 
         #endregion
 
         #region methods
-        public HearUserPresenter()
-        {
 
-        }
-        public HearUserPresenter(int indexVideo)
-        {
-            hearUser = new HearUser(indexVideo);
+        public HearUserPresenter()
+        {           
             SubscriptionReactive();
         }
 
         private void SubscriptionReactive()
         {
-            subscriptionUser = hearUser.subjectUser.Subscribe(
+            subscriptionUser = HearUser.Instance.subjectUser.Subscribe(
                 usr => LaunchUser(usr), 
                 () => Console.WriteLine("Operation Completed."));
         }
@@ -44,15 +38,32 @@ namespace WhoIsDemo.presenter
             try
             {
                 
-                person = JsonConvert.DeserializeObject<Person>(user);                
-                subjectUser.OnNext(person);
-               
-
+                person = JsonConvert.DeserializeObject<Person>(user);
+                int idVid = Convert.ToInt16(person.Params.Client);
+                if (idVid == IdVideo)
+                {
+                    subjectUser.OnNext(person);
+                }
+                             
             }
             catch (Newtonsoft.Json.JsonReaderException ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public bool EnableObserverUser()
+        {
+            bool result = false;
+            if (AipuFace.Instance.IsLoadConfiguration)
+            {
+                if (!RequestAipu.Instance.IsEnableObserverUser())
+                {
+                    RequestAipu.Instance.EnableEarUser();
+                }
+                result = true;
+            }
+            return result;
         }
 
         #endregion

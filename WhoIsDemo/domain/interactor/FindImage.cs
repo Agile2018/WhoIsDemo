@@ -14,8 +14,11 @@ namespace WhoIsDemo.domain.interactor
         private string nameDatabase;
         private string imageBase64;
         private Database database = new Database();
+        private List<String> listImage = new List<string>();
         public delegate void ImageDelegate(string imageBase64);
         public event ImageDelegate OnImage;
+        public delegate void ListImageDelegate(List<String> list);
+        public event ListImageDelegate OnListImage;
         #endregion
 
         #region methods
@@ -36,6 +39,20 @@ namespace WhoIsDemo.domain.interactor
                 ImageBase64 = imageDb.data_64;
             }
                         
+        }
+
+        public void GetListImageByIdFace(int idFace)
+        {
+
+            Image imageDb = database.GetImageByUser(idFace);
+            if (imageDb != null)
+            {
+                List<String> list = new List<string>();
+                list.Add(imageDb.data_64);
+                list.Add(imageDb.data_64_aux);
+                this.ListImage = list;
+            }
+
         }
 
         public string Connection {
@@ -78,6 +95,20 @@ namespace WhoIsDemo.domain.interactor
                 OnImage(imageBase64);
             }
            
+        }
+
+        public List<string> ListImage {
+            get
+            {
+                return listImage;
+            }
+
+            set
+            {
+                listImage = value;
+                OnListImage(listImage);
+            }
+            
         }
 
 

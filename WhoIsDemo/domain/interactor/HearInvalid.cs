@@ -13,13 +13,14 @@ namespace WhoIsDemo.domain.interactor
         #region variables
         private readonly AipuObserver aipuObserver;
         public Subject<string> subjectError = new Subject<string>();
+        private static readonly HearInvalid instance = new HearInvalid();
+        public static HearInvalid Instance => instance;
         #endregion
 
         #region methods
-        public HearInvalid(int indexVideo)
-        {            
-            this.aipuObserver = HeapAipuVideo
-                .Instance.GetObserver(indexVideo);
+        public HearInvalid()
+        {
+            this.aipuObserver = AipuFace.Instance.GetObserver();
             this.aipuObserver.OnError += new AipuObserver
                 .MessageErrorDelegate(SendError);
         }

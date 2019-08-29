@@ -1,38 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
 using WhoIsDemo.domain.interactor;
 
 namespace WhoIsDemo.presenter
 {
     class HearInvalidPresenter
     {
-        #region variables
-        HearInvalid hearInvalid;
+        #region variables        
         IDisposable subscriptionInvalidMessage;
+        
         public Subject<string> subjectError = new Subject<string>();
+        private static readonly HearInvalidPresenter instance = new HearInvalidPresenter();
+        public static HearInvalidPresenter Instance => instance;
         #endregion
 
-        #region methods
-        public HearInvalidPresenter() { }
-        public HearInvalidPresenter(int indexVideo)
-        {
-            hearInvalid = new HearInvalid(indexVideo);
+        #region methods      
+        public HearInvalidPresenter()
+        {            
             SubscriptionReactive();
         }
 
         private void SubscriptionReactive()
         {
-            subscriptionInvalidMessage = hearInvalid.subjectError.Subscribe(
+            subscriptionInvalidMessage = HearInvalid.Instance.subjectError.Subscribe(
                 msg => LaunchMessage(msg),
                 () => Console.WriteLine("Operation Completed."));
         }
 
         private void LaunchMessage(string message)
         {
+
             subjectError.OnNext(message);
         }
 

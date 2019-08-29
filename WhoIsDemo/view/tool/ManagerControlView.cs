@@ -235,6 +235,37 @@ namespace WhoIsDemo.view.tool
             return split;
         }
 
+        public ToolStripComboBox GetToolStripComboBoxMain(string nameMDI)
+        {
+            ToolStripComboBox cbo = null;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Name == nameMDI)
+                {
+                    mdiMain md = (mdiMain)f;
+
+                    foreach (Control c in f.Controls)
+                    {
+                        if (c is ToolStrip)
+                        {
+                            ToolStrip tool = (ToolStrip)c;
+
+                            foreach(ToolStripItem tt in tool.Items)
+                            {
+                                if (tt is ToolStripComboBox)
+                                {
+                                    cbo = (ToolStripComboBox)tt;
+                                    break;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            return cbo;
+        }
         public StatusStrip GetStatusStripMain(string nameMDI)
         {
             StatusStrip status = null;
@@ -264,8 +295,7 @@ namespace WhoIsDemo.view.tool
         {
             try
             {
-                //StatusStrip ssMain = new StatusStrip();
-                //ssMain = ssCtrl;
+               
                 ToolStripProgressBar tsProgressBar = ssCtrl.Items[index] as ToolStripProgressBar;
                 tsProgressBar.Style = ProgressBarStyle.Marquee;
                 tsProgressBar.MarqueeAnimationSpeed = 30;
@@ -281,8 +311,7 @@ namespace WhoIsDemo.view.tool
 
         public void StopProgressStatusStrip(int index, StatusStrip ssCtrl)
         {
-            //StatusStrip ssMain = new StatusStrip();
-            //ssMain = ssCtrl;
+            
 
             ToolStripProgressBar tsProgressBar = ssCtrl.Items[index] as ToolStripProgressBar;
             tsProgressBar.Style = ProgressBarStyle.Continuous;
@@ -313,6 +342,58 @@ namespace WhoIsDemo.view.tool
 
 
                 }
+            }
+        }
+
+        public void EnabledOptionSubMenu(string nameOption, string nameMDI)
+        {
+            Form frm = new Form();
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Name == nameMDI)
+                    frm = f;
+
+            }
+
+            foreach (ToolStripMenuItem mnu in frm.MainMenuStrip.Items)
+            {
+                foreach (ToolStripDropDownItem smnu in mnu.DropDownItems)
+                {
+                    foreach (ToolStripDropDownItem semnu in smnu.DropDownItems)
+                    {
+                        if (semnu.Name == nameOption)
+                        {
+                            semnu.Enabled = true;
+                            semnu.Visible = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void OnlyInteger(KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar) || (char.IsControl(e.KeyChar)))
+            {
+                e.Handled = false;
+
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        public void OnlyDecimal(KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) ||
+                (char.IsControl(e.KeyChar)) || (e.KeyChar == '.'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
         #endregion

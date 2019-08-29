@@ -69,11 +69,12 @@ namespace WhoIsDemo.model
 
         }
 
-        public async Task<bool> UpdateUser(int idFace, string namePerson, string address)
+        public async Task<bool> UpdateUser(int idFace, string namePerson, 
+            string lastName, string identification)
         {
             var filter = Builders<PersonDb>.Filter.Eq("id_face", idFace);
             var update = Builders<PersonDb>.Update.Set("name", namePerson)
-                .Set("address", address);
+                .Set("lastname", lastName).Set("identification", identification);
 
             var result = await users.UpdateOneAsync(filter, update);
 

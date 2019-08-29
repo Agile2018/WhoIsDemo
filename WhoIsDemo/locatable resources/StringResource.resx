@@ -123,13 +123,34 @@
   <data name="complete" xml:space="preserve">
     <value>Operation Completed.</value>
   </data>
+  <data name="configuration_empty" xml:space="preserve">
+    <value>Configuration empty</value>
+  </data>
+  <data name="directory_config_empty" xml:space="preserve">
+    <value>The configuration directory es empty </value>
+  </data>
   <data name="error" xml:space="preserve">
     <value>Error in task.</value>
   </data>
   <data name="ip_video_empty" xml:space="preserve">
     <value>The IP Video Empty</value>
   </data>
-  <data name="value_key_epty" xml:space="preserve">
+  <data name="load_library" xml:space="preserve">
+    <value>The library is not loaded verify.</value>
+  </data>
+  <data name="reload_library" xml:space="preserve">
+    <value>Reload Library</value>
+  </data>
+  <data name="reset" xml:space="preserve">
+    <value>Reset application, please.</value>
+  </data>
+  <data name="stop_library" xml:space="preserve">
+    <value>Stop Library</value>
+  </data>
+  <data name="value_key_empty" xml:space="preserve">
     <value>The value Key is empty</value>
+  </data>
+  <data name="verify_key" xml:space="preserve">
+    <value>Verify Key.</value>
   </data>
 </root>

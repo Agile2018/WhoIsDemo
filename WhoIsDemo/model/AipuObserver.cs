@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Media;
-using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using ASSLibrary;
-using System.Windows.Media.Imaging;
 using System.Threading;
 
 namespace WhoIsDemo.model
@@ -17,13 +12,13 @@ namespace WhoIsDemo.model
         #region variables
         private Aipu aipu;
         private string errorBiometrics;
-        private string userJson;
-        private Bitmap frame;
+        private string userJson;        
         private IObservable<string> observableError;
         private IObservable<string> observableUser;
         IDisposable subscriptionUser;
         IDisposable subscriptionError;
-        private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+        bool isHearObserverUser = false;
+        //private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
         public string ErrorBiometrics
         {
             get
@@ -52,26 +47,13 @@ namespace WhoIsDemo.model
             }
         }
 
-        public Bitmap Frame
-        {
-            get
-            {
-                return frame;
-            }
-
-            set
-            {
-                frame = value;
-                OnFrame(frame);
-            }
-        }
+        public bool IsHearObserverUser { get => isHearObserverUser; set => isHearObserverUser = value; }
 
         public delegate void MessageErrorDelegate(string error);
         public event MessageErrorDelegate OnError;
         public delegate void UserJsonDelegate(string dataUser);
         public event UserJsonDelegate OnUser;
-        public delegate void FrameDelegate(Bitmap inputFrame);
-        public event FrameDelegate OnFrame;
+        
         #endregion
 
         #region methods
@@ -79,13 +61,19 @@ namespace WhoIsDemo.model
         {
             this.aipu = workAipu;
             ObserverError();
-            ObserverUser();
+            
             
         }
 
         ~AipuObserver()
         {
 
+        }
+
+        public void EnableObserverUser()
+        {
+            ObserverUser();
+            isHearObserverUser = true;
         }
 
         private void ObserverError()
@@ -147,67 +135,14 @@ namespace WhoIsDemo.model
 
         }
 
-        public Bitmap ResizeBitmap(Bitmap bmp)
-        {
-            if (bmp != null)
-            {
-                int newWidth = Convert.ToInt16(bmp.Width * 0.5);
-                int newHeight = Convert.ToInt16(bmp.Height * 0.5);
-                Bitmap result = new Bitmap(newWidth, newHeight);
-                using (Graphics g = Graphics.FromImage(result))
-                {
-                    g.DrawImage(bmp, 0, 0, newWidth, newHeight);
-                }
-
-                return result;
-            }
-            return null;
-        }
-
-
-        private byte[] ObjectToByteArray(Object obj)
-        {
-            if (obj == null)
-                return null;
-
-            BinaryFormatter binaryFormat = new BinaryFormatter();
-            MemoryStream memoryStream = new MemoryStream();
-            binaryFormat.Serialize(memoryStream, obj);
-
-            return memoryStream.ToArray();
-        }
-
-        private ImageSource ConvertBitmapToImageSource(Bitmap imToConvert)
-        {
-            try
-            {
-                Bitmap bmp = new Bitmap(imToConvert);
-                MemoryStream ms = new MemoryStream();
-                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                ms.Seek(0, SeekOrigin.Begin);
-                image.StreamSource = ms;
-                image.EndInit();
-                
-                ImageSource sc = (ImageSource)image;
-
-
-                return sc;
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
-            return null;
-        }
-
         public void Dispose()
         {
             this.aipu = null;
-            subscriptionUser.Dispose();
+            if (isHearObserverUser)
+            {
+                subscriptionUser.Dispose();
+            }
+            
             subscriptionError.Dispose();            
         }
 

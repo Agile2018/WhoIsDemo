@@ -14,12 +14,12 @@ namespace WhoIsDemo.model
         public ObjectId Id { get; set; }
         [BsonElement("id_face")]
         public int Id_face { get; set; }
-
         [BsonElement("name")]
         public string Name { get; set; }
-        [BsonElement("address")]
-        public string Address { get; set; }
-
+        [BsonElement("lastname")]
+        public string Lastname { get; set; }
+        [BsonElement("identification")]
+        public string Identification { get; set; }
 
     }
 }

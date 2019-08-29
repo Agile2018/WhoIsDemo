@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using WhoIsDemo.domain.interactor;
 using WhoIsDemo.form;
 using WhoIsDemo.locatable_resources;
+using WhoIsDemo.model;
 using WhoIsDemo.presenter;
 using WhoIsDemo.repository;
 using WhoIsDemo.view.tool;
 
-//using ASSLibrary;
 
 namespace WhoIsDemo
 {
@@ -18,8 +19,10 @@ namespace WhoIsDemo
         #endregion
         #region variables
         private ManagerControlView managerControlView = new ManagerControlView();
+        DiskPresenter diskPresenter = new DiskPresenter();
         private RegistryValueDataReader registryValueDataReader = new RegistryValueDataReader();
-        public List<int> listDispositive = new List<int>();
+        
+        IDisposable subscriptionHearInvalid;
         #endregion
 
         public mdiMain()
@@ -28,43 +31,51 @@ namespace WhoIsDemo
             
         }
 
+        private void SubscriptionReactive()
+        {
+
+            subscriptionHearInvalid = HearInvalidPresenter.Instance.subjectError.Subscribe(
+                result => LaunchMessage(result),
+                () => Console.WriteLine(StringResource.complete));            
+
+        }
+
+        private void LaunchMessage(string result)
+        {
+
+            this.statusStrip.Invoke(new Action(() => managerControlView
+                    .SetValueTextStatusStrip(result, 0, this.statusStrip)));
+        }
+
         private void mdiMain_Load(object sender, EventArgs e)
         {
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Top = 0;
             this.Left = (int)((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2);
-            managerControlView.CreateStatusBar(this, statusStrip);
-            
-            
+            managerControlView.CreateStatusBar(this, statusStrip);            
+            SubscriptionReactive();
+            diskPresenter.CreateDirectoryWork();
+            VerifyFileConfiguration();
+            GetListVideos();
+            cboResolution.SelectedIndex = 0;
         }
              
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             System.Windows.Forms.Application.Exit();
         }
 
-        private void dispositivoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            managerControlView.SetValueTextStatusStrip("", 0, statusStrip);            
-            frmIdentify frmWork = new frmIdentify() { MdiParent = this };
-            frmWork.ipVideo = registryValueDataReader
-                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
-                RegistryValueDataReader.IP_CAMERA_KEY);
-
-            frmWork.strNameMenu = "dispositivoToolStripMenuItem";           
-            dispositivoToolStripMenuItem.Enabled = false;
-            frmWork.Show();
-        }
-
-        private void configuraciónToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmConfiguration frmWork = new frmConfiguration() { MdiParent = this };
-            frmWork.strNameMenu = "configuraciónToolStripMenuItem";
-            configuraciónToolStripMenuItem.Enabled = false;
-            frmWork.Show();
-        }
+        //private void dispositivoToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    Cursor.Current = Cursors.WaitCursor;
+        //    managerControlView.SetValueTextStatusStrip("", 0, statusStrip);            
+        //    frmIdentify frmWork = new frmIdentify() { MdiParent = this };           
+        //    frmWork.strNameMenu = "dispositivoToolStripMenuItem";           
+        //    dispositivoToolStripMenuItem.Enabled = false;
+        //    frmWork.Show();
+        //}
 
         private void baseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -72,6 +83,145 @@ namespace WhoIsDemo
             frmWork.strNameMenu = "baseDeDatosToolStripMenuItem";
             baseDeDatosToolStripMenuItem.Enabled = false;
             frmWork.Show();
+        }
+
+        private void IntAipuFace()
+        {
+            AipuFace.Instance.InitLibrary();
+            AipuFace.Instance.LoadConfiguration(DiskPresenter.directory);
+            
+        }
+
+        private void VerifyFileConfiguration()
+        {
+            if (!diskPresenter.VerifyFileOfConfiguration())
+            {
+                diskPresenter.CreateContentDirectoryWork();
+                this.statusStrip.Invoke(new Action(() => managerControlView
+                    .SetValueTextStatusStrip(StringResource.configuration_empty, 0, this.statusStrip)));
+
+            }
+        }
+
+        private void mdiMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Threading.Thread closeLibrary = new System
+                .Threading.Thread(new System.Threading
+                .ThreadStart(RequestAipu.Instance.Terminate));
+            closeLibrary.Start();
+            
+        }
+
+        private void btnLoadLibrary_Click(object sender, EventArgs e)
+        {
+            if (!AipuFace.Instance.IsLoadConfiguration)
+            {
+                IntAipuFace();
+            }
+            
+        }
+
+        private void btnStopLibrary_Click(object sender, EventArgs e)
+        {
+            AipuFace.Instance.StopAipu();
+            this.statusStrip.Invoke(new Action(() => managerControlView
+                    .SetValueTextStatusStrip(StringResource.stop_library, 0, this.statusStrip)));
+        }
+
+        private void btnReloadLibrary_Click(object sender, EventArgs e)
+        {
+            AipuFace.Instance.ReloadAipu();
+            this.statusStrip.Invoke(new Action(() => managerControlView
+                    .SetValueTextStatusStrip(StringResource.reload_library, 0, this.statusStrip)));
+        }        
+
+        private void globalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConfiguration frmWork = new frmConfiguration() { MdiParent = this };
+            frmWork.strNameMenu = "globalToolStripMenuItem";
+            globalToolStripMenuItem.Enabled = false;
+            frmWork.Show();
+        }
+
+        private void parcialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConfigurationDinamic frmWork = new frmConfigurationDinamic() { MdiParent = this };
+            frmWork.strNameMenu = "parcialToolStripMenuItem";
+            parcialToolStripMenuItem.Enabled = false;
+            frmWork.Show();
+        }
+
+        private void GetListVideos()
+        {
+            Configuration.Instance.ListVideo = diskPresenter.ReadListVideo();
+            if (Configuration.Instance.ListVideo.Count != 0)
+            {
+                foreach(Video vid in Configuration.Instance.ListVideo)
+                {
+                    cboVideo.Items.Add(vid.id);
+                }
+            }
+        }
+
+        private void cboVideo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = cboVideo.SelectedIndex;
+            if (index != -1)
+            {
+                Configuration.Instance.VideoDefault = Configuration
+                    .Instance.ListVideo[index].path;
+            }
+        }
+
+        private void cboResolution_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cboResolution.SelectedIndex)
+            {
+                case 0:
+                    Configuration.Instance.Width = 320;
+                    Configuration.Instance.Height = 240;
+                    break;
+                case 1:
+                    Configuration.Instance.Width = 640;
+                    Configuration.Instance.Height = 480;
+                    break;
+                case 2:
+                    Configuration.Instance.Width = 1280;
+                    Configuration.Instance.Height = 960;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void btnChangeMode_Click(object sender, EventArgs e)
+        {
+            RequestAipu.Instance.WorkMode(1);
+        }
+
+        private void enrolamientoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            managerControlView.SetValueTextStatusStrip("", 0, statusStrip);
+            frmEnroll frmWork = new frmEnroll() { MdiParent = this };
+            frmWork.strNameMenu = "enrolamientoToolStripMenuItem";
+            frmWork.LinkVideo = 1;
+            enrolamientoToolStripMenuItem.Enabled = false;
+            frmWork.Show();
+        }
+
+        private void controlDeEntradaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            managerControlView.SetValueTextStatusStrip("", 0, statusStrip);
+            frmEntryControl frmWork = new frmEntryControl() { MdiParent = this };
+            frmWork.strNameMenu = "controlDeEntradaToolStripMenuItem";
+            frmWork.LinkVideo = 2;
+            controlDeEntradaToolStripMenuItem.Enabled = false;
+            frmWork.Show();
+        }
+
+        private void btnNotRegister_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -13,17 +13,16 @@ namespace WhoIsDemo.domain.interactor
         #region variables
         private readonly AipuObserver aipuObserver;
         public Subject<string> subjectUser = new Subject<string>();
-
+        private static readonly HearUser instance = new HearUser();
+        public static HearUser Instance => instance;
         #endregion
 
         #region methods
-        public HearUser(int indexVideo)
+        public HearUser()
         {
-            this.aipuObserver = HeapAipuVideo
-                .Instance.GetObserver(indexVideo);
+            this.aipuObserver = AipuFace.Instance.GetObserver();
             this.aipuObserver.OnUser += new AipuObserver
                 .UserJsonDelegate(SendUser);
-
         }
 
         private void SendUser(string user)

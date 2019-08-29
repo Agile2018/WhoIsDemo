@@ -52,6 +52,34 @@ namespace WhoIsDemo.repository
             }
         }
 
+        public bool IsFileExists(string nameFile)
+        {
+            return File.Exists(nameFile);
+        }
+
+        public void CreateWorkDirectory(string nameDirectory)
+        {
+            if (!Directory.Exists(nameDirectory)){
+                Directory.CreateDirectory(nameDirectory);
+            }
+        }
+
+        public void WriteFile(string strPath, string content)
+        {
+            try
+            {
+                StreamWriter streamWriter = new StreamWriter(strPath);
+
+                streamWriter.WriteLine(content);
+                streamWriter.Dispose();
+            }
+            catch (System.IO.IOException e)
+            {
+                throw new FileNotFoundException("Write File", e);
+
+            }
+        }
+
         #endregion
     }
 }

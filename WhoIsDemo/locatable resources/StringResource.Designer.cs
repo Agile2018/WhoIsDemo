@@ -79,6 +79,24 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuration empty.
+        /// </summary>
+        internal static string configuration_empty {
+            get {
+                return ResourceManager.GetString("configuration_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The configuration directory es empty .
+        /// </summary>
+        internal static string directory_config_empty {
+            get {
+                return ResourceManager.GetString("directory_config_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error in task..
         /// </summary>
         internal static string error {
@@ -97,11 +115,56 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The library is not loaded verify..
+        /// </summary>
+        internal static string load_library {
+            get {
+                return ResourceManager.GetString("load_library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reload Library.
+        /// </summary>
+        internal static string reload_library {
+            get {
+                return ResourceManager.GetString("reload_library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset application, please..
+        /// </summary>
+        internal static string reset {
+            get {
+                return ResourceManager.GetString("reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Library.
+        /// </summary>
+        internal static string stop_library {
+            get {
+                return ResourceManager.GetString("stop_library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value Key is empty.
         /// </summary>
-        internal static string value_key_epty {
+        internal static string value_key_empty {
             get {
-                return ResourceManager.GetString("value_key_epty", resourceCulture);
+                return ResourceManager.GetString("value_key_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verify Key..
+        /// </summary>
+        internal static string verify_key {
+            get {
+                return ResourceManager.GetString("verify_key", resourceCulture);
             }
         }
     }

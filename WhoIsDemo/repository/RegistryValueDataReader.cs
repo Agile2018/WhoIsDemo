@@ -29,6 +29,7 @@ namespace WhoIsDemo.repository
         public const string IP_CAMERA_KEY = "IPCamera";
         public const string TITLE_PRINT_KEY = "title_print";
         public const string BUILDING_KEY = "building";
+        public const string DIRECTORY_KEY = "directory";
         private static readonly int KEY_WOW64_32KEY = 0x200;
         private static readonly int KEY_WOW64_64KEY = 0x100;
         private static readonly UIntPtr HKEY_LOCAL_MACHINE = (UIntPtr)0x80000002;

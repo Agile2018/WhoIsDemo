@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reactive.Subjects;
@@ -44,7 +45,7 @@ namespace WhoIsDemo.presenter
         }
 
         public Subject<Bitmap> subjectImage = new Subject<Bitmap>();
-
+        public Subject<List<Bitmap>> subjectListImage = new Subject<List<Bitmap>>();
         #endregion
 
         #region methods
@@ -52,6 +53,8 @@ namespace WhoIsDemo.presenter
         {
             this.findImage.OnImage += new FindImage
                 .ImageDelegate(SendBitmap);
+            this.findImage.OnListImage += new FindImage
+                .ListImageDelegate(SendListBitmap);
         }
         public void Connect()
         {
@@ -65,10 +68,33 @@ namespace WhoIsDemo.presenter
             findImage.GetImageByIdFace(idFace);
         }
 
+        public void GetListImage64ByUser(int idFace)
+        {
+            findImage.GetListImageByIdFace(idFace);
+        }
+
         private void SendBitmap(string image64)
         {
             Bitmap imageTransform = Base64StringToBitmap(image64);
             subjectImage.OnNext(imageTransform);
+        }
+
+        private void SendListBitmap(List<String> list)
+        {
+            Bitmap imageGallery = Base64StringToBitmap(list[0]);
+            Bitmap imageCamera = Base64StringToBitmap(list[1]);
+
+            List<Bitmap> listImage = new List<Bitmap>();
+            if (imageGallery != null)
+            {
+                listImage.Add(imageGallery);
+            }
+            if (imageCamera != null)
+            {
+                listImage.Add(imageCamera);
+            }
+            subjectListImage.OnNext(listImage);
+
         }
 
         private Bitmap Base64StringToBitmap(string
@@ -104,6 +130,10 @@ namespace WhoIsDemo.presenter
             {
                 Console.WriteLine("Error Access Violation. " + ax.Message);
             }
+            catch (System.FormatException ex)
+            {
+                Console.WriteLine("Error Format. " + ex.Message);
+            }
             finally
             {
                 memoryStream = null;
@@ -124,6 +154,41 @@ namespace WhoIsDemo.presenter
             }
 
             return result;
+        }
+
+        public Bitmap AdjustAlpha(Bitmap image, float translucency)
+        {
+
+            float t = translucency;
+            ColorMatrix cm = new ColorMatrix(new float[][]
+                {
+                    new float[] {1, 0, 0, 0, 0},
+                    new float[] {0, 1, 0, 0, 0},
+                    new float[] {0, 0, 1, 0, 0},
+                    new float[] {0, 0, 0, t, 0},
+                    new float[] {0, 0, 0, 0, 1},
+                });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width, 0),
+                new Point(0, image.Height),
+            };
+            Rectangle rect =
+                new Rectangle(0, 0, image.Width, image.Height);
+
+
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect,
+                    GraphicsUnit.Pixel, attributes);
+            }
+
+            return bm;
         }
         #endregion
     }

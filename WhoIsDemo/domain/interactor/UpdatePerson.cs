@@ -24,9 +24,11 @@ namespace WhoIsDemo.domain.interactor
             database.GetUsers();
         }
 
-        public void UpdateUser(int idFace, string namePerson, string address)
+        public void UpdateUser(int idFace, string namePerson, 
+            string lastName, string identification)
         {
-            Task task = database.UpdateUser(idFace, namePerson, address);
+            Task task = database.UpdateUser(idFace, namePerson, 
+                lastName, identification);
             if (task.IsCompleted)
             {
                 task.Dispose();

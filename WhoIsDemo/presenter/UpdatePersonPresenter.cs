@@ -40,18 +40,28 @@ namespace WhoIsDemo.presenter
                 updatePerson.NameDatabase = nameDatabase;
             }
         }
-
+        private static readonly UpdatePersonPresenter instance = new UpdatePersonPresenter();
+        public static UpdatePersonPresenter Instance => instance;
         #endregion
 
         #region methods
-        public void Connect()
+        public UpdatePersonPresenter()
+        {
+            Connection = "mongodb://localhost:27017";
+            NameDatabase = "dbass";
+            Connect();
+        }
+
+        private void Connect()
         {
             updatePerson.Connect();
         }
 
-        public void UpdateUser(int idFace, string namePerson, string address)
+        public void UpdateUser(int idFace, string namePerson, 
+            string lastName, string identification)
         {
-            updatePerson.UpdateUser(idFace, namePerson, address);
+            updatePerson.UpdateUser(idFace, namePerson, 
+                lastName, identification);
         }
         #endregion
 
