@@ -116,7 +116,7 @@ namespace WhoIsDemo.model
                 observer.OnNext(await GetUserAsync());
             });
             subscriptionUser = observableUser
-                .Where(res => res != UserJson && !string.IsNullOrEmpty(res))                 
+                .Where(res => res != UserJson && !string.IsNullOrEmpty(res))      // res != UserJson &&
                 .Delay(TimeSpan.FromSeconds(0.2))
                 .Repeat()
                 .Subscribe(
@@ -129,7 +129,7 @@ namespace WhoIsDemo.model
         {
             return Task.Run(() =>
             {
-                Console.WriteLine("OBSERVANDO-------");
+                //Console.WriteLine("OBSERVANDO-------");
                 return aipu.GetUser;
             });
 

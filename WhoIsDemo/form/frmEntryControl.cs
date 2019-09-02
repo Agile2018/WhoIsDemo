@@ -113,12 +113,13 @@ namespace WhoIsDemo.form
             this.Left = (int)((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2);
 
             InitControls();
-            SubscriptionReactive();
-            EnableObserverUser();
-            InitListPerson();
+            InitListPerson();            
+            EnableObserverUser();            
             ConnectDatabase();
 
         }
+
+
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -172,12 +173,13 @@ namespace WhoIsDemo.form
 
         }
 
-        private void AddImageOfPerson(List<Bitmap> listImage)
+        private void ThreadAddImageOfPerson(List<Bitmap> listImage)
         {
             if (!SearchPersonList(Convert.ToInt32(personTransition.Params.Id_face),
                     this.listPersonSlider))
             {
                 SetPersonInList();
+                //this.SetImage(listImage[0]);
                 this.Invoke(new Action(() => this.SetImage(listImage[0])));
             }
 
@@ -185,9 +187,15 @@ namespace WhoIsDemo.form
                     this.listPersonRegister))
             {
                 this.listPersonRegister.Add(personTransition);
-                this.Invoke(new Action(() => this.AddNewCardPerson(listImage)));
+                
+                this.AddNewCardPerson(listImage);
+                //this.Invoke(new Action(() => this.AddNewCardPerson(listImage)));
             }
+        }
 
+        private void AddImageOfPerson(List<Bitmap> listImage)
+        {            
+            Task t = this.TaskAddImageOfPerson(listImage);
         }
 
         private bool SearchPersonList(int id, List<Person> people)
@@ -231,9 +239,10 @@ namespace WhoIsDemo.form
                 Bitmap imgGallery = findImagePresenter.ResizeBitmap(listImage[0]);
                 cardPerson.Photo = imgGallery;
             }
-           
-            
-            flowLayoutPanel1.Controls.Add(cardPerson);
+
+            this.flowLayoutPanel1.Invoke(new Action(() => 
+            this.flowLayoutPanel1.Controls.Add(cardPerson)));
+            //flowLayoutPanel1.Controls.Add(cardPerson);
         }
 
         private void AddPersonIndentify(Person person)
@@ -305,6 +314,14 @@ namespace WhoIsDemo.form
 
         }
 
+        private async Task TaskAddImageOfPerson(List<Bitmap> listImage)
+        {
+            await Task.Run(() =>
+            {
+                ThreadAddImageOfPerson(listImage);
+
+            });
+        }
         private async Task TaskWriteImage(Mat img)
         {
 
@@ -490,6 +507,11 @@ namespace WhoIsDemo.form
         private void frmEntryControl_Resize(object sender, EventArgs e)
         {
             this.Refresh();
+        }
+
+        private void frmEntryControl_Shown(object sender, EventArgs e)
+        {
+            SubscriptionReactive();
         }
     }
 

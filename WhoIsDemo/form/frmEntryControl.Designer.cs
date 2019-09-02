@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEntryControl));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
             this.pic1 = new System.Windows.Forms.PictureBox();
             this.pic8 = new System.Windows.Forms.PictureBox();
             this.pic6 = new System.Windows.Forms.PictureBox();
@@ -46,7 +43,10 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.imbVideo = new Emgu.CV.UI.ImageBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -96,40 +96,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(1295, 828);
             this.splitContainer1.SplitterDistance = 269;
             this.splitContainer1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkGray;
-            this.label1.Location = new System.Drawing.Point(489, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 19);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Personas registradas";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(494, 37);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(789, 486);
-            this.flowLayoutPanel1.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DarkGray;
-            this.label4.Location = new System.Drawing.Point(12, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 19);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Cámara";
             // 
             // pic1
             // 
@@ -281,6 +247,29 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkGray;
+            this.label1.Location = new System.Drawing.Point(489, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(180, 19);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Personas registradas";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(494, 37);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(789, 486);
+            this.flowLayoutPanel1.TabIndex = 11;
+            // 
             // imbVideo
             // 
             this.imbVideo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -290,6 +279,17 @@
             this.imbVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imbVideo.TabIndex = 2;
             this.imbVideo.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DarkGray;
+            this.label4.Location = new System.Drawing.Point(12, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 19);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Cámara";
             // 
             // btnClose
             // 
@@ -316,6 +316,7 @@
             this.Text = "Control de entrada";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEntryControl_FormClosing);
             this.Load += new System.EventHandler(this.frmEntryControl_Load);
+            this.Shown += new System.EventHandler(this.frmEntryControl_Shown);
             this.Resize += new System.EventHandler(this.frmEntryControl_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

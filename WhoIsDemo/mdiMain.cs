@@ -59,6 +59,7 @@ namespace WhoIsDemo
             VerifyFileConfiguration();
             GetListVideos();
             cboResolution.SelectedIndex = 0;
+            
         }
              
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,9 +220,6 @@ namespace WhoIsDemo
             frmWork.Show();
         }
 
-        private void btnNotRegister_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

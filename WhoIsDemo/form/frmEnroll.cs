@@ -111,9 +111,8 @@ namespace WhoIsDemo.form
             this.Left = (int)((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2);
 
             InitControls();
-            SubscriptionReactive();
-            EnableObserverUser();
-            InitListPerson();
+            InitListPerson();            
+            EnableObserverUser();            
             ConnectDatabase();
         }
 
@@ -169,22 +168,35 @@ namespace WhoIsDemo.form
 
         }
 
-        private void AddImageOfPerson(Bitmap image)
+        private void ThreadAddImageOfPerson(Bitmap image)
         {
             if (!SearchPersonList(Convert.ToInt32(personTransition.Params.Id_face),
                     this.listPersonSlider))
             {
                 SetPersonInList();
+                //this.SetImage(image);
                 this.Invoke(new Action(() => this.SetImage(image)));
             }
-            
+
             if (personTransition.Params.Register == "1")
             {
-                this.Invoke(new Action(() => this.AddNewCardPerson(image)));
+                this.AddNewCardPerson(image);
+                //this.Invoke(new Action(() => this.AddNewCardPerson(image)));
             }
-                
         }
 
+        private void AddImageOfPerson(Bitmap image)
+        {
+            Task t = this.TaskAddImageOfPerson(image);
+        }
+        private async Task TaskAddImageOfPerson(Bitmap image)
+        {
+            await Task.Run(() =>
+            {
+                ThreadAddImageOfPerson(image);
+
+            });
+        }
         private bool SearchPersonList(int id, List<Person> people)
         {
             Person personSearch = people
@@ -219,8 +231,9 @@ namespace WhoIsDemo.form
                 Bitmap imgResize = findImagePresenter.ResizeBitmap(image);
                 cardPerson.Photo = imgResize;
             }
-            
-            flowLayoutPanel1.Controls.Add(cardPerson);
+            this.flowLayoutPanel1.Invoke(new Action(() =>
+            this.flowLayoutPanel1.Controls.Add(cardPerson)));
+            //flowLayoutPanel1.Controls.Add(cardPerson);
         }
        
         private void AddPersonIndentify(Person person)
@@ -476,6 +489,11 @@ namespace WhoIsDemo.form
         private void frmEnroll_Resize(object sender, EventArgs e)
         {
             this.Refresh();
+        }
+
+        private void frmEnroll_Shown(object sender, EventArgs e)
+        {
+            SubscriptionReactive();
         }
     }
 }

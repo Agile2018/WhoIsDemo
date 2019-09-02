@@ -318,6 +318,7 @@ namespace WhoIsDemo.form
             this.Text = "Enrolamiento de personas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEnroll_FormClosing);
             this.Load += new System.EventHandler(this.frmEnroll_Load);
+            this.Shown += new System.EventHandler(this.frmEnroll_Shown);
             this.Resize += new System.EventHandler(this.frmEnroll_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

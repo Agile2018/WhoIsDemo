@@ -29,7 +29,7 @@ namespace WhoIsDemo.domain.interactor
         {
             if (!string.IsNullOrEmpty(user))
             {
-                
+                Console.WriteLine(user);
                 subjectUser.OnNext(user);
             }
         }
