@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WhoIsDemo.domain.interactor;
 using WhoIsDemo.form;
@@ -57,8 +58,7 @@ namespace WhoIsDemo
             SubscriptionReactive();
             diskPresenter.CreateDirectoryWork();
             VerifyFileConfiguration();
-            GetListVideos();
-            cboResolution.SelectedIndex = 0;
+            GetListVideos();            
             
         }
              
@@ -88,9 +88,19 @@ namespace WhoIsDemo
 
         private void IntAipuFace()
         {
-            AipuFace.Instance.InitLibrary();
-            AipuFace.Instance.LoadConfiguration(DiskPresenter.directory);
-            
+            if (!string.IsNullOrEmpty(Configuration.Instance.ConnectDatabase))
+            {
+                AipuFace.Instance.InitLibrary();
+                AipuFace.Instance.LoadConfiguration(DiskPresenter.directory);
+            }
+            else
+            {
+                this.statusStrip.Invoke(new Action(() => managerControlView
+                    .SetValueTextStatusStrip(StringResource.configuration_empty, 0, this.statusStrip)));
+
+            }
+
+
         }
 
         private void VerifyFileConfiguration()
@@ -101,6 +111,10 @@ namespace WhoIsDemo
                 this.statusStrip.Invoke(new Action(() => managerControlView
                     .SetValueTextStatusStrip(StringResource.configuration_empty, 0, this.statusStrip)));
 
+            }
+            else
+            {
+                GetDatabaseConfiguration();
             }
         }
 
@@ -122,19 +136,19 @@ namespace WhoIsDemo
             
         }
 
-        private void btnStopLibrary_Click(object sender, EventArgs e)
-        {
-            AipuFace.Instance.StopAipu();
-            this.statusStrip.Invoke(new Action(() => managerControlView
-                    .SetValueTextStatusStrip(StringResource.stop_library, 0, this.statusStrip)));
-        }
+        //private void btnStopLibrary_Click(object sender, EventArgs e)
+        //{
+        //    RequestAipu.Instance.StopAipu();
+        //    this.statusStrip.Invoke(new Action(() => managerControlView
+        //            .SetValueTextStatusStrip(StringResource.stop_library, 0, this.statusStrip)));
+        //}
 
-        private void btnReloadLibrary_Click(object sender, EventArgs e)
-        {
-            AipuFace.Instance.ReloadAipu();
-            this.statusStrip.Invoke(new Action(() => managerControlView
-                    .SetValueTextStatusStrip(StringResource.reload_library, 0, this.statusStrip)));
-        }        
+        //private void btnReloadLibrary_Click(object sender, EventArgs e)
+        //{
+        //    RequestAipu.Instance.ReloadAipu();
+        //    this.statusStrip.Invoke(new Action(() => managerControlView
+        //            .SetValueTextStatusStrip(StringResource.reload_library, 0, this.statusStrip)));
+        //}        
 
         private void globalToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -164,6 +178,17 @@ namespace WhoIsDemo
             }
         }
 
+        private void GetDatabaseConfiguration()
+        {
+            DatabaseConfig databaseConfig = diskPresenter.ReadDatabaseConfiguration();
+            if (!string.IsNullOrEmpty(databaseConfig.Params.connect))
+            {
+                Configuration.Instance.ConnectDatabase = databaseConfig.Params.connect;
+                Configuration.Instance.NameDatabase = databaseConfig.Params.name;
+                
+            }
+        }
+
         private void cboVideo_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = cboVideo.SelectedIndex;
@@ -172,28 +197,7 @@ namespace WhoIsDemo
                 Configuration.Instance.VideoDefault = Configuration
                     .Instance.ListVideo[index].path;
             }
-        }
-
-        private void cboResolution_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (cboResolution.SelectedIndex)
-            {
-                case 0:
-                    Configuration.Instance.Width = 320;
-                    Configuration.Instance.Height = 240;
-                    break;
-                case 1:
-                    Configuration.Instance.Width = 640;
-                    Configuration.Instance.Height = 480;
-                    break;
-                case 2:
-                    Configuration.Instance.Width = 1280;
-                    Configuration.Instance.Height = 960;
-                    break;
-                default:
-                    break;
-            }
-        }
+        }     
 
         private void btnChangeMode_Click(object sender, EventArgs e)
         {
@@ -202,6 +206,7 @@ namespace WhoIsDemo
 
         private void enrolamientoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Task taskLoadPeoples = SynchronizationPeoplePresenter.Instance.TaskLoadPeoples();
             managerControlView.SetValueTextStatusStrip("", 0, statusStrip);
             frmEnroll frmWork = new frmEnroll() { MdiParent = this };
             frmWork.strNameMenu = "enrolamientoToolStripMenuItem";

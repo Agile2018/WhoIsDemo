@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cboLevelResolution = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblOkDetect = new System.Windows.Forms.Label();
             this.btnDetect = new System.Windows.Forms.Button();
             this.txtAccurancy = new System.Windows.Forms.TextBox();
@@ -52,6 +54,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cboLevelResolution);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.lblOkDetect);
             this.groupBox2.Controls.Add(this.btnDetect);
             this.groupBox2.Controls.Add(this.txtAccurancy);
@@ -64,17 +68,39 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(667, 63);
+            this.groupBox2.Size = new System.Drawing.Size(667, 97);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detección";
+            // 
+            // cboLevelResolution
+            // 
+            this.cboLevelResolution.FormattingEnabled = true;
+            this.cboLevelResolution.Items.AddRange(new object[] {
+            "Standard",
+            "High definition",
+            "High definition plus"});
+            this.cboLevelResolution.Location = new System.Drawing.Point(99, 55);
+            this.cboLevelResolution.Name = "cboLevelResolution";
+            this.cboLevelResolution.Size = new System.Drawing.Size(159, 21);
+            this.cboLevelResolution.TabIndex = 36;
+            this.cboLevelResolution.SelectedIndexChanged += new System.EventHandler(this.cboLevelResolution_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 58);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "Level resolution:";
             // 
             // lblOkDetect
             // 
             this.lblOkDetect.AutoSize = true;
             this.lblOkDetect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOkDetect.ForeColor = System.Drawing.Color.Red;
-            this.lblOkDetect.Location = new System.Drawing.Point(599, 20);
+            this.lblOkDetect.Location = new System.Drawing.Point(594, 20);
             this.lblOkDetect.Name = "lblOkDetect";
             this.lblOkDetect.Size = new System.Drawing.Size(0, 20);
             this.lblOkDetect.TabIndex = 34;
@@ -172,7 +198,7 @@
             this.groupBox3.Controls.Add(this.btnSaveVideo);
             this.groupBox3.Controls.Add(this.txtIpVideo);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(12, 81);
+            this.groupBox3.Location = new System.Drawing.Point(12, 129);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(667, 245);
             this.groupBox3.TabIndex = 3;
@@ -240,7 +266,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(576, 350);
+            this.btnClose.Location = new System.Drawing.Point(576, 398);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(103, 35);
             this.btnClose.TabIndex = 7;
@@ -252,7 +278,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 403);
+            this.ClientSize = new System.Drawing.Size(691, 442);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -289,5 +315,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSaveVideos;
+        private System.Windows.Forms.ComboBox cboLevelResolution;
+        private System.Windows.Forms.Label label1;
     }
 }

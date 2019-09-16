@@ -15,12 +15,13 @@ namespace WhoIsDemo.model
         AipuObserver aipuObserver;
         private bool isLoadConfiguration = false;
         private bool isStopAipu = false;
-
+        private bool isTracking = false;
         private static readonly AipuFace instance = new AipuFace();
         public static AipuFace Instance => instance;
 
         public bool IsLoadConfiguration { get => isLoadConfiguration; set => isLoadConfiguration = value; }
         public bool IsStopAipu { get => isStopAipu; set => isStopAipu = value; }
+        public bool IsTracking { get => isTracking; set => isTracking = value; }
         #endregion
 
         #region methods
@@ -52,6 +53,39 @@ namespace WhoIsDemo.model
         public void SetWorkMode(int mode)
         {
             aipu.SetWorkMode(mode);
+            
+        }
+
+        public void ResfreshBetweenFrame(int value)
+        {
+            aipu.ResfreshBetweenFrame(value);
+
+        }
+
+        public void SetSequenceFps(int value)
+        {
+            aipu.SetSequenceFps(value);
+
+        }
+
+        public bool GetStateProccessRecognition()
+        {
+            return aipu.GetStateProccessRecognition;
+        }
+
+        public void ResetIdUser()
+        {
+            aipu.ResetIdUser();
+        }
+
+        public void TerminateTracking()
+        {
+            if (isTracking)
+            {
+                aipu.TerminateTracking();
+            }
+            
+            isTracking = false;
         }
 
         public void SetIsRegister(bool option)
@@ -65,6 +99,22 @@ namespace WhoIsDemo.model
 
         }
 
+        public void SendFastFrame(byte[] data, int rows, int cols)
+        {
+            aipu.SetFastFrame(data, rows, cols);
+        }
+
+        public void InitTracking(byte[] data, int rows, int cols)
+        {
+            aipu.InitTracking(data, rows, cols);
+            isTracking = true;
+        }
+
+        public void Tracking(byte[] data, int rows, int cols)
+        {
+            aipu.Tracking(data, rows, cols);
+        }
+
         public AipuObserver GetObserver()
         {
             return aipuObserver;
@@ -75,9 +125,19 @@ namespace WhoIsDemo.model
             aipuObserver.EnableObserverUser();
         }
 
+        public void EnableObserverCoordinates(bool enable)
+        {
+            aipuObserver.EnableObserverCoordinates(enable);
+        }
+
         public bool IsObserverUser()
         {
             return aipuObserver.IsHearObserverUser;
+        }
+
+        public bool IsObserverCoordinates()
+        {
+            return aipuObserver.IsHearObserverCoordinates;
         }
 
         public void StopAipu()

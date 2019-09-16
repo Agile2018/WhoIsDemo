@@ -1,5 +1,7 @@
 ﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using Emgu.CV.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,13 +22,28 @@ namespace WhoIsDemo.form
     {
         #region constants
         private const int queueImage = 9;
+        const int SWP_NOSIZE = 0x1;
+        const int SWP_NOMOVE = 0x2;
+        const int SWP_NOACTIVATE = 0x10;
+        const int wFlags = SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE;
+        const int HWND_TOPMOST = -1;
+        const int HWND_NOTOPMOST = -2;
         #endregion
 
         #region variables
-        //EnrollPresenter enrollPresenter = new EnrollPresenter();
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
+        public static extern IntPtr SetWindowPos(IntPtr hWnd,
+            int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
+        
         public string strNameMenu;
-        private bool flagProccessSave = false;
         private int indexPerson = 0;
+        private int countRepeatFrame = 0;
+        private float[] coordinatesRectFace;
+        private float[] coordinatesVolatile = new float[2];
+        private double totalFrame;
+        private double fps;
+        private ImageViewer viewer;
+        
         private StatusStrip status;
         private Person personTransition = new Person();
         private List<Person> listPersonSlider = new List<Person>();
@@ -34,10 +51,12 @@ namespace WhoIsDemo.form
         ManagerControlView managerControlView = new ManagerControlView();
         HearUserPresenter hearUserPresenter = new HearUserPresenter();
         FindImagePresenter findImagePresenter = new FindImagePresenter();
-
+        HearCoordinatesPresenter hearCoordinatesPresenter = new HearCoordinatesPresenter();
+        GraffitsPresenter graffitsPresenter = new GraffitsPresenter();
         IDisposable subscriptionHearUser;
         IDisposable subscriptionFindImage;
-
+        IDisposable subscriptionCoordinates;
+        
         private int linkVideo;
 
         public int LinkVideo
@@ -51,7 +70,7 @@ namespace WhoIsDemo.form
             {
                 linkVideo = value;
                 hearUserPresenter.IdVideo = linkVideo;
-
+                graffitsPresenter.LinkVideo = linkVideo;
             }
 
         }
@@ -108,23 +127,16 @@ namespace WhoIsDemo.form
             this.AutoScaleMode = AutoScaleMode.Dpi;
             this.PerformAutoScale();
             this.Top = 0;
-            this.Width = 1203;
-            this.Height = 818;
-            this.Left = (int)((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2);
-
+            this.Left = 0;
+            this.Width = 1086;
+            this.Height = 867;
+            
             InitControls();
             InitListPerson();            
-            EnableObserverUser();            
+            EnableObservers();            
             ConnectDatabase();
 
-        }
-
-
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        }        
 
         #region methods
         private void InitListPerson()
@@ -143,6 +155,18 @@ namespace WhoIsDemo.form
         {
             RequestAipu.Instance.IsRegister(false);
             this.status = managerControlView.GetStatusStripMain(mdiMain.NAME);
+            if (!string.IsNullOrEmpty(Configuration.Instance.VideoDefault))
+            {
+                InitCapture();
+            }
+            else
+            {
+                this.btnStart.Enabled = false;
+
+                managerControlView
+                    .SetValueTextStatusStrip(StringResource.ip_video_empty,
+                    0, this.status);
+            }
         }
 
         private void ConnectDatabase()
@@ -150,7 +174,7 @@ namespace WhoIsDemo.form
             findImagePresenter.Connect();
         }
 
-        private void EnableObserverUser()
+        private void EnableObservers()
         {
             if (!hearUserPresenter.EnableObserverUser())
             {
@@ -158,7 +182,7 @@ namespace WhoIsDemo.form
                     StringResource.load_library, 0, this.status);
 
             }
-
+            hearCoordinatesPresenter.EnabledCoordinates(true);
         }
 
         private void SubscriptionReactive()
@@ -170,6 +194,14 @@ namespace WhoIsDemo.form
             subscriptionHearUser = hearUserPresenter.subjectUser.Subscribe(
                 person => AddPersonIndentify(person),
                 () => Console.WriteLine(StringResource.complete));
+            subscriptionCoordinates = hearCoordinatesPresenter.subjectCoordinates.Subscribe(
+                coor => SetCoordinatesFace(coor),
+                () => Console.WriteLine(StringResource.complete));
+        }
+
+        private void SetCoordinatesFace(float[] coordinateFlow)
+        {
+            this.coordinatesRectFace = coordinateFlow;
 
         }
 
@@ -179,7 +211,7 @@ namespace WhoIsDemo.form
                     this.listPersonSlider))
             {
                 SetPersonInList();
-                //this.SetImage(listImage[0]);
+                
                 this.Invoke(new Action(() => this.SetImage(listImage[0])));
             }
 
@@ -189,7 +221,7 @@ namespace WhoIsDemo.form
                 this.listPersonRegister.Add(personTransition);
                 
                 this.AddNewCardPerson(listImage);
-                //this.Invoke(new Action(() => this.AddNewCardPerson(listImage)));
+                
             }
         }
 
@@ -256,62 +288,132 @@ namespace WhoIsDemo.form
         private void InitCapture()
         {
 
-            capture = new VideoCapture(Configuration.Instance.VideoDefault);
-            capture.ImageGrabbed += ProcessFrame;
-
-            if (capture != null)
-            {
-                try
-                {
-
-                    capture.Start();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-            }
-        }
-
-        private void ProcessFrame(object sender, EventArgs e)
-        {
-            if (capture != null && capture.Ptr != IntPtr.Zero)
-            {
-
-                CaptureFrame();
-            }
-        }
+            VideoCapture captureInit = new VideoCapture(Configuration.Instance.VideoDefault);
+            Mat frame = new Mat();
+            captureInit.Read(frame);
+            totalFrame = captureInit.GetCaptureProperty(CapProp.FrameCount);
+            fps = captureInit.GetCaptureProperty(CapProp.Fps);
+            graffitsPresenter.SetSequenceFps(Convert.ToInt32(fps));
+            Configuration.Instance.CalculeArea();
+            graffitsPresenter.DimesionAdjustment(frame.Width, frame.Height);
+            graffitsPresenter.ImageScalingAdjustment();
+            Task taskInitTracking = graffitsPresenter.TaskInitTracking();
+            captureInit.Dispose();
+        }       
 
         private void CaptureFrame()
         {
-            Mat frame = new Mat();
-            try
+            using (viewer = new ImageViewer())
+            using (capture = new VideoCapture(Configuration.Instance.VideoDefault)) 
             {
-                if (capture.Retrieve(frame, 0))
+                capture.SetCaptureProperty(CapProp.FrameWidth, Configuration.Instance.Width);
+                capture.SetCaptureProperty(CapProp.FrameHeight, Configuration.Instance.Height);
+                int wait = 1000 / Convert.ToInt16(fps);
+                capture.ImageGrabbed += delegate (object sender, EventArgs e)
                 {
-                    this.imbVideo.Invoke(new Action(() =>
-                    this.imbVideo.Image = frame));
+                    Mat frame = new Mat();
+                    capture.Retrieve(frame);
 
+                    Mat frameClone = frame.Clone();
+
+                    Task taskTracking = graffitsPresenter.TaskTracking(frameClone);
+                    Task taskRecognition = graffitsPresenter.TaskImageForRecognition(frameClone);
+                    DrawRectangleFace(frame);
+                    PutTextInFrame(frame);
+                    viewer.Image = frame;
+                    CvInvoke.WaitKey(wait);
+
+                };
+
+                viewer.ControlBox = false;
+                viewer.Text = "Video";
+                Size sizeViewer = new Size(Configuration.Instance.Width, Configuration.Instance.Height);
+                viewer.Size = sizeViewer;                
+                capture.Start();
+                viewer.ShowDialog();
+
+
+            }
+
+        }
+
+        private void PutTextInFrame(Mat img)
+        {
+            string textBox = string.Format("Resolution: {0}x{1}", 
+                Configuration.Instance.WidthReal, Configuration.Instance.HeightReal);
+            int x = Convert.ToInt32(Convert
+                .ToSingle(Configuration.Instance.CoordinatesXText) * Configuration
+                .Instance.FactorScalingWidthText);
+            int y = Convert.ToInt32(Convert
+                .ToSingle(Configuration.Instance.CoordinatesYText) * Configuration
+                .Instance.FactorScalingHeightText);
+            CvInvoke.PutText(img, textBox, new System.Drawing
+                .Point(x, y),
+                FontFace.HersheySimplex, 0.4, new MCvScalar(255.0, 0.0, 0.0));
+            textBox = string.Format("FPS: {0}",
+                Convert.ToInt16(fps));
+            y += 20;
+            CvInvoke.PutText(img, textBox, new System.Drawing
+                .Point(x, y),
+                FontFace.HersheySimplex, 0.4, new MCvScalar(255.0, 0.0, 0.0));
+            textBox = string.Format("Identified: {0}",
+                listPersonRegister.Count);
+            y += 20;
+            CvInvoke.PutText(img, textBox, new System.Drawing
+                .Point(x, y),
+                FontFace.HersheySimplex, 0.4, new MCvScalar(255.0, 0.0, 0.0));
+        }
+
+        private void DrawRectangleFace(Mat img)
+        {
+
+            if (this.coordinatesRectFace[0] > 0)
+            {
+
+                float x1 = this.coordinatesRectFace[0] * graffitsPresenter.FactorScaling;
+                float y1 = this.coordinatesRectFace[1] * graffitsPresenter.FactorScaling;
+                float w = this.coordinatesRectFace[2] * graffitsPresenter.FactorScaling;
+                float h = this.coordinatesRectFace[3] * graffitsPresenter.FactorScaling;
+
+                if (this.coordinatesVolatile[0] == x1 &&
+                    this.coordinatesVolatile[1] == y1)
+                {
+                    this.countRepeatFrame += 1;
+                }
+                else
+                {
+                    this.coordinatesVolatile[0] = x1;
+                    this.coordinatesVolatile[1] = y1;
+                    this.countRepeatFrame = 0;
+                }
+
+
+                Console.WriteLine(x1 + ", " + y1 + ", " + w + ", " + h);
+                if (this.countRepeatFrame < 3)
+                {
+                    try
+                    {
+                        Rectangle rectangle = new Rectangle(Convert.ToInt32(x1),
+                        Convert.ToInt32(y1),
+                        Convert.ToInt32(w), Convert.ToInt32(h));
+                        CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 0.0, 0.0), 1);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine("Error Rectangle dimension " + ex.Message);
+                    }
 
                 }
-                if (!flagProccessSave && frame != null)
-                {
-                    Task t = this.TaskWriteImage(frame);
-                }
+
 
             }
-            catch (System.InvalidOperationException ex)
-            {
-                this.status.Invoke(new Action(() => managerControlView
-                .SetValueTextStatusStrip(ex.Message, 0, this.status)));
-            }
-            catch (System.AccessViolationException ex)
-            {
-                this.status.Invoke(new Action(() => managerControlView
-                .SetValueTextStatusStrip(ex.Message, 0, this.status)));
-            }
 
+        }
+
+        private void BringToFrontImageViewer(IntPtr handle, int position)
+        {
+            SetWindowPos(handle, position, 0, 0, 0, 0, wFlags);
         }
 
         private async Task TaskAddImageOfPerson(List<Bitmap> listImage)
@@ -322,95 +424,67 @@ namespace WhoIsDemo.form
 
             });
         }
-        private async Task TaskWriteImage(Mat img)
-        {
-
-
-            await Task.Run(() =>
-            {
-                LaunchThreadSaveImage(img);
-
-            });
-
-        }
-
-        private void LaunchThreadSaveImage(Mat img)
-        {
-            flagProccessSave = true;
-            WriteImage(img);
-
-        }
-
-        private void WriteImage(Mat img)
-        {
-            Mat clone = img.Clone();
-            CvInvoke.Resize(clone, clone, new Size(Configuration.Instance.Width,
-                Configuration.Instance.Height)); //  320, 240 640, 480
-
-            int length = clone.Width * clone.Height * clone.NumberOfChannels;
-            byte[] data = new byte[length];
-
-            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-            using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
-                handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
-                CvInvoke.BitwiseNot(clone, m2);
-            handle.Free();
-
-            RequestAipu.Instance.SendFrame(data, clone.Height,
-                clone.Width, LinkVideo);
-            clone.Dispose();
-            flagProccessSave = false;
-        }
-
-
+        
         #endregion
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(Configuration.Instance.VideoDefault))
+            Task.Run(() =>
             {
-                InitCapture();
+                CaptureFrame();
 
-                btnStart.Enabled = false;
-                btnStop.Enabled = true;
-            }
-            else
-            {
-                managerControlView
-                    .SetValueTextStatusStrip(StringResource.ip_video_empty,
-                    0, this.status);
-            }
+            });            
+            this.btnStart.Enabled = false;
+            this.btnStop.Enabled = true;
+            this.btnFrontVideo.Enabled = true;
+            this.btnBackVideo.Enabled = true;
         }
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
-            capture.Start();
-
-            btnStop.Enabled = true;
-            btnRestart.Enabled = false;
+            capture.Start();            
+            this.btnStop.Enabled = true;
+            this.btnRestart.Enabled = false;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            btnRestart.Enabled = true;
-            btnStop.Enabled = false;
+            this.btnRestart.Enabled = true;
+            this.btnStop.Enabled = false;            
             capture.Stop();
         }
 
         private void frmEntryControl_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.capture != null && this.capture.IsOpened)
+            try
             {
-                capture.Stop();
-                Task.Delay(300).Wait();
-                this.imbVideo.Invoke(new Action(() =>
-                        this.imbVideo.Dispose()));
-                this.capture.Dispose();
-
+                if (this.capture != null && this.capture.IsOpened)
+                {
+                    capture.Stop();
+                    Task.Delay(300).Wait();                    
+                    this.capture.Dispose();                    
+                }
+                if (viewer != null)
+                {
+                    this.viewer.Invoke(new Action(() => this.viewer.Close()));
+                }
+                graffitsPresenter.ResetIdUser();
+                hearCoordinatesPresenter.EnabledCoordinates(false);
                 if (subscriptionHearUser != null) subscriptionHearUser.Dispose();
                 if (subscriptionFindImage != null) subscriptionFindImage.Dispose();
+                if (subscriptionCoordinates != null) subscriptionCoordinates.Dispose();                
+                System.Threading.Thread closeTracking = new System
+                    .Threading.Thread(new System.Threading
+               .ThreadStart(graffitsPresenter.TerminateTracking));
+                closeTracking.Start();
+                managerControlView.EnabledOptionMenu(strNameMenu, mdiMain.NAME);
             }
-            managerControlView.EnabledOptionMenu(strNameMenu, mdiMain.NAME);
+            catch (System.AccessViolationException ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            
 
         }
 
@@ -512,6 +586,23 @@ namespace WhoIsDemo.form
         private void frmEntryControl_Shown(object sender, EventArgs e)
         {
             SubscriptionReactive();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnFrontVideo_Click(object sender, EventArgs e)
+        {
+            this.viewer.Invoke(new Action(() => BringToFrontImageViewer(this.viewer.Handle,
+                HWND_TOPMOST)));
+        }
+
+        private void btnBackVideo_Click(object sender, EventArgs e)
+        {
+            this.viewer.Invoke(new Action(() => BringToFrontImageViewer(this.viewer.Handle,
+                HWND_NOTOPMOST)));
         }
     }
 

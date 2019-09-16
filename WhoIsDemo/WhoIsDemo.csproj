@@ -124,14 +124,22 @@
   <ItemGroup>
     <Compile Include="domain\interactor\DropDatabase.cs" />
     <Compile Include="domain\interactor\FindImage.cs" />
+    <Compile Include="domain\interactor\HearCoordinates.cs" />
     <Compile Include="domain\interactor\HearUser.cs" />
     <Compile Include="domain\interactor\RequestAipu.cs" />
+    <Compile Include="domain\interactor\SynchronizationOfPeopleWithDatabase.cs" />
     <Compile Include="domain\interactor\UpdatePerson.cs" />
     <Compile Include="form\CardPerson.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="form\CardPerson.Designer.cs">
       <DependentUpon>CardPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\CardSimple.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="form\CardSimple.Designer.cs">
+      <DependentUpon>CardSimple.cs</DependentUpon>
     </Compile>
     <Compile Include="form\CardTwoImage.cs">
       <SubType>UserControl</SubType>
@@ -193,6 +201,7 @@
     <Compile Include="model\ParamsDatabase.cs" />
     <Compile Include="model\ParamsDetect.cs" />
     <Compile Include="model\ParamsFile.cs" />
+    <Compile Include="model\People.cs" />
     <Compile Include="model\Person.cs" />
     <Compile Include="model\PersonDb.cs" />
     <Compile Include="model\Video.cs" />
@@ -201,8 +210,12 @@
     <Compile Include="presenter\DropDatabasePresenter.cs" />
     <Compile Include="presenter\EnrollPresenter.cs" />
     <Compile Include="presenter\FindImagePresenter.cs" />
+    <Compile Include="presenter\GraffitsPresenter.cs" />
+    <Compile Include="presenter\HearCoordinatesPresenter.cs" />
     <Compile Include="presenter\HearInvalidPresenter.cs" />
     <Compile Include="presenter\HearUserPresenter.cs" />
+    <Compile Include="presenter\QueueMatPresenter.cs" />
+    <Compile Include="presenter\SynchronizationPeoplePresenter.cs" />
     <Compile Include="presenter\UpdatePersonPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -211,6 +224,9 @@
     <Compile Include="view\tool\ManagerControlView.cs" />
     <EmbeddedResource Include="form\CardPerson.resx">
       <DependentUpon>CardPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\CardSimple.resx">
+      <DependentUpon>CardSimple.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\CardTwoImage.resx">
       <DependentUpon>CardTwoImage.cs</DependentUpon>
@@ -264,6 +280,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="License-LGPL.txt" />
+    <None Include="Resources\timer-off.png" />
+    <None Include="Resources\file-document-box-multiple-outline.png" />
+    <None Include="Resources\eye-outline.png" />
+    <None Include="Resources\eye-off-outline.png" />
     <None Include="Resources\cctvX.png" />
     <None Include="Resources\close.png" />
     <None Include="Resources\ic_clear_black_48dp.png" />

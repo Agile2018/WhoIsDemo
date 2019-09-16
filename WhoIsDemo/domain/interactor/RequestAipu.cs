@@ -31,6 +31,49 @@ namespace WhoIsDemo.domain.interactor
             AipuFace.Instance.SendFrame(data, rows, cols, client);
         }
 
+        public void SendFastFrame(byte[] data, int rows, int cols)
+        {
+            AipuFace.Instance.SendFastFrame(data, rows, cols);
+        }
+
+        public void InitTracking(byte[] data, int rows, int cols)
+        {
+            AipuFace.Instance.InitTracking(data, rows, cols);
+        }
+
+        public void Tracking(byte[] data, int rows, int cols)
+        {
+            AipuFace.Instance.Tracking(data, rows, cols);
+        }
+
+        public void ResfreshBetweenFrame(int value)
+        {
+            AipuFace.Instance.ResfreshBetweenFrame(value);
+
+        }
+
+        public void SetSequenceFps(int value)
+        {
+            AipuFace.Instance.SetSequenceFps(value);
+
+        }
+
+        public bool GetStateProccessRecognition()
+        {
+            return AipuFace.Instance.GetStateProccessRecognition();
+        }
+
+        public void ResetIdUser()
+        {
+            AipuFace.Instance.ResetIdUser();
+        }
+
+        public void TerminateTracking()
+        {
+            AipuFace.Instance.TerminateTracking();
+
+        }
+
         public bool IsEnableObserverUser()
         {
             return AipuFace.Instance.IsObserverUser();
@@ -41,6 +84,25 @@ namespace WhoIsDemo.domain.interactor
             AipuFace.Instance.EnableObserverUser();
         }
 
+        public void EnableObserverCoordinates(bool enable)
+        {
+            AipuFace.Instance.EnableObserverCoordinates(enable);
+        }
+
+        public bool IsObserverCoordinates()
+        {
+            return AipuFace.Instance.IsObserverCoordinates();
+        }
+
+        public void StopAipu()
+        {
+            AipuFace.Instance.StopAipu();
+        }
+
+        public void ReloadAipu()
+        {
+            AipuFace.Instance.ReloadAipu();
+        }
         public void Terminate()
         {
             AipuFace.Instance.Terminate();

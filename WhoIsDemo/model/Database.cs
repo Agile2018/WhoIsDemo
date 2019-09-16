@@ -103,6 +103,50 @@ namespace WhoIsDemo.model
           
         }
 
+        public List<Image> GetImagesOfPepople()
+        {
+            List<Image> list = new List<Image>();
+            try
+            {
+                var filter = Builders<Image>.Filter.Empty;
+                var result = images.Find(filter).ToListAsync();
+                return result.Result;
+            }
+            catch (InvalidOperationException ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            catch (System.AggregateException ax)
+            {
+
+                Console.WriteLine(ax.Message);
+            }
+            return list;
+        }
+
+        public List<PersonDb> GetAllPeople()
+        {
+            List<PersonDb> list = new List<PersonDb>();
+            try
+            {
+                var filter = Builders<PersonDb>.Filter.Empty;
+                var result = users.Find(filter).ToListAsync();
+                return result.Result;
+            }
+            catch (InvalidOperationException ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            catch (System.AggregateException ax)
+            {
+
+                Console.WriteLine(ax.Message);
+            }
+            return list;
+        }
+
         public bool DropDatabase()
         {
             try

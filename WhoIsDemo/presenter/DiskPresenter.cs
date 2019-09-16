@@ -105,6 +105,7 @@ namespace WhoIsDemo.presenter
         {
             VideoConfig videoConfig = new VideoConfig();
             List<Video> list = new List<Video>();
+
             try
             {
                 string pathFile = directoryConfiguration + "/" + file_video;

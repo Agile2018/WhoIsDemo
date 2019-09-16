@@ -36,20 +36,16 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enrolamientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.controlDeEntradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.baseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnLoadLibrary = new System.Windows.Forms.ToolStripButton();
-            this.btnStopLibrary = new System.Windows.Forms.ToolStripButton();
-            this.btnReloadLibrary = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnChangeMode = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cboVideo = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.cboResolution = new System.Windows.Forms.ToolStripComboBox();
-            this.controlDeEntradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -117,9 +113,16 @@
             // enrolamientoToolStripMenuItem
             // 
             this.enrolamientoToolStripMenuItem.Name = "enrolamientoToolStripMenuItem";
-            this.enrolamientoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enrolamientoToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.enrolamientoToolStripMenuItem.Text = "Enrolamiento";
             this.enrolamientoToolStripMenuItem.Click += new System.EventHandler(this.enrolamientoToolStripMenuItem_Click);
+            // 
+            // controlDeEntradaToolStripMenuItem
+            // 
+            this.controlDeEntradaToolStripMenuItem.Name = "controlDeEntradaToolStripMenuItem";
+            this.controlDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.controlDeEntradaToolStripMenuItem.Text = "Control de entrada";
+            this.controlDeEntradaToolStripMenuItem.Click += new System.EventHandler(this.controlDeEntradaToolStripMenuItem_Click);
             // 
             // herramientasToolStripMenuItem
             // 
@@ -148,14 +151,10 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnLoadLibrary,
-            this.btnStopLibrary,
-            this.btnReloadLibrary,
             this.toolStripSeparator1,
             this.btnChangeMode,
             this.toolStripSeparator2,
-            this.cboVideo,
-            this.toolStripLabel1,
-            this.cboResolution});
+            this.cboVideo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(890, 25);
@@ -171,26 +170,6 @@
             this.btnLoadLibrary.Size = new System.Drawing.Size(23, 22);
             this.btnLoadLibrary.ToolTipText = "Upload library";
             this.btnLoadLibrary.Click += new System.EventHandler(this.btnLoadLibrary_Click);
-            // 
-            // btnStopLibrary
-            // 
-            this.btnStopLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnStopLibrary.Image = global::WhoIsDemo.Properties.Resources.stop;
-            this.btnStopLibrary.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnStopLibrary.Name = "btnStopLibrary";
-            this.btnStopLibrary.Size = new System.Drawing.Size(23, 22);
-            this.btnStopLibrary.ToolTipText = "Stop library";
-            this.btnStopLibrary.Click += new System.EventHandler(this.btnStopLibrary_Click);
-            // 
-            // btnReloadLibrary
-            // 
-            this.btnReloadLibrary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnReloadLibrary.Image = global::WhoIsDemo.Properties.Resources.reload;
-            this.btnReloadLibrary.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnReloadLibrary.Name = "btnReloadLibrary";
-            this.btnReloadLibrary.Size = new System.Drawing.Size(23, 22);
-            this.btnReloadLibrary.ToolTipText = "Reload Library";
-            this.btnReloadLibrary.Click += new System.EventHandler(this.btnReloadLibrary_Click);
             // 
             // toolStripSeparator1
             // 
@@ -218,29 +197,6 @@
             this.cboVideo.Size = new System.Drawing.Size(121, 25);
             this.cboVideo.ToolTipText = "Select video";
             this.cboVideo.SelectedIndexChanged += new System.EventHandler(this.cboVideo_SelectedIndexChanged);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(65, 22);
-            this.toolStripLabel1.Text = "Resolución";
-            // 
-            // cboResolution
-            // 
-            this.cboResolution.Items.AddRange(new object[] {
-            "320x240",
-            "640x480",
-            "1280x960"});
-            this.cboResolution.Name = "cboResolution";
-            this.cboResolution.Size = new System.Drawing.Size(121, 25);
-            this.cboResolution.SelectedIndexChanged += new System.EventHandler(this.cboResolution_SelectedIndexChanged);
-            // 
-            // controlDeEntradaToolStripMenuItem
-            // 
-            this.controlDeEntradaToolStripMenuItem.Name = "controlDeEntradaToolStripMenuItem";
-            this.controlDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.controlDeEntradaToolStripMenuItem.Text = "Control de entrada";
-            this.controlDeEntradaToolStripMenuItem.Click += new System.EventHandler(this.controlDeEntradaToolStripMenuItem_Click);
             // 
             // mdiMain
             // 
@@ -277,16 +233,12 @@
         private System.Windows.Forms.ToolStripMenuItem baseDeDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnLoadLibrary;
-        private System.Windows.Forms.ToolStripButton btnStopLibrary;
-        private System.Windows.Forms.ToolStripButton btnReloadLibrary;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnChangeMode;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripComboBox cboVideo;
         private System.Windows.Forms.ToolStripMenuItem globalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parcialToolStripMenuItem;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripComboBox cboResolution;
         private System.Windows.Forms.ToolStripMenuItem enrolamientoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem controlDeEntradaToolStripMenuItem;
     }

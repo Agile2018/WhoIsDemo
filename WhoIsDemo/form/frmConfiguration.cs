@@ -132,6 +132,8 @@ namespace WhoIsDemo.form
                 paramsDatabase.name = txtNameDatabase.Text;
                 databaseConfig.Params = paramsDatabase;
                 diskPresenter.SaveDatabaseConfiguration(databaseConfig);
+                Configuration.Instance.ConnectDatabase = databaseConfig.Params.connect;
+                Configuration.Instance.NameDatabase = databaseConfig.Params.name;
                 lblOkDatabase.Text = "OK";
             }
         }

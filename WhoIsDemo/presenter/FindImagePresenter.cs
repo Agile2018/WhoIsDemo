@@ -8,6 +8,7 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using WhoIsDemo.domain.interactor;
+using WhoIsDemo.model;
 
 namespace WhoIsDemo.presenter
 {
@@ -58,8 +59,8 @@ namespace WhoIsDemo.presenter
         }
         public void Connect()
         {
-            Connection = "mongodb://localhost:27017";
-            NameDatabase = "dbass";
+            Connection = Configuration.Instance.ConnectDatabase; // "mongodb://localhost:27017";
+            NameDatabase = Configuration.Instance.NameDatabase; //"dbass";
             findImage.Connect();
         }
 
@@ -97,7 +98,7 @@ namespace WhoIsDemo.presenter
 
         }
 
-        private Bitmap Base64StringToBitmap(string
+        public Bitmap Base64StringToBitmap(string
                                            base64String)
         {
             Bitmap bmpReturn = null;
