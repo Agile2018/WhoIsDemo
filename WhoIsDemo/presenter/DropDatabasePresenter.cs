@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WhoIsDemo.domain.interactor;
+using WhoIsDemo.model;
 
 namespace WhoIsDemo.presenter
 {
@@ -47,9 +48,9 @@ namespace WhoIsDemo.presenter
         public DropDatabasePresenter() { }
 
         public void Connect()
-        {
-            Connection = "mongodb://localhost:27017";
-            NameDatabase = "dbass";
+        {            
+            Connection = Configuration.Instance.ConnectDatabase; // "mongodb://localhost:27017";
+            NameDatabase = Configuration.Instance.NameDatabase; //"dbass";
             dropDatabase.Connect();
         }
 

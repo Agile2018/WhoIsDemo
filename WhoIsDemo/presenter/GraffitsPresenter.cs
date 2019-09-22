@@ -1,6 +1,7 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Cuda;
 using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -75,6 +76,17 @@ namespace WhoIsDemo.presenter
 
         }
 
+        public void TextScalingAdjustment()
+        {
+            int width = Configuration.Instance.WidthReal;
+            int height = Configuration.Instance.HeightReal;
+            int approximateArea = width * height;
+
+            float differenceArea = Convert.ToSingle(approximateArea) / Convert
+                .ToSingle(Configuration.Instance.AreaDefault);
+            Configuration.Instance.FactorScalingSizeFont = differenceArea * Configuration.scalingFontSize;
+            Configuration.Instance.FactorScalingIncrementHeight = differenceArea * Configuration.incrementHeight;
+        }
         public void ImageScalingAdjustment()
         {
             int width = Configuration.Instance.WidthReal;
@@ -262,21 +274,29 @@ namespace WhoIsDemo.presenter
         private void InitTracking()
         {
             Mat clone = CvInvoke.Imread("camera\\mask.png");
-            CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
-            Console.WriteLine("Init Tracking: " + widthScaling.ToString() + " " 
-                + heightScaling.ToString());
-            int length = clone.Width * clone.Height * clone.NumberOfChannels;
-            byte[] data = new byte[length];
+            if (clone != null)
+            {
+                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
+                Console.WriteLine("Init Tracking: " + widthScaling.ToString() + " "
+                    + heightScaling.ToString());
+                int length = clone.Width * clone.Height * clone.NumberOfChannels;
+                byte[] data = new byte[length];
 
-            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-            using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
-                handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
-                CvInvoke.BitwiseNot(clone, m2);
-            handle.Free();
+                GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+                using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
+                    handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
+                    CvInvoke.BitwiseNot(clone, m2);
+                handle.Free();
 
-            RequestAipu.Instance.InitTracking(data, clone.Height,
-                clone.Width);
-            clone.Dispose();
+                RequestAipu.Instance.InitTracking(data, clone.Height,
+                    clone.Width);
+                clone.Dispose();
+            }
+            else
+            {
+                Console.WriteLine("Mask NULL...");
+            }
+            
         }
 
         public async Task TaskTracking(Mat img)
@@ -345,6 +365,36 @@ namespace WhoIsDemo.presenter
 
         }
 
+        public void PutTextInFrame(Mat img, int countNewPerson, double fps)
+        {
+            string textBox = string.Format("Resolution:{0}x{1}",
+        Configuration.Instance.WidthReal, Configuration.Instance.HeightReal);
+            int x = Convert.ToInt32(Convert
+                .ToSingle(Configuration.Instance.CoordinatesXText) * Configuration
+                .Instance.FactorScalingWidthText);
+            int y = Convert.ToInt32(Convert
+                .ToSingle(Configuration.Instance.CoordinatesYText) * Configuration
+                .Instance.FactorScalingHeightText);
+            CvInvoke.PutText(img, textBox, new System.Drawing
+                .Point(x, y),
+                FontFace.HersheySimplex, Configuration.Instance.FactorScalingSizeFont,
+                new MCvScalar(255.0, 0.0, 0.0));
+            textBox = string.Format("FPS: {0}",
+                Convert.ToInt16(fps));
+            y += Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
+            CvInvoke.PutText(img, textBox, new System.Drawing
+                .Point(x, y),
+                FontFace.HersheySimplex, Configuration.Instance.FactorScalingSizeFont,
+                new MCvScalar(255.0, 0.0, 0.0));
+            textBox = string.Format("Identified: {0}",
+                countNewPerson);
+            y += Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
+            CvInvoke.PutText(img, textBox, new System.Drawing
+                .Point(x, y),
+                FontFace.HersheySimplex, Configuration.Instance.FactorScalingSizeFont,
+                new MCvScalar(255.0, 0.0, 0.0));
+
+        }
         #endregion
     }
 }

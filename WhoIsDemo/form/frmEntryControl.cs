@@ -27,7 +27,7 @@ namespace WhoIsDemo.form
         const int SWP_NOACTIVATE = 0x10;
         const int wFlags = SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE;
         const int HWND_TOPMOST = -1;
-        const int HWND_NOTOPMOST = -2;
+        const int HWND_BOTTOM = 1;
         #endregion
 
         #region variables
@@ -289,16 +289,29 @@ namespace WhoIsDemo.form
         {
 
             VideoCapture captureInit = new VideoCapture(Configuration.Instance.VideoDefault);
-            Mat frame = new Mat();
-            captureInit.Read(frame);
-            totalFrame = captureInit.GetCaptureProperty(CapProp.FrameCount);
-            fps = captureInit.GetCaptureProperty(CapProp.Fps);
-            graffitsPresenter.SetSequenceFps(Convert.ToInt32(fps));
-            Configuration.Instance.CalculeArea();
-            graffitsPresenter.DimesionAdjustment(frame.Width, frame.Height);
-            graffitsPresenter.ImageScalingAdjustment();
-            Task taskInitTracking = graffitsPresenter.TaskInitTracking();
-            captureInit.Dispose();
+            if (captureInit.IsOpened)
+            {
+                Mat frame = new Mat();
+                captureInit.Read(frame);
+                totalFrame = captureInit.GetCaptureProperty(CapProp.FrameCount);
+                fps = captureInit.GetCaptureProperty(CapProp.Fps);
+                graffitsPresenter.SetSequenceFps(Convert.ToInt32(fps));
+                Configuration.Instance.CalculeArea();
+                graffitsPresenter.DimesionAdjustment(frame.Width, frame.Height);
+                graffitsPresenter.ImageScalingAdjustment();
+                graffitsPresenter.TextScalingAdjustment();
+                Task taskInitTracking = graffitsPresenter.TaskInitTracking();
+                captureInit.Dispose();
+            }
+            else
+            {
+                this.btnStart.Enabled = false;
+
+                managerControlView
+                    .SetValueTextStatusStrip(StringResource.ip_video_empty,
+                    0, this.status);
+            }
+            
         }       
 
         private void CaptureFrame()
@@ -319,14 +332,14 @@ namespace WhoIsDemo.form
                     Task taskTracking = graffitsPresenter.TaskTracking(frameClone);
                     Task taskRecognition = graffitsPresenter.TaskImageForRecognition(frameClone);
                     DrawRectangleFace(frame);
-                    PutTextInFrame(frame);
+                    graffitsPresenter.PutTextInFrame(frame, listPersonRegister.Count, fps);
                     viewer.Image = frame;
                     CvInvoke.WaitKey(wait);
 
                 };
 
                 viewer.ControlBox = false;
-                viewer.Text = "Video";
+                viewer.Text = "Video control de entrada";
                 Size sizeViewer = new Size(Configuration.Instance.Width, Configuration.Instance.Height);
                 viewer.Size = sizeViewer;                
                 capture.Start();
@@ -336,34 +349,7 @@ namespace WhoIsDemo.form
             }
 
         }
-
-        private void PutTextInFrame(Mat img)
-        {
-            string textBox = string.Format("Resolution: {0}x{1}", 
-                Configuration.Instance.WidthReal, Configuration.Instance.HeightReal);
-            int x = Convert.ToInt32(Convert
-                .ToSingle(Configuration.Instance.CoordinatesXText) * Configuration
-                .Instance.FactorScalingWidthText);
-            int y = Convert.ToInt32(Convert
-                .ToSingle(Configuration.Instance.CoordinatesYText) * Configuration
-                .Instance.FactorScalingHeightText);
-            CvInvoke.PutText(img, textBox, new System.Drawing
-                .Point(x, y),
-                FontFace.HersheySimplex, 0.4, new MCvScalar(255.0, 0.0, 0.0));
-            textBox = string.Format("FPS: {0}",
-                Convert.ToInt16(fps));
-            y += 20;
-            CvInvoke.PutText(img, textBox, new System.Drawing
-                .Point(x, y),
-                FontFace.HersheySimplex, 0.4, new MCvScalar(255.0, 0.0, 0.0));
-            textBox = string.Format("Identified: {0}",
-                listPersonRegister.Count);
-            y += 20;
-            CvInvoke.PutText(img, textBox, new System.Drawing
-                .Point(x, y),
-                FontFace.HersheySimplex, 0.4, new MCvScalar(255.0, 0.0, 0.0));
-        }
-
+     
         private void DrawRectangleFace(Mat img)
         {
 
@@ -478,6 +464,8 @@ namespace WhoIsDemo.form
                .ThreadStart(graffitsPresenter.TerminateTracking));
                 closeTracking.Start();
                 managerControlView.EnabledOptionMenu(strNameMenu, mdiMain.NAME);
+                managerControlView.EnabledOptionMenu("enrolamientoToolStripMenuItem", mdiMain.NAME);
+                managerControlView.EnabledOptionMenu("configuraciónToolStripMenuItem", mdiMain.NAME);
             }
             catch (System.AccessViolationException ex)
             {
@@ -602,7 +590,7 @@ namespace WhoIsDemo.form
         private void btnBackVideo_Click(object sender, EventArgs e)
         {
             this.viewer.Invoke(new Action(() => BringToFrontImageViewer(this.viewer.Handle,
-                HWND_NOTOPMOST)));
+                HWND_BOTTOM)));
         }
     }
 

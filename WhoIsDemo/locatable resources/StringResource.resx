@@ -124,7 +124,7 @@
     <value>Operation Completed.</value>
   </data>
   <data name="configuration_empty" xml:space="preserve">
-    <value>Configuration empty</value>
+    <value>Verify configuration</value>
   </data>
   <data name="directory_config_empty" xml:space="preserve">
     <value>The configuration directory es empty </value>

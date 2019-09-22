@@ -153,12 +153,6 @@
     <Compile Include="form\frmConfiguration.Designer.cs">
       <DependentUpon>frmConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\frmConfigurationDinamic.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\frmConfigurationDinamic.Designer.cs">
-      <DependentUpon>frmConfigurationDinamic.cs</DependentUpon>
-    </Compile>
     <Compile Include="form\frmEnroll.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,12 +164,6 @@
     </Compile>
     <Compile Include="form\frmEntryControl.Designer.cs">
       <DependentUpon>frmEntryControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\frmToolDatabase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\frmToolDatabase.Designer.cs">
-      <DependentUpon>frmToolDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="locatable resources\StringResource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -234,17 +222,11 @@
     <EmbeddedResource Include="form\frmConfiguration.resx">
       <DependentUpon>frmConfiguration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\frmConfigurationDinamic.resx">
-      <DependentUpon>frmConfigurationDinamic.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="form\frmEnroll.resx">
       <DependentUpon>frmEnroll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\frmEntryControl.resx">
       <DependentUpon>frmEntryControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\frmToolDatabase.resx">
-      <DependentUpon>frmToolDatabase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="locatable resources\StringResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -280,6 +262,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="License-LGPL.txt" />
+    <None Include="Resources\cached.png" />
+    <None Include="Resources\lock-reset.png" />
+    <None Include="Resources\ic_save_black_48dp.png" />
+    <None Include="Resources\agile.png" />
+    <None Include="Resources\AGILE WHOIS LOGO2.jpg" />
+    <None Include="Resources\AGILE WHOIS LOGO.jpg" />
     <None Include="Resources\timer-off.png" />
     <None Include="Resources\file-document-box-multiple-outline.png" />
     <None Include="Resources\eye-outline.png" />

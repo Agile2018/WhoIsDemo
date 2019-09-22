@@ -64,7 +64,11 @@ namespace WhoIsDemo.model
 
         public void SetSequenceFps(int value)
         {
-            aipu.SetSequenceFps(value);
+            if (value != 0)
+            {
+                aipu.SetSequenceFps(value);
+            }
+            
 
         }
 
@@ -76,6 +80,11 @@ namespace WhoIsDemo.model
         public void ResetIdUser()
         {
             aipu.ResetIdUser();
+        }
+
+        public void SetConfigurationDatabase()
+        {
+            aipu.SetConfigurationDatabase();
         }
 
         public void TerminateTracking()

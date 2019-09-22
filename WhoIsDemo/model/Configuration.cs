@@ -11,6 +11,8 @@ namespace WhoIsDemo.model
         #region constants
         public const int templateHeight = 360;
         public const int templateWidth = 640;
+        public const float scalingFontSize = 0.4f;
+        public const float incrementHeight = 20;
         #endregion
         #region variables
         private static readonly Configuration instance = new Configuration();
@@ -34,6 +36,8 @@ namespace WhoIsDemo.model
         public float FactorScalingWidthText { get => factorScalingWidthText; set => factorScalingWidthText = value; }
         public int CoordinatesXText { get => coordinatesXText; set => coordinatesXText = value; }
         public int CoordinatesYText { get => coordinatesYText; set => coordinatesYText = value; }
+        public float FactorScalingSizeFont { get => factorScalingSizeFont; set => factorScalingSizeFont = value; }
+        public float FactorScalingIncrementHeight { get => factorScalingIncrementHeight; set => factorScalingIncrementHeight = value; }
 
         private List<Video> listVideo = new List<Video>();
         private List<int> listHeightResolution = new List<int>();
@@ -53,6 +57,8 @@ namespace WhoIsDemo.model
         private float factorScalingWidthText = 1;
         private int coordinatesXText = 450;
         private int coordinatesYText = 40;
+        private float factorScalingSizeFont = 0.4f;
+        private float factorScalingIncrementHeight = 1;
         #endregion
 
         #region constants

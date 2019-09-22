@@ -68,6 +68,11 @@ namespace WhoIsDemo.domain.interactor
             AipuFace.Instance.ResetIdUser();
         }
 
+        public void SetConfigurationDatabase()
+        {
+            AipuFace.Instance.SetConfigurationDatabase();
+        }
+
         public void TerminateTracking()
         {
             AipuFace.Instance.TerminateTracking();

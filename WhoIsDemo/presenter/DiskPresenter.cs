@@ -122,6 +122,10 @@ namespace WhoIsDemo.presenter
             {
                 Console.WriteLine(ex.Message);
             }
+            catch(System.NullReferenceException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             return list;
         }

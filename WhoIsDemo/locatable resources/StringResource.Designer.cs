@@ -79,7 +79,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configuration empty.
+        ///   Looks up a localized string similar to Verify configuration.
         /// </summary>
         internal static string configuration_empty {
             get {

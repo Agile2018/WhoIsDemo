@@ -93,6 +93,26 @@ namespace WhoIsDemo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap agile {
+            get {
+                object obj = ResourceManager.GetObject("agile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cached {
+            get {
+                object obj = ResourceManager.GetObject("cached", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cctv {
             get {
                 object obj = ResourceManager.GetObject("cctv", resourceCulture);
@@ -196,6 +216,26 @@ namespace WhoIsDemo.Properties {
         internal static System.Drawing.Bitmap ic_clear_black_48dp {
             get {
                 object obj = ResourceManager.GetObject("ic_clear_black_48dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_save_black_48dp {
+            get {
+                object obj = ResourceManager.GetObject("ic_save_black_48dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lock_reset {
+            get {
+                object obj = ResourceManager.GetObject("lock_reset", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

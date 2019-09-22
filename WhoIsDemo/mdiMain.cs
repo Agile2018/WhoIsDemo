@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WhoIsDemo.domain.interactor;
@@ -54,6 +56,7 @@ namespace WhoIsDemo
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Top = 0;
             this.Left = (int)((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2);
+            Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.Black;
             managerControlView.CreateStatusBar(this, statusStrip);            
             SubscriptionReactive();
             diskPresenter.CreateDirectoryWork();
@@ -67,24 +70,7 @@ namespace WhoIsDemo
 
             System.Windows.Forms.Application.Exit();
         }
-
-        //private void dispositivoToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    Cursor.Current = Cursors.WaitCursor;
-        //    managerControlView.SetValueTextStatusStrip("", 0, statusStrip);            
-        //    frmIdentify frmWork = new frmIdentify() { MdiParent = this };           
-        //    frmWork.strNameMenu = "dispositivoToolStripMenuItem";           
-        //    dispositivoToolStripMenuItem.Enabled = false;
-        //    frmWork.Show();
-        //}
-
-        private void baseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmToolDatabase frmWork = new frmToolDatabase() { MdiParent = this };
-            frmWork.strNameMenu = "baseDeDatosToolStripMenuItem";
-            baseDeDatosToolStripMenuItem.Enabled = false;
-            frmWork.Show();
-        }
+  
 
         private void IntAipuFace()
         {
@@ -103,11 +89,38 @@ namespace WhoIsDemo
 
         }
 
+        private void CreateParamsDatabase()
+        {
+            DatabaseConfig databaseConfig = new DatabaseConfig();
+            databaseConfig.configuration = "database_configuration";
+            ParamsDatabase paramsDatabase = new ParamsDatabase();
+            paramsDatabase.connect = "mongodb://localhost:27017/?minPoolSize=3&maxPoolSize=3";
+            paramsDatabase.name = "dbass";
+            databaseConfig.Params = paramsDatabase;
+            diskPresenter.SaveDatabaseConfiguration(databaseConfig);
+            Configuration.Instance.ConnectDatabase = databaseConfig.Params.connect;
+            Configuration.Instance.NameDatabase = databaseConfig.Params.name;
+        }
+
+        private void CreateParamsDetect()
+        {
+            Detect detect = new Detect();
+            detect.configuration = "detect_configuration";
+            ParamsDetect paramsDetect = new ParamsDetect();
+            paramsDetect.accuracy = 600;
+            paramsDetect.maxeye = 200 ;
+            paramsDetect.maxfaces = 1;
+            paramsDetect.mineye = 25;
+            detect.Params = paramsDetect;
+            diskPresenter.SaveDetectConfiguration(detect);
+        }
         private void VerifyFileConfiguration()
         {
             if (!diskPresenter.VerifyFileOfConfiguration())
             {
                 diskPresenter.CreateContentDirectoryWork();
+                CreateParamsDatabase();
+                CreateParamsDetect();
                 this.statusStrip.Invoke(new Action(() => managerControlView
                     .SetValueTextStatusStrip(StringResource.configuration_empty, 0, this.statusStrip)));
 
@@ -127,44 +140,14 @@ namespace WhoIsDemo
             
         }
 
-        private void btnLoadLibrary_Click(object sender, EventArgs e)
-        {
-            if (!AipuFace.Instance.IsLoadConfiguration)
-            {
-                IntAipuFace();
-            }
+        //private void btnLoadLibrary_Click(object sender, EventArgs e)
+        //{
+        //    if (!AipuFace.Instance.IsLoadConfiguration)
+        //    {
+        //        IntAipuFace();
+        //    }
             
-        }
-
-        //private void btnStopLibrary_Click(object sender, EventArgs e)
-        //{
-        //    RequestAipu.Instance.StopAipu();
-        //    this.statusStrip.Invoke(new Action(() => managerControlView
-        //            .SetValueTextStatusStrip(StringResource.stop_library, 0, this.statusStrip)));
         //}
-
-        //private void btnReloadLibrary_Click(object sender, EventArgs e)
-        //{
-        //    RequestAipu.Instance.ReloadAipu();
-        //    this.statusStrip.Invoke(new Action(() => managerControlView
-        //            .SetValueTextStatusStrip(StringResource.reload_library, 0, this.statusStrip)));
-        //}        
-
-        private void globalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmConfiguration frmWork = new frmConfiguration() { MdiParent = this };
-            frmWork.strNameMenu = "globalToolStripMenuItem";
-            globalToolStripMenuItem.Enabled = false;
-            frmWork.Show();
-        }
-
-        private void parcialToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmConfigurationDinamic frmWork = new frmConfigurationDinamic() { MdiParent = this };
-            frmWork.strNameMenu = "parcialToolStripMenuItem";
-            parcialToolStripMenuItem.Enabled = false;
-            frmWork.Show();
-        }
 
         private void GetListVideos()
         {
@@ -198,11 +181,7 @@ namespace WhoIsDemo
                     .Instance.ListVideo[index].path;
             }
         }     
-
-        private void btnChangeMode_Click(object sender, EventArgs e)
-        {
-            RequestAipu.Instance.WorkMode(1);
-        }
+       
 
         private void enrolamientoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -212,6 +191,8 @@ namespace WhoIsDemo
             frmWork.strNameMenu = "enrolamientoToolStripMenuItem";
             frmWork.LinkVideo = 1;
             enrolamientoToolStripMenuItem.Enabled = false;
+            controlDeEntradaToolStripMenuItem.Enabled = false;
+            configuraciónToolStripMenuItem.Enabled = false;
             frmWork.Show();
         }
 
@@ -222,9 +203,24 @@ namespace WhoIsDemo
             frmWork.strNameMenu = "controlDeEntradaToolStripMenuItem";
             frmWork.LinkVideo = 2;
             controlDeEntradaToolStripMenuItem.Enabled = false;
+            enrolamientoToolStripMenuItem.Enabled = false;
+            configuraciónToolStripMenuItem.Enabled = false;
             frmWork.Show();
         }
 
-        
+        private void mdiMain_Shown(object sender, EventArgs e)
+        {
+            IntAipuFace();
+        }
+
+        private void configuraciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConfiguration frmWork = new frmConfiguration() { MdiParent = this };
+            frmWork.strNameMenu = "configuraciónToolStripMenuItem";
+            configuraciónToolStripMenuItem.Enabled = false;
+            controlDeEntradaToolStripMenuItem.Enabled = false;
+            enrolamientoToolStripMenuItem.Enabled = false;
+            frmWork.Show();
+        }
     }
 }

@@ -34,15 +34,10 @@ namespace WhoIsDemo.form
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.flpDatabase = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnLoadFile = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btnFrontVideo = new System.Windows.Forms.Button();
             this.btnBackVideo = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -56,6 +51,11 @@ namespace WhoIsDemo.form
             this.pic7 = new System.Windows.Forms.PictureBox();
             this.pic9 = new System.Windows.Forms.PictureBox();
             this.btnStopLoadFile = new System.Windows.Forms.Button();
+            this.flpDatabase = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLoadFile = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -114,11 +114,11 @@ namespace WhoIsDemo.form
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkGray;
-            this.label2.Location = new System.Drawing.Point(418, 9);
+            this.label2.Location = new System.Drawing.Point(478, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(259, 23);
+            this.label2.Size = new System.Drawing.Size(138, 23);
             this.label2.TabIndex = 13;
-            this.label2.Text = "Enrolamiento de personas";
+            this.label2.Text = "Enrolamiento";
             // 
             // panel2
             // 
@@ -130,76 +130,6 @@ namespace WhoIsDemo.form
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(234, 57);
             this.panel2.TabIndex = 11;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panel1.Controls.Add(this.btnFrontVideo);
-            this.panel1.Controls.Add(this.btnBackVideo);
-            this.panel1.Controls.Add(this.btnClose);
-            this.panel1.Location = new System.Drawing.Point(805, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(234, 57);
-            this.panel1.TabIndex = 10;
-            // 
-            // flpDatabase
-            // 
-            this.flpDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.flpDatabase.AutoScroll = true;
-            this.flpDatabase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flpDatabase.Location = new System.Drawing.Point(12, 37);
-            this.flpDatabase.Name = "flpDatabase";
-            this.flpDatabase.Size = new System.Drawing.Size(346, 465);
-            this.flpDatabase.TabIndex = 13;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkGray;
-            this.label1.Location = new System.Drawing.Point(378, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 19);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Personas nuevas";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(377, 37);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(706, 465);
-            this.flowLayoutPanel1.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DarkGray;
-            this.label4.Location = new System.Drawing.Point(12, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(206, 19);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Resultados de vigilancia";
-            // 
-            // btnLoadFile
-            // 
-            this.btnLoadFile.FlatAppearance.BorderSize = 0;
-            this.btnLoadFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
-            this.btnLoadFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.CadetBlue;
-            this.btnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadFile.Image = global::WhoIsDemo.Properties.Resources.file;
-            this.btnLoadFile.Location = new System.Drawing.Point(541, 4);
-            this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(39, 30);
-            this.btnLoadFile.TabIndex = 17;
-            this.btnLoadFile.UseVisualStyleBackColor = true;
-            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // btnRestart
             // 
@@ -244,6 +174,17 @@ namespace WhoIsDemo.form
             this.btnStart.TabIndex = 14;
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panel1.Controls.Add(this.btnFrontVideo);
+            this.panel1.Controls.Add(this.btnBackVideo);
+            this.panel1.Controls.Add(this.btnClose);
+            this.panel1.Location = new System.Drawing.Point(805, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(234, 57);
+            this.panel1.TabIndex = 10;
             // 
             // btnFrontVideo
             // 
@@ -412,6 +353,66 @@ namespace WhoIsDemo.form
             this.btnStopLoadFile.UseVisualStyleBackColor = true;
             this.btnStopLoadFile.Click += new System.EventHandler(this.btnStopLoadFile_Click);
             // 
+            // flpDatabase
+            // 
+            this.flpDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.flpDatabase.AutoScroll = true;
+            this.flpDatabase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpDatabase.Location = new System.Drawing.Point(12, 37);
+            this.flpDatabase.Name = "flpDatabase";
+            this.flpDatabase.Size = new System.Drawing.Size(346, 465);
+            this.flpDatabase.TabIndex = 13;
+            // 
+            // btnLoadFile
+            // 
+            this.btnLoadFile.FlatAppearance.BorderSize = 0;
+            this.btnLoadFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnLoadFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.CadetBlue;
+            this.btnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadFile.Image = global::WhoIsDemo.Properties.Resources.file;
+            this.btnLoadFile.Location = new System.Drawing.Point(541, 4);
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(39, 30);
+            this.btnLoadFile.TabIndex = 17;
+            this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkGray;
+            this.label1.Location = new System.Drawing.Point(378, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 19);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Personas nuevas";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(377, 37);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(706, 465);
+            this.flowLayoutPanel1.TabIndex = 11;
+            this.flowLayoutPanel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.flowLayoutPanel1_Scroll);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DarkGray;
+            this.label4.Location = new System.Drawing.Point(12, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(206, 19);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Resultados de vigilancia";
+            // 
             // frmEnroll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -421,7 +422,7 @@ namespace WhoIsDemo.form
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmEnroll";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Enrolamiento de personas";
+            this.Text = "Enrolamiento";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEnroll_FormClosing);
             this.Load += new System.EventHandler(this.frmEnroll_Load);
             this.Shown += new System.EventHandler(this.frmEnroll_Shown);

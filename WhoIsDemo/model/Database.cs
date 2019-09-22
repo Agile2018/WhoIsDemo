@@ -37,9 +37,19 @@ namespace WhoIsDemo.model
         }
         public void Connect()
         {
-            client = new MongoClient(connection);
-            session = client.StartSession();
-            database = session.Client.GetDatabase(nameDatabase);
+            try
+            {
+                client = new MongoClient(connection);
+                session = client.StartSession();
+                database = session.Client.GetDatabase(nameDatabase);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            
+
             ////var image = client.GetDatabase("dbass").GetCollection<BsonDocument>("image");
             //var image = session.Client.GetDatabase("dbass")
             //    .GetCollection<Image>("image");
@@ -57,15 +67,33 @@ namespace WhoIsDemo.model
 
         public void GetUsers()
         {
-            users = session.Client.GetDatabase(nameDatabase)
-                .GetCollection<PersonDb>(TABLE_USER);
+            try
+            {
+                users = session.Client.GetDatabase(nameDatabase)
+               .GetCollection<PersonDb>(TABLE_USER);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+           
 
         }
 
         public void GetImages()
         {
-            images = session.Client.GetDatabase(nameDatabase)
+            try
+            {
+                images = session.Client.GetDatabase(nameDatabase)
                 .GetCollection<Image>(TABLE_IMAGE);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            
 
         }
 
