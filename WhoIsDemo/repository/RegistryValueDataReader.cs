@@ -26,6 +26,7 @@ namespace WhoIsDemo.repository
         public const string PORT_KEY3 = "Port3";
         public const string PORT_KEY4 = "Port4";
         public const string URL_SERVER_KEY = "Urlserver";
+        public const string LEVEL_RESOLUTION = "Level_Resolution";
         public const string IP_CAMERA_KEY = "IPCamera";
         public const string TITLE_PRINT_KEY = "title_print";
         public const string BUILDING_KEY = "building";

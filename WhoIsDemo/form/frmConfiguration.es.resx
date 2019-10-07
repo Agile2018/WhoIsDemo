@@ -117,46 +117,119 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="app_name" xml:space="preserve">
-    <value>WhoIs DEMO</value>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Reconocimiento</value>
   </data>
-  <data name="complete" xml:space="preserve">
-    <value>Operation Completed.</value>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Base de datos</value>
   </data>
-  <data name="configuration_empty" xml:space="preserve">
-    <value>Define configuration parameters, please</value>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Biometría</value>
   </data>
-  <data name="delete_database" xml:space="preserve">
-    <value>Are you sure to delete the database?</value>
+  <data name="cboDetectorMode.Items" xml:space="preserve">
+    <value>Modo balanceado</value>
   </data>
-  <data name="directory_config_empty" xml:space="preserve">
-    <value>The configuration directory es empty </value>
+  <data name="cboDetectorMode.Items1" xml:space="preserve">
+    <value>Modo veloz</value>
   </data>
-  <data name="error" xml:space="preserve">
-    <value>Error in the task performed.</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
   </data>
-  <data name="ip_video_empty" xml:space="preserve">
-    <value>The video address is empty.</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Modo de detección:</value>
   </data>
-  <data name="load_library" xml:space="preserve">
-    <value>The library is not loaded, please check.</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
   </data>
-  <data name="reload_library" xml:space="preserve">
-    <value>Reloaded library</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Detección forzada:</value>
   </data>
-  <data name="reset" xml:space="preserve">
-    <value>Reset application, please.</value>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 13</value>
   </data>
-  <data name="stop_library" xml:space="preserve">
-    <value>Stop Library.</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Velocidad de identificación:</value>
   </data>
-  <data name="value_key_empty" xml:space="preserve">
-    <value>The value key is empty</value>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 82</value>
   </data>
-  <data name="verify_key" xml:space="preserve">
-    <value>Verify Key.</value>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
   </data>
-  <data name="work" xml:space="preserve">
-    <value>Working...</value>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Precisión:</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 188</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 13</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Mínima distancia ojos:</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 135</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 13</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Máxima distancia ojos:</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 28</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Detección Máxima:</value>
+  </data>
+  <data name="cboLevelResolution.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 363</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nivel de resolución:</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 24</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Ruta Video:</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Limpiar base de datos</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Cambiar base de datos</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 86</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 13</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Cadena de conexión:</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 60</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 13</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Nombre base de datos:</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Configuración</value>
   </data>
 </root>

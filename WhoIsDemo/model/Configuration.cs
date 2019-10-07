@@ -74,6 +74,8 @@ namespace WhoIsDemo.model
             ListHeightResolution.Add(450);
             ListWidthResolution.Add(1280);
             ListHeightResolution.Add(720);
+            ListWidthResolution.Add(1920);
+            ListHeightResolution.Add(1080);
         }
 
         public void CalculeArea()

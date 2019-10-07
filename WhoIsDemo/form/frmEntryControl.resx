@@ -117,139 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="splitContainer1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="label2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnFrontVideo.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnBackVideo.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnClose.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnRestart.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="pic1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnStop.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnStart.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="pic8.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pic6.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pic8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
-        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
-        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
-        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
-        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
-        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
-        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
-        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
-        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="pic6.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="pic6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
-        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
-        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
-        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
-        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
-        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
-        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
-        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
-        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="pic4.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="pic4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
-        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
-        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
-        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
-        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
-        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
-        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
-        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
-        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="pic2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="pic2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
-        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
-        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
-        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
-        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
-        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
-        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
-        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
-        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="pic3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="pic3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
-        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
-        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
-        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
-        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
-        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
-        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
-        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
-        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="pic5.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="pic5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
-        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
-        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
-        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
-        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
-        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
-        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
-        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
-        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="pic7.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="pic7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -264,9 +136,453 @@
         Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="pic9.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="&gt;&gt;btnFrontVideo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRestart.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="pic2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="btnRestart.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1046, 432</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 14pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;btnFrontVideo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pic3.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="flowLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="pic7.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnFrontVideo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;pic9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pic1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="pic5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 162</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pic2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>627, 76</value>
+  </data>
+  <data name="&gt;&gt;btnRestart.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pic8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
+        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
+        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
+        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
+        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
+        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
+        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
+        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
+        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pic8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1005, 237</value>
+  </data>
+  <data name="pic3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 216</value>
+  </data>
+  <data name="pic1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>451, 62</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 23</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 19</value>
+  </data>
+  <data name="btnBackVideo.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;pic6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnStop.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Entry control</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Entry control</value>
+  </data>
+  <data name="pic4.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="pic1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;btnStart.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnRestart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;pic7.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="btnFrontVideo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>803, 17</value>
+  </data>
+  <data name="btnClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pic8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnRestart.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;pic3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnBackVideo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="&gt;&gt;pic9.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="pic2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
+  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>313</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="btnStop.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;btnStop.Name" xml:space="preserve">
+    <value>btnStop</value>
+  </data>
+  <data name="pic6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
+        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
+        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
+        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
+        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
+        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
+        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
+        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
+        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pic9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 237</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;btnStart.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="pic9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;pic2.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="pic3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;pic8.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="pic3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>285, 76</value>
+  </data>
+  <data name="btnFrontVideo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pic6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 108</value>
+  </data>
+  <data name="pic6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;pic1.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 47</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 12</value>
+  </data>
+  <data name="&gt;&gt;pic7.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="btnBackVideo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnStop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 43</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frmEntryControl</value>
+  </data>
+  <data name="pic2.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="pic7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="pic8.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="&gt;&gt;pic5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pic2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 216</value>
+  </data>
+  <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
+    <value>btnStart</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnStop.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="pic9.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="pic5.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="pic8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 54</value>
+  </data>
+  <data name="pic9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 54</value>
+  </data>
+  <data name="&gt;&gt;pic4.Name" xml:space="preserve">
+    <value>pic4</value>
+  </data>
+  <data name="pic7.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="pic7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 108</value>
+  </data>
+  <data name="btnRestart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 18</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="pic4.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="pic4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
+        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
+        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
+        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
+        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
+        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
+        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
+        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
+        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pic5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="btnStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;pic1.Name" xml:space="preserve">
+    <value>pic1</value>
+  </data>
+  <data name="&gt;&gt;pic2.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="pic5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
+        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
+        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
+        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
+        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
+        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
+        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
+        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
+        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="&gt;&gt;btnBackVideo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pic8.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="btnStart.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;btnBackVideo.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;btnRestart.Name" xml:space="preserve">
+    <value>btnRestart</value>
+  </data>
+  <data name="&gt;&gt;pic1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;pic8.Name" xml:space="preserve">
+    <value>pic8</value>
+  </data>
+  <data name="&gt;&gt;btnBackVideo.Name" xml:space="preserve">
+    <value>btnBackVideo</value>
+  </data>
+  <data name="&gt;&gt;pic6.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="btnFrontVideo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnBackVideo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;pic8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;pic5.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="pic4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="btnRestart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 43</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pic3.Name" xml:space="preserve">
+    <value>pic3</value>
+  </data>
+  <data name="btnStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 43</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;btnStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="pic5.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="&gt;&gt;btnBackVideo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pic6.Name" xml:space="preserve">
+    <value>pic6</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnFrontVideo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 43</value>
+  </data>
   <data name="pic9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -281,13 +597,275 @@
         Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;pic2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pic4.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="pic4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 162</value>
+  </data>
+  <data name="pic6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>919, 183</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnFrontVideo.Name" xml:space="preserve">
+    <value>btnFrontVideo</value>
+  </data>
+  <data name="&gt;&gt;pic3.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;btnRestart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="btnStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 18</value>
+  </data>
+  <data name="&gt;&gt;pic6.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
+    <value>btnClose</value>
+  </data>
+  <data name="pic4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>793, 130</value>
+  </data>
+  <data name="pic1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;btnStop.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pic9.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="pic1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 230</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Monitoring result</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pic5.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="pic8.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="pic2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
+        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
+        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
+        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
+        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
+        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
+        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
+        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
+        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnBackVideo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 43</value>
+  </data>
+  <data name="btnStart.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="&gt;&gt;pic5.Name" xml:space="preserve">
+    <value>pic5</value>
+  </data>
+  <data name="pic3.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="&gt;&gt;pic2.Name" xml:space="preserve">
+    <value>pic2</value>
+  </data>
+  <data name="&gt;&gt;pic7.Name" xml:space="preserve">
+    <value>pic7</value>
+  </data>
+  <data name="pic9.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>441, 18</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1070, 828</value>
+  </data>
+  <data name="&gt;&gt;pic7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
+  </data>
+  <data name="pic3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAByElEQVRoQ+2XT0rDQBjFu1E3eg3Bf8cQ
+        V67FG+gdvICCpaWiF9BNF+Kqm0lSkO7MrrrsTrdCVdBqRd8HDyzDJKRpk4nw/eAHWTRv3jQz6bSmKIqi
+        KPPEGLMVBEEzDMN7+EblutHtdjf5serR6XSWUPIcfsOfBMdRFJ212+1F3lYNWD6yyqYZVmoS6HMxUS6r
+        Ld7uF1nzKJO2bJKU5bTBGH9ww9rlslpnjD9Q4sEqNY19xvgDJV6tUtP4whh/SAmr1DQOGeMPlPj3S6hh
+        lcos3kKnjPGHHA9QZmyXy+AYb7B1xvhFjgeOgqnK65e3+0eOBSgV2CWTxIRNHMcLvL0acBItmLacZNk0
+        K1d+EjkeoGgd9qH8Roh92bCVWfOKovzR6/VWsEl34RG8gjEcwGc4onI9wCa+w2a+xLV8dhc/gsuMKReW
+        PoS38Avar8usfkLJOJBMxheHDIJv8QQDznICTXKIp3Nc2FNB+A4GebIGLcJHfEnbHHY+IHQfyuN2DViE
+        I0xij8PPBoJWEfhuDVCGH8aYNdbIDyZw4wgvy2vWyA9CitiwWZ39L6cjtFRZIz+u0DJljfy4QsuUNfLj
+        Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnStop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 18</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 12pt, style=Bold</value>
+  </data>
+  <data name="btnClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 43</value>
+  </data>
+  <data name="btnBackVideo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>887, 17</value>
+  </data>
+  <data name="pic6.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="btnFrontVideo.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnClose.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;pic9.Name" xml:space="preserve">
+    <value>pic9</value>
+  </data>
+  <data name="&gt;&gt;btnFrontVideo.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;pic3.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;pic4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pic4.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnStop.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="pic7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 183</value>
+  </data>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1070, 828</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>971, 18</value>
+  </data>
+  <data name="pic5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 129</value>
+  </data>
+  <data name="&gt;&gt;pic1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="pic8.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="pic5.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="pic6.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="label1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnStop.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="pic3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="pic4.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnRestart.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnBackVideo.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="pic9.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnFrontVideo.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="flowLayoutPanel1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="pic7.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>es</value>
+  </metadata>
+  <metadata name="btnClose.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnStart.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="pic1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="pic2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="label2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="splitContainer1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>

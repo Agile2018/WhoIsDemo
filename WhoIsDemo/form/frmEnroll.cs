@@ -1,13 +1,9 @@
 ﻿using Emgu.CV;
-using Emgu.CV.Cuda;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.UI;
-using Emgu.CV.VideoStab;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -28,6 +24,8 @@ namespace WhoIsDemo.form
     {
         #region constants
         private const int queueImage = 9;
+        private const int sizeMaxFlowLayout = 30;
+        private const int sizeCoordinates = 20;
         const int SWP_NOSIZE = 0x1;
         const int SWP_NOMOVE = 0x2;
         const int SWP_NOACTIVATE = 0x10;
@@ -42,13 +40,15 @@ namespace WhoIsDemo.form
        
         public string strNameMenu;        
         private int indexPerson = 0;
-        private int countRepeatFrame = 0;        
+        //private int countRepeatFrame = 0;
+        private int countFlowLayoutControls = 0;
         private float[] coordinatesRectFace;
-        private float[] coordinatesVolatile = new float[2];
+        private float[] coordinatesVolatile = new float[sizeCoordinates];
         private double totalFrame;
         private double fps;
         private int countNewPerson = 0;        
-        private ImageViewer viewer;        
+        private ImageViewer viewer;
+        //private int coordinateX1, coordinateY1, rectangleWidth, rectangleHeight;
         private StatusStrip status;
         private Person personTransition = new Person();
         private List<Person> listPersonSlider = new List<Person>();
@@ -162,6 +162,9 @@ namespace WhoIsDemo.form
             this.status = managerControlView.GetStatusStripMain(mdiMain.NAME);
             this.openFileDialog.Filter = "Image Files(*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG";
             this.openFileDialog.Multiselect = true;
+            this.lblQuantityRecords.Text = SynchronizationPeoplePresenter
+                .Instance.GetNumbersPersons().ToString();
+            
             //if (CudaInvoke.HasCuda == true)
             //{
             //    Console.WriteLine("CUDA EXIST");
@@ -180,9 +183,18 @@ namespace WhoIsDemo.form
                 this.btnStart.Enabled = false;
 
                 managerControlView
-                    .SetValueTextStatusStrip(StringResource.ip_video_empty,
+                    .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                    .GetString("ip_video_empty"),
                     0, this.status);
             }
+
+            SynchronizationPeoplePresenter.Instance.OnListPeople += new SynchronizationPeoplePresenter
+                .ListPeopleDelegate(LoadListSyncUp);
+        }
+
+        private void LoadListSyncUp(List<People> list)
+        {
+            Task taskUploadPeople = TaskUploadPeopleOfDatabase(list);
         }
 
         private void ConnectDatabase()
@@ -195,7 +207,8 @@ namespace WhoIsDemo.form
             if (!hearUserPresenter.EnableObserverUser())
             {
                 managerControlView.SetValueTextStatusStrip(
-                    StringResource.load_library, 0, this.status);
+                    ManagerResource.Instance.resourceManager
+                    .GetString("load_library"), 0, this.status);
 
             }
             hearCoordinatesPresenter.EnabledCoordinates(true);
@@ -228,13 +241,23 @@ namespace WhoIsDemo.form
                 this.btnStart.Invoke(new Action(() => this.btnStart.Enabled = true));
                 this.status.Invoke(new Action(() => managerControlView
                 .StopProgressStatusStrip(1, this.status)));
+                this.lblQuantityRecords.Invoke(new Action(() => this.lblQuantityRecords.Text = SynchronizationPeoplePresenter
+                .Instance.GetNumbersPersons().ToString()));
+                this.status.Invoke(new Action(() => managerControlView
+                    .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                    .GetString("complete"),
+                    0, this.status)));
             }
         }
 
         private void SetCoordinatesFace(float[] coordinateFlow)
         {            
-            this.coordinatesRectFace = coordinateFlow;            
+            this.coordinatesRectFace = coordinateFlow;
+            Task.Run(() =>
+            {
+                RefreshRectangle();
 
+            });
         }
 
         private void ThreadAddImageOfPerson(Bitmap image)
@@ -249,8 +272,10 @@ namespace WhoIsDemo.form
 
             if (personTransition.Params.Register == "1")
             {
-                countNewPerson++;
+                countNewPerson++;                
                 this.AddNewCardPerson(image);
+                this.lblCountNewPersons.Invoke(new Action(() =>
+                this.lblCountNewPersons.Text = countNewPerson.ToString()));
                 
             }
         }
@@ -291,6 +316,14 @@ namespace WhoIsDemo.form
         }
         private void AddNewCardPerson(Bitmap image)
         {
+
+            if (this.countFlowLayoutControls >= sizeMaxFlowLayout)
+            {
+                this.countFlowLayoutControls = 0;
+                this.flowLayoutPanel1.Invoke(new Action(() =>
+                this.flowLayoutPanel1.Controls.Clear()));
+                Task.Delay(20);
+            }
             CardPerson cardPerson = new CardPerson();
             cardPerson.IdFace = personTransition.Params.Id_face;
             cardPerson.Id = personTransition.Params.Identification;
@@ -305,24 +338,29 @@ namespace WhoIsDemo.form
             this.flowLayoutPanel1.Controls.Add(cardPerson)));
             this.flowLayoutPanel1.Invoke(new Action(() =>
             this.flowLayoutPanel1.Refresh()));
+            this.countFlowLayoutControls++;
         }
 
-        private async Task TaskUploadPeopleOfDatabase()
+        private async Task TaskUploadPeopleOfDatabase(List<People> list)
         {
             await Task.Run(() =>
             {
-                UploadPeopleOfDatabase();
+                UploadPeopleOfDatabase(list);
 
             });
         }
 
-        private void UploadPeopleOfDatabase()
+        private void UploadPeopleOfDatabase(List<People> list)
         {
-            foreach(People people in SynchronizationPeoplePresenter
-                .Instance.SyncUpPeople)
+            this.flpDatabase.Invoke(new Action(() =>
+            this.flpDatabase.Controls.Clear()));
+
+            foreach (People people in list)
             {
                 AddCardSimple(people);
             }
+
+            
         }
 
         private void AddCardSimple(People people)
@@ -355,16 +393,17 @@ namespace WhoIsDemo.form
             {
                 capture.SetCaptureProperty(CapProp.FrameWidth, Configuration.Instance.Width);
                 capture.SetCaptureProperty(CapProp.FrameHeight, Configuration.Instance.Height);
-                int wait = 1000 / Convert.ToInt16(fps);
+                int wait = graffitsPresenter.SetFps(Convert.ToInt16(fps));
                 capture.ImageGrabbed += delegate (object sender, EventArgs e)
                 {  
                     Mat frame = new Mat();
                     capture.Retrieve(frame);
 
                     Mat frameClone = frame.Clone();
-                                        
-                    Task taskTracking = graffitsPresenter.TaskTracking(frameClone);
-                    Task taskRecognition = graffitsPresenter.TaskImageForRecognition(frameClone);
+                    //Task taskRecognition = graffitsPresenter.TaskImageForRecognition(frameClone);
+                    ThreadPool.QueueUserWorkItem(new
+                        WaitCallback(graffitsPresenter.WriteImageForRecognition), frameClone);
+
                     DrawRectangleFace(frame);
                     graffitsPresenter.PutTextInFrame(frame, countNewPerson, fps);
                     viewer.Image = frame;
@@ -415,52 +454,106 @@ namespace WhoIsDemo.form
         }      
 
         private void DrawRectangleFace(Mat img)
-        {            
-
-            if (this.coordinatesRectFace[0] > 0)
+        {
+            if (this.coordinatesVolatile[0] != 0)
             {
-                
-                float x1 = this.coordinatesRectFace[0] * graffitsPresenter.FactorScaling;
-                float y1 = this.coordinatesRectFace[1] * graffitsPresenter.FactorScaling;
-                float w = this.coordinatesRectFace[2] * graffitsPresenter.FactorScaling;
-                float h = this.coordinatesRectFace[3] * graffitsPresenter.FactorScaling;
-                
-                if (this.coordinatesVolatile[0] == x1 && 
-                    this.coordinatesVolatile[1] == y1)
-                {
-                    this.countRepeatFrame += 1; 
-                }
-                else
-                {
-                    this.coordinatesVolatile[0] = x1;
-                    this.coordinatesVolatile[1] = y1;
-                    this.countRepeatFrame = 0;
-                }
+                int indexVolatile = 0;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            }
 
-                
-                Console.WriteLine(x1 + ", " + y1 + ", " + w + ", " + h);
-                if (this.countRepeatFrame < 3)
-                {
-                    try
-                    {
-                        Rectangle rectangle = new Rectangle(Convert.ToInt32(x1),
-                        Convert.ToInt32(y1),
-                        Convert.ToInt32(w), Convert.ToInt32(h));
-                        CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 0.0, 0.0), 1);
-                    }
-                    catch (Exception ex)
-                    {
+            if (this.coordinatesVolatile[4] != 0)
+            {
+                int indexVolatile = 4;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            }
 
-                        Console.WriteLine("Error Rectangle dimension " + ex.Message);
-                    }
-                    
-                }
-                
-                
+            if (this.coordinatesVolatile[8] != 0)
+            {
+                int indexVolatile = 8;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            }
+
+            if (this.coordinatesVolatile[12] != 0)
+            {
+                int indexVolatile = 12;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            }
+
+            if (this.coordinatesVolatile[16] != 0)
+            {
+                int indexVolatile = 16;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
             }
 
         }
-     
+
+        private void RefreshRectangle()
+        {
+            for (int i = 0; i < sizeCoordinates; i++)
+            {
+                this.coordinatesVolatile[i] = this.coordinatesRectFace[i] * graffitsPresenter.FactorScaling;
+            }
+
+            //float x1 = this.coordinatesRectFace[0] * graffitsPresenter.FactorScaling;
+            //float y1 = this.coordinatesRectFace[1] * graffitsPresenter.FactorScaling;
+            //float w = this.coordinatesRectFace[2] * graffitsPresenter.FactorScaling;
+            //float h = this.coordinatesRectFace[3] * graffitsPresenter.FactorScaling;
+
+
+            //coordinateX1 = Convert.ToInt16(x1);
+            //coordinateY1 = Convert.ToInt16(y1);
+            //rectangleWidth = Convert.ToInt16(w);
+            //rectangleHeight = Convert.ToInt16(h);
+
+            //if (this.coordinatesRectFace[0] > 0)
+            //{
+
+            //    float x1 = this.coordinatesRectFace[0] * graffitsPresenter.FactorScaling;
+            //    float y1 = this.coordinatesRectFace[1] * graffitsPresenter.FactorScaling;
+            //    float w = this.coordinatesRectFace[2] * graffitsPresenter.FactorScaling;
+            //    float h = this.coordinatesRectFace[3] * graffitsPresenter.FactorScaling;
+
+            //    coordinateX1 = Convert.ToInt16(x1);
+            //    coordinateY1 = Convert.ToInt16(y1);
+            //    rectangleWidth = Convert.ToInt16(w);
+            //    rectangleHeight = Convert.ToInt16(h);
+
+            //}
+            //else
+            //{
+            //    coordinateX1 = 0;
+            //    coordinateY1 = 0;
+            //    rectangleWidth = 0;
+            //    rectangleHeight = 0;
+            //}
+        }
+        
+
         #endregion
 
         private void BringToFrontImageViewer(IntPtr handle, int position)
@@ -491,6 +584,7 @@ namespace WhoIsDemo.form
                     graffitsPresenter.CancelLoad = true;
                     Task.Delay(300).Wait();
                 }
+                
                 graffitsPresenter.ResetIdUser();
                 hearCoordinatesPresenter.EnabledCoordinates(false);
                 if (subscriptionHearUser != null) subscriptionHearUser.Dispose();
@@ -614,7 +708,7 @@ namespace WhoIsDemo.form
         private void frmEnroll_Shown(object sender, EventArgs e)
         {
             SubscriptionReactive();
-            Task taskUploadPeople = TaskUploadPeopleOfDatabase();
+            Task taskLoadPeoples = SynchronizationPeoplePresenter.Instance.TaskLoadPeoples();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -677,6 +771,9 @@ namespace WhoIsDemo.form
                 this.btnFrontVideo.Enabled = false;
                 this.btnFrontVideo.Enabled = false;
                 this.btnStopLoadFile.Enabled = true;
+                managerControlView
+                    .SetValueTextStatusStrip(StringResource.work,
+                    0, this.status);
                 managerControlView.StartProgressStatusStrip(1, this.status);
                 RequestAipu.Instance.WorkMode(1);
                 Task taskRecognition = graffitsPresenter
@@ -693,6 +790,26 @@ namespace WhoIsDemo.form
         private void flowLayoutPanel1_Scroll(object sender, ScrollEventArgs e)
         {
             flowLayoutPanel1.Refresh();
+        }          
+
+        private void flpDatabase_Scroll(object sender, ScrollEventArgs e)
+        {
+            //Console.WriteLine(flpDatabase.VerticalScroll.Maximum);
+            //Console.WriteLine(e.NewValue);
+            //Console.WriteLine(e.OldValue);
+            
+            flpDatabase.Refresh();
+
+        }
+
+        private void btnDownRecords_Click(object sender, EventArgs e)
+        {
+            SynchronizationPeoplePresenter.Instance.GetListPeople(true);
+        }
+
+        private void btnUploadRecords_Click(object sender, EventArgs e)
+        {
+            SynchronizationPeoplePresenter.Instance.GetListPeople(false);
         }
     }
 }

@@ -42,8 +42,9 @@ namespace WhoIsDemo.domain.interactor
             database.GetUsers();
         }
 
-        public void SyncUpDatabase()
+        public void SyncUpDatabase(int indexSkip)
         {
+            database.IndexSkip = indexSkip;
             GetAllPeople();
             GetImagesOfPeople();
             SyncUpPeople = this.listPeople;
@@ -78,6 +79,15 @@ namespace WhoIsDemo.domain.interactor
             }
         }
 
+        public int GetMaxLimit()
+        {
+            return Database.LIMIT_RECORDS;
+        }
+
+        public long GetNumberOfUsers()
+        {
+            return database.GetNumberOfUsers();
+        }
 
         #endregion
     }

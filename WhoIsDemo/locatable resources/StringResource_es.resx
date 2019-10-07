@@ -121,42 +121,42 @@
     <value>WhoIs DEMO</value>
   </data>
   <data name="complete" xml:space="preserve">
-    <value>Operation Completed.</value>
+    <value>Operación completada.</value>
   </data>
   <data name="configuration_empty" xml:space="preserve">
-    <value>Define configuration parameters, please</value>
+    <value>Defina los parámetros de configuración, por favor.</value>
   </data>
   <data name="delete_database" xml:space="preserve">
-    <value>Are you sure to delete the database?</value>
+    <value>Esta seguro de borrar la base de datos?</value>
   </data>
   <data name="directory_config_empty" xml:space="preserve">
-    <value>The configuration directory es empty </value>
+    <value>El directorio de configuración está vacio.</value>
   </data>
   <data name="error" xml:space="preserve">
-    <value>Error in the task performed.</value>
+    <value>Error en la tarea realizada.</value>
   </data>
   <data name="ip_video_empty" xml:space="preserve">
-    <value>The video address is empty.</value>
+    <value>La dirección de video está vacia.</value>
   </data>
   <data name="load_library" xml:space="preserve">
-    <value>The library is not loaded, please check.</value>
+    <value>La librería no está cargada, verifique por favor.</value>
   </data>
   <data name="reload_library" xml:space="preserve">
-    <value>Reloaded library</value>
+    <value>Librería recargada.</value>
   </data>
   <data name="reset" xml:space="preserve">
-    <value>Reset application, please.</value>
+    <value>Reinice la aplicación, por favor.</value>
   </data>
   <data name="stop_library" xml:space="preserve">
-    <value>Stop Library.</value>
+    <value>Librería detenida.</value>
   </data>
   <data name="value_key_empty" xml:space="preserve">
-    <value>The value key is empty</value>
+    <value>El valor de la llave está vacio.</value>
   </data>
   <data name="verify_key" xml:space="preserve">
-    <value>Verify Key.</value>
+    <value>Verifique la llave, por favor.</value>
   </data>
   <data name="work" xml:space="preserve">
-    <value>Working...</value>
+    <value>Espere...</value>
   </data>
 </root>

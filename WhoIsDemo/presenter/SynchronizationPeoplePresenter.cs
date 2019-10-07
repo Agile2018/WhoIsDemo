@@ -17,7 +17,15 @@ namespace WhoIsDemo.presenter
         SynchronizationOfPeopleWithDatabase synchronizationOfPeopleWithDatabase = 
             new SynchronizationOfPeopleWithDatabase();
         private List<People> syncUpPeople = new List<People>();
-
+        private List<People> beforePeople = new List<People>();
+        private List<People> afterPeople = new List<People>();
+        private int skipInit = 0;
+        private int skipEnd = 0;
+        private int maxLimitCount = 0;
+        private int skipIndex = 0;
+        private long numberPersons = 0;
+        public delegate void ListPeopleDelegate(List<People> list);
+        public event ListPeopleDelegate OnListPeople;
         #endregion
 
         #region methods
@@ -26,13 +34,103 @@ namespace WhoIsDemo.presenter
             this.synchronizationOfPeopleWithDatabase.OnListPeople += 
                 new SynchronizationOfPeopleWithDatabase
                 .ListPeopleDelegate(LoadListSyncUp);
+            this.maxLimitCount = this.synchronizationOfPeopleWithDatabase.GetMaxLimit();
+            InitSkip();
         }
 
-        public List<People> SyncUpPeople { get => syncUpPeople; set => syncUpPeople = value; }
+        public List<People> SyncUpPeople {
+            get
+            {
+                return syncUpPeople;
+            }
+
+            set
+            {
+                syncUpPeople = value;
+                OnListPeople(syncUpPeople);
+            }
+        }
+
+        public long NumberPersons { get => numberPersons;}
 
         private void LoadListSyncUp(List<People> list)
         {
+            RefreshListPeople(list);
+           
+        }
+
+        private void InitSkip()
+        {
+            
+            this.skipEnd = this.maxLimitCount;
+            this.skipIndex = this.skipInit;
+            this.skipInit = 0;
+        }
+
+        public long GetNumbersPersons()
+        {
+            this.numberPersons = this.synchronizationOfPeopleWithDatabase.GetNumberOfUsers();
+            return this.numberPersons;
+        }
+
+        private void ChangeSkipInLoad()
+        {
+
+            this.skipIndex = this.skipEnd;
+            this.skipEnd += this.maxLimitCount;
+            this.skipInit += this.maxLimitCount;
+        }
+
+        private void ChangeSkipInDownload()
+        {
+            this.skipEnd -= this.maxLimitCount;
+            this.skipInit -= this.maxLimitCount;
+            this.skipIndex = this.skipInit;            
+            
+        }
+
+        private bool UpdateSkip(bool address)
+        {
+            bool result = true;
+            if (address)
+            {
+                if (this.skipEnd < this.NumberPersons)
+                {
+                    ChangeSkipInLoad();
+                }
+                else
+                {
+                    result = false;
+                }
+                
+            }
+            else if (this.skipInit > 0)
+            {
+                ChangeSkipInDownload();
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
+           
+        }
+
+        public void GetListPeople(bool address)
+        {
+            if (UpdateSkip(address))
+            {
+                Task taskLoadPeoples = TaskLoadPeoples();
+            }
+            
+        }
+
+        private void RefreshListPeople(List<People> list)
+        {
+            this.syncUpPeople.Clear();
             SyncUpPeople = list;
+
         }
 
         public async Task TaskLoadPeoples()
@@ -48,7 +146,7 @@ namespace WhoIsDemo.presenter
         private void LoadPeoples()
         {
 
-            synchronizationOfPeopleWithDatabase.SyncUpDatabase();
+            synchronizationOfPeopleWithDatabase.SyncUpDatabase(skipIndex);
 
         }
         public void AddPeople(People people)

@@ -117,46 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="app_name" xml:space="preserve">
-    <value>WhoIs DEMO</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="configuraciónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="complete" xml:space="preserve">
-    <value>Operation Completed.</value>
+  <data name="configuraciónToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Configuración</value>
   </data>
-  <data name="configuration_empty" xml:space="preserve">
-    <value>Define configuration parameters, please</value>
+  <data name="salirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="delete_database" xml:space="preserve">
-    <value>Are you sure to delete the database?</value>
+  <data name="salirToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Salir</value>
   </data>
-  <data name="directory_config_empty" xml:space="preserve">
-    <value>The configuration directory es empty </value>
+  <data name="archivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
   </data>
-  <data name="error" xml:space="preserve">
-    <value>Error in the task performed.</value>
+  <data name="archivoToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Archivo</value>
   </data>
-  <data name="ip_video_empty" xml:space="preserve">
-    <value>The video address is empty.</value>
+  <data name="enrolamientoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="load_library" xml:space="preserve">
-    <value>The library is not loaded, please check.</value>
+  <data name="enrolamientoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Enrolación</value>
   </data>
-  <data name="reload_library" xml:space="preserve">
-    <value>Reloaded library</value>
+  <data name="controlDeEntradaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="reset" xml:space="preserve">
-    <value>Reset application, please.</value>
+  <data name="controlDeEntradaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Control de entrada</value>
   </data>
-  <data name="stop_library" xml:space="preserve">
-    <value>Stop Library.</value>
+  <data name="detecciónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
   </data>
-  <data name="value_key_empty" xml:space="preserve">
-    <value>The value key is empty</value>
+  <data name="detecciónToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Reconocimiento</value>
   </data>
-  <data name="verify_key" xml:space="preserve">
-    <value>Verify Key.</value>
+  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 22</value>
   </data>
-  <data name="work" xml:space="preserve">
-    <value>Working...</value>
+  <data name="toolStripLabel1.Text" xml:space="preserve">
+    <value>Seleccionar video: </value>
   </data>
 </root>

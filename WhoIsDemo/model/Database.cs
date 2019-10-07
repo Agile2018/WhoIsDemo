@@ -13,10 +13,12 @@ namespace WhoIsDemo.model
         #region constant
         private const string TABLE_USER = "user";
         private const string TABLE_IMAGE = "image";
+        public const int LIMIT_RECORDS = 20;
         #endregion
         #region variables
         private string connection;
         private string nameDatabase;
+        private int indexSkip = 0;
         private MongoClient client;
         private IClientSessionHandle session;
         private IMongoDatabase database;
@@ -137,7 +139,8 @@ namespace WhoIsDemo.model
             try
             {
                 var filter = Builders<Image>.Filter.Empty;
-                var result = images.Find(filter).ToListAsync();
+                //var result = images.Find(filter).ToListAsync();
+                var result = images.Find(filter).Skip(IndexSkip).Limit(LIMIT_RECORDS).ToListAsync();
                 return result.Result;
             }
             catch (InvalidOperationException ex)
@@ -159,7 +162,9 @@ namespace WhoIsDemo.model
             try
             {
                 var filter = Builders<PersonDb>.Filter.Empty;
-                var result = users.Find(filter).ToListAsync();
+                //var result = users.Find(filter).ToListAsync();
+                var result = users.Find(filter).Skip(IndexSkip).Limit(LIMIT_RECORDS).ToListAsync();
+                
                 return result.Result;
             }
             catch (InvalidOperationException ex)
@@ -173,6 +178,12 @@ namespace WhoIsDemo.model
                 Console.WriteLine(ax.Message);
             }
             return list;
+        }
+
+        public long GetNumberOfUsers()
+        {
+            var filter = Builders<PersonDb>.Filter.Empty;
+            return users.CountDocuments(filter);
         }
 
         public bool DropDatabase()
@@ -194,6 +205,7 @@ namespace WhoIsDemo.model
 
         public string Connection { get => connection; set => connection = value; }
         public string NameDatabase { get => nameDatabase; set => nameDatabase = value; }
+        public int IndexSkip { get => indexSkip; set => indexSkip = value; }
         #endregion
     }
 }

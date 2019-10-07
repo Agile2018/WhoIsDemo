@@ -20,6 +20,7 @@ namespace WhoIsDemo.presenter
         public const string file_face = "detect.txt";
         public const string file_video = "video.txt";
         public const string directory = "directory.txt";
+        public const string file_identify = "identify.txt";
         #endregion
 
         #region variables
@@ -61,6 +62,24 @@ namespace WhoIsDemo.presenter
 
         }
 
+        public void SaveIdentifyConfiguration(Identify identify)
+        {
+
+            try
+            {
+                string jsonOut = JsonConvert.SerializeObject(identify);
+                string pathFile = directoryConfiguration + "/" + file_identify;
+                disk.WriteFile(pathFile, jsonOut);
+
+            }
+            catch (System.IO.IOException e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+
+        }
+
         public Detect ReadDetectConfiguration()
         {
             Detect detect = new Detect();
@@ -81,6 +100,28 @@ namespace WhoIsDemo.presenter
                 Console.WriteLine(ex.Message);
             }
             return detect;
+        }
+
+        public Identify ReadIdentifyConfiguration()
+        {
+            Identify identify = new Identify();
+            try
+            {
+                string pathFile = directoryConfiguration + "/" + file_identify;
+                string content = disk.ReadTextFile(pathFile);
+                identify = JsonConvert.DeserializeObject<Identify>(content);
+
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            catch (Newtonsoft.Json.JsonReaderException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return identify;
         }
 
         public void SaveVideoConfiguration(VideoConfig videoConfig)
@@ -211,6 +252,7 @@ namespace WhoIsDemo.presenter
             paramsFile.file_database = file_database;
             paramsFile.file_face = file_face;
             paramsFile.file_video = file_video;
+            paramsFile.file_identify = file_identify;
             fileConfiguration.Params = paramsFile;
             try
             {

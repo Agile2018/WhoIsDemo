@@ -117,46 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="app_name" xml:space="preserve">
-    <value>WhoIs DEMO</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Información:</value>
   </data>
-  <data name="complete" xml:space="preserve">
-    <value>Operation Completed.</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
   </data>
-  <data name="configuration_empty" xml:space="preserve">
-    <value>Define configuration parameters, please</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>APELLIDO:</value>
   </data>
-  <data name="delete_database" xml:space="preserve">
-    <value>Are you sure to delete the database?</value>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
   </data>
-  <data name="directory_config_empty" xml:space="preserve">
-    <value>The configuration directory es empty </value>
-  </data>
-  <data name="error" xml:space="preserve">
-    <value>Error in the task performed.</value>
-  </data>
-  <data name="ip_video_empty" xml:space="preserve">
-    <value>The video address is empty.</value>
-  </data>
-  <data name="load_library" xml:space="preserve">
-    <value>The library is not loaded, please check.</value>
-  </data>
-  <data name="reload_library" xml:space="preserve">
-    <value>Reloaded library</value>
-  </data>
-  <data name="reset" xml:space="preserve">
-    <value>Reset application, please.</value>
-  </data>
-  <data name="stop_library" xml:space="preserve">
-    <value>Stop Library.</value>
-  </data>
-  <data name="value_key_empty" xml:space="preserve">
-    <value>The value key is empty</value>
-  </data>
-  <data name="verify_key" xml:space="preserve">
-    <value>Verify Key.</value>
-  </data>
-  <data name="work" xml:space="preserve">
-    <value>Working...</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>NOMBRE:</value>
   </data>
 </root>

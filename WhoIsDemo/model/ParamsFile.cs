@@ -13,5 +13,6 @@ namespace WhoIsDemo.model
         public string file_database { get; set; }
         public string file_face { get; set; }
         public string file_video { get; set; }
+        public string file_identify { get; set; }
     }
 }

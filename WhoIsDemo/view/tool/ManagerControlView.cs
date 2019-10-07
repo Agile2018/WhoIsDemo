@@ -396,6 +396,18 @@ namespace WhoIsDemo.view.tool
                 e.Handled = true;
             }
         }
+
+        public void SetValueToComboBox(ComboBox cbo, string value)
+        {
+            for (int i = 0; i < cbo.Items.Count; i++)
+            {
+                cbo.SelectedIndex = i;
+                if (cbo.Text == value || Convert.ToString(cbo.SelectedValue) == value)
+                {
+                    return;
+                }
+            }
+        }
         #endregion
     }
 }

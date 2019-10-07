@@ -1,16 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WhoIsDemo.domain.interactor;
-using WhoIsDemo.locatable_resources;
 using WhoIsDemo.model;
 using WhoIsDemo.presenter;
 using WhoIsDemo.repository;
@@ -28,6 +20,7 @@ namespace WhoIsDemo.form
         ManagerControlView managerControlView = new ManagerControlView();
         DiskPresenter diskPresenter = new DiskPresenter();
         DropDatabasePresenter dropDatabasePresenter = new DropDatabasePresenter();
+        private RegistryValueDataReader registryValueDataReader = new RegistryValueDataReader();
         private StatusStrip status;
         ToolStripComboBox cboVideos;
         #endregion
@@ -46,6 +39,7 @@ namespace WhoIsDemo.form
                 GetDetectionConfiguration();
                 GetVideoConfiguration();
                 GetDatabaseConfiguration();
+                SetValueRegistryLevelResolution();
                 dropDatabasePresenter.Connect();
             }
             catch (FieldAccessException fe)
@@ -53,7 +47,8 @@ namespace WhoIsDemo.form
                 if (fe != null)
                 {
 
-                    string messageError = StringResource.value_key_empty + ": " +
+                    string messageError = ManagerResource.Instance.resourceManager
+                    .GetString("value_key_empty") + ": " +
                         fe.Source + ": " + fe.Message;
                     managerControlView
                     .SetValueTextStatusStrip(messageError, 0, this.status);
@@ -101,13 +96,14 @@ namespace WhoIsDemo.form
 
             lvwVideo.Columns.Add("ID", 50, HorizontalAlignment.Center);
             lvwVideo.Columns.Add("Ruta", 600, HorizontalAlignment.Center);
-            cboLevelResolution.SelectedIndex = 0;
+            
         }
 
         private void GetDetectionConfiguration()
         {
             Detect detect = diskPresenter.ReadDetectConfiguration();
-            if (detect != null)
+            Identify identify = diskPresenter.ReadIdentifyConfiguration();
+            if (detect != null && identify != null)
             {
                 txtAccurancy.Text = (string.IsNullOrEmpty(detect.Params.accuracy.ToString())) ? "0" :
                     detect.Params.accuracy.ToString();
@@ -118,6 +114,18 @@ namespace WhoIsDemo.form
                 txtMinEye.Text = (string.IsNullOrEmpty(detect.Params.mineye.ToString())) ? "0" :
                     detect.Params.mineye.ToString();
 
+                managerControlView.SetValueToComboBox(cboDetectForced,
+                    identify.Params.A_FaceDetectionForced.ToString());
+                managerControlView.SetValueToComboBox(cboIdentificationSpeed,
+                    identify.Params.A_IdentificationSpeed.ToString());
+                if (detect.Params.modedetect == 1)
+                {
+                    cboDetectorMode.SelectedIndex = 0;
+                }
+                else
+                {
+                    cboDetectorMode.SelectedIndex = 1;
+                }
             }
 
         }
@@ -164,14 +172,32 @@ namespace WhoIsDemo.form
             if (VerifyInputDetect())
             {
                 Detect detect = new Detect();
+                Identify identify = new Identify();
+                identify.configuration = "identify_configuration";
                 detect.configuration = "detect_configuration";
+                ParamsIdentify paramsIdentify = new ParamsIdentify();
                 ParamsDetect paramsDetect = new ParamsDetect();
                 paramsDetect.accuracy = Convert.ToInt16(txtAccurancy.Text);
-                paramsDetect.maxeye = Convert.ToInt16(txtMaxEye.Text); ;
-                paramsDetect.maxfaces = Convert.ToInt16(txtMaxDetect.Text); ;
-                paramsDetect.mineye = Convert.ToInt16(txtMinEye.Text); ;
+                paramsDetect.maxeye = Convert.ToInt16(txtMaxEye.Text);
+                paramsIdentify.A_MaxEyeDist = Convert.ToInt16(txtMaxEye.Text);
+                paramsDetect.maxfaces = Convert.ToInt16(txtMaxDetect.Text); 
+                paramsDetect.mineye = Convert.ToInt16(txtMinEye.Text);
+                paramsIdentify.A_MinEyeDist = Convert.ToInt16(txtMinEye.Text);
+                paramsIdentify.A_FaceDetectionForced = Convert.ToInt16(cboDetectForced.Text);
+                paramsIdentify.A_IdentificationSpeed = Convert.ToInt16(cboIdentificationSpeed.Text);
+                if (cboDetectorMode.SelectedIndex == 0)
+                {
+                    paramsDetect.modedetect = 1;
+                }
+                else
+                {
+                    paramsDetect.modedetect = 2;
+                }
+
                 detect.Params = paramsDetect;
+                identify.Params = paramsIdentify;
                 diskPresenter.SaveDetectConfiguration(detect);
+                diskPresenter.SaveIdentifyConfiguration(identify);
                 this.lblOkDetect.Text = "Wait...";
                 RequestAipu.Instance.StopAipu();
                 Task.Delay(500).Wait();
@@ -185,7 +211,10 @@ namespace WhoIsDemo.form
             return (!string.IsNullOrEmpty(txtAccurancy.Text) &&
                 !string.IsNullOrEmpty(txtMaxDetect.Text) &&
                 !string.IsNullOrEmpty(txtMaxEye.Text) &&
-                !string.IsNullOrEmpty(txtMinEye.Text));
+                !string.IsNullOrEmpty(txtMinEye.Text) && 
+                cboDetectForced.SelectedIndex != -1 && 
+                cboIdentificationSpeed.SelectedIndex != -1 && 
+                cboDetectorMode.SelectedIndex != -1);
         }
 
         private void cboLevelResolution_SelectedIndexChanged(object sender, EventArgs e)
@@ -197,6 +226,9 @@ namespace WhoIsDemo.form
                     .Instance.ListWidthResolution[index];
                 Configuration.Instance.ResolutionHeightDefault = Configuration
                     .Instance.ListHeightResolution[index];
+                registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.LEVEL_RESOLUTION, index.ToString());
+
             }
         }
 
@@ -281,17 +313,45 @@ namespace WhoIsDemo.form
 
         private void btnClearDatabase_Click(object sender, EventArgs e)
         {
-            if (dropDatabasePresenter.DropCurrentDatabase())
+            if (MessageBox.Show(ManagerResource.Instance.resourceManager
+                    .GetString("delete_database"), "Confirm", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                diskPresenter.FileDelete("iengine.db");
-                managerControlView.SetValueTextStatusStrip(StringResource.complete,
-                    0, this.status);
-            }
-            else
+                if (dropDatabasePresenter.DropCurrentDatabase())
+                {
+                    diskPresenter.FileDelete("iengine.db");
+                    lblOkClearDatabase.Text = "OK";
+                    managerControlView.SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                        .GetString("complete"),
+                        0, this.status);
+                }
+                else
+                {
+                    managerControlView.SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                        .GetString("error"),
+                        0, this.status);
+                }
+            }            
+            
+            
+        }
+
+        private void SetValueRegistryLevelResolution()
+        {
+            string level = "0";
+            if (!string.IsNullOrEmpty(registryValueDataReader
+                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                RegistryValueDataReader.LEVEL_RESOLUTION)))
             {
-                managerControlView.SetValueTextStatusStrip(StringResource.error,
-                    0, this.status);
+                level = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.LEVEL_RESOLUTION);                
             }
+            cboLevelResolution.SelectedIndex = Convert.ToInt16(level);
+            Configuration.Instance.ResolutionWidthDefault = Configuration
+                    .Instance.ListWidthResolution[Convert.ToInt16(level)];
+            Configuration.Instance.ResolutionHeightDefault = Configuration
+                .Instance.ListHeightResolution[Convert.ToInt16(level)];
         }
     }
 }

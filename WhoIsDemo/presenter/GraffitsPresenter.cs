@@ -32,6 +32,7 @@ namespace WhoIsDemo.presenter
         public Subject<bool> subjectLoad = new Subject<bool>();
         private bool cancelLoad = false;
         private bool isLoadFile = false;
+        private static readonly object _balanceLocker = new object();
         #endregion
 
         #region methods
@@ -136,27 +137,35 @@ namespace WhoIsDemo.presenter
 
             
         }
-        private void WriteImageForRecognition(Mat img)
+        public void WriteImageForRecognition(object state)
         {
-            Mat clone = img.Clone();
-            if (factorScaling != 1)
+            lock (_balanceLocker)
             {
-                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
+                Mat img = (Mat)state;
+                Mat clone = img.Clone();
+                //if (factorScaling != 1)
+                //{
+                //    CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
+                //}
+                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Lanczos4);
+                int length = clone.Width * clone.Height * clone.NumberOfChannels;
+                byte[] data = new byte[length];
+
+                GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+                using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
+                    handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
+                    CvInvoke.BitwiseNot(clone, m2);
+                handle.Free();
+
+                RequestAipu.Instance.Tracking(data, clone.Height,
+                   clone.Width);
+                RequestAipu.Instance.SendFrame(data, clone.Height,
+                    clone.Width, linkVideo);
+
+                clone.Dispose();
+                //isWritingImage = false;
             }
-
-            int length = clone.Width * clone.Height * clone.NumberOfChannels;
-            byte[] data = new byte[length];
-
-            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-            using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
-                handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
-                CvInvoke.BitwiseNot(clone, m2);
-            handle.Free();
-
-            RequestAipu.Instance.SendFrame(data, clone.Height,
-                clone.Width, linkVideo);
-            clone.Dispose();
-            isWritingImage = false;
+   
         }
 
         private void LaunchImageForRecognition(Mat img)
@@ -276,9 +285,8 @@ namespace WhoIsDemo.presenter
             Mat clone = CvInvoke.Imread("camera\\mask.png");
             if (clone != null)
             {
-                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
-                Console.WriteLine("Init Tracking: " + widthScaling.ToString() + " "
-                    + heightScaling.ToString());
+                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
+                
                 int length = clone.Width * clone.Height * clone.NumberOfChannels;
                 byte[] data = new byte[length];
 
@@ -324,8 +332,7 @@ namespace WhoIsDemo.presenter
             if (factorScaling != 1)
             {
                 CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
-                Console.WriteLine("Inside Tracking: " + widthScaling.ToString() + " "
-                + heightScaling.ToString());
+                
             }
 
             int length = clone.Width * clone.Height * clone.NumberOfChannels;
@@ -342,7 +349,7 @@ namespace WhoIsDemo.presenter
             clone.Dispose();
             isWritingImageForTracking = false;
         }
-
+        
         public void SetSequenceFps(int value)
         {
             RequestAipu.Instance.SetSequenceFps(value);
@@ -377,23 +384,36 @@ namespace WhoIsDemo.presenter
                 .Instance.FactorScalingHeightText);
             CvInvoke.PutText(img, textBox, new System.Drawing
                 .Point(x, y),
-                FontFace.HersheySimplex, Configuration.Instance.FactorScalingSizeFont,
-                new MCvScalar(255.0, 0.0, 0.0));
+                FontFace.HersheySimplex, 0.4,
+                new MCvScalar(255.0, 255.0, 255.0));
             textBox = string.Format("FPS: {0}",
                 Convert.ToInt16(fps));
-            y += Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
+            y += 25; //Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
             CvInvoke.PutText(img, textBox, new System.Drawing
                 .Point(x, y),
-                FontFace.HersheySimplex, Configuration.Instance.FactorScalingSizeFont,
-                new MCvScalar(255.0, 0.0, 0.0));
+                FontFace.HersheySimplex, 0.4,
+                new MCvScalar(255.0, 255.0, 255.0));
             textBox = string.Format("Identified: {0}",
                 countNewPerson);
-            y += Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
+            y += 25; // Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
             CvInvoke.PutText(img, textBox, new System.Drawing
                 .Point(x, y),
-                FontFace.HersheySimplex, Configuration.Instance.FactorScalingSizeFont,
-                new MCvScalar(255.0, 0.0, 0.0));
+                FontFace.HersheySimplex, 0.4,
+                new MCvScalar(255.0, 255.0, 255.0));
+            //Configuration.Instance.FactorScalingSizeFont
+        }
 
+        public int SetFps(int fps)
+        {
+            int indexProtocol = Configuration.Instance.VideoDefault.IndexOf(":");
+            if (indexProtocol >= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1000 / fps;
+            }
         }
         #endregion
     }

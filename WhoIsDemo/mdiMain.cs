@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WhoIsDemo.domain.interactor;
@@ -30,8 +31,23 @@ namespace WhoIsDemo
 
         public mdiMain()
         {
+            DefineCurrentUICulture();
             InitializeComponent();
             
+        }
+
+        private void DefineCurrentUICulture()
+        {
+            if (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag != "en-US")
+            {
+                Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+            }
+
+            ManagerResource.Instance.SetResourceManager();
         }
 
         private void SubscriptionReactive()
@@ -39,7 +55,8 @@ namespace WhoIsDemo
 
             subscriptionHearInvalid = HearInvalidPresenter.Instance.subjectError.Subscribe(
                 result => LaunchMessage(result),
-                () => Console.WriteLine(StringResource.complete));            
+                () => Console.WriteLine(ManagerResource.Instance.resourceManager
+                    .GetString("complete")));            
 
         }
 
@@ -61,14 +78,33 @@ namespace WhoIsDemo
             SubscriptionReactive();
             diskPresenter.CreateDirectoryWork();
             VerifyFileConfiguration();
-            GetListVideos();            
-            
+            GetListVideos();
+            SetValueRegistryLevelResolution();
         }
-             
+
+        private void SetValueRegistryLevelResolution()
+        {
+            string level = "0";
+            if (!string.IsNullOrEmpty(registryValueDataReader
+                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                RegistryValueDataReader.LEVEL_RESOLUTION)))
+            {
+                level = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.LEVEL_RESOLUTION);
+            }            
+            Configuration.Instance.ResolutionWidthDefault = Configuration
+                    .Instance.ListWidthResolution[Convert.ToInt16(level)];
+            Configuration.Instance.ResolutionHeightDefault = Configuration
+                .Instance.ListHeightResolution[Convert.ToInt16(level)];
+        }
+
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             System.Windows.Forms.Application.Exit();
+            
+            
         }
   
 
@@ -82,7 +118,8 @@ namespace WhoIsDemo
             else
             {
                 this.statusStrip.Invoke(new Action(() => managerControlView
-                    .SetValueTextStatusStrip(StringResource.configuration_empty, 0, this.statusStrip)));
+                    .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                    .GetString("configuration_empty"), 0, this.statusStrip)));
 
             }
 
@@ -108,12 +145,28 @@ namespace WhoIsDemo
             detect.configuration = "detect_configuration";
             ParamsDetect paramsDetect = new ParamsDetect();
             paramsDetect.accuracy = 600;
-            paramsDetect.maxeye = 200 ;
+            paramsDetect.maxeye = 250 ;
             paramsDetect.maxfaces = 1;
-            paramsDetect.mineye = 25;
+            paramsDetect.mineye = 35;
+            paramsDetect.modedetect = 1;            
             detect.Params = paramsDetect;
             diskPresenter.SaveDetectConfiguration(detect);
         }
+
+        private void CreateParamsIdentify()
+        {
+            Identify identify = new Identify();
+            identify.configuration = "identify_configuration";
+            ParamsIdentify paramsIdentify = new ParamsIdentify();
+            paramsIdentify.A_MinEyeDist = 35;
+            paramsIdentify.A_MaxEyeDist = 250;
+            paramsIdentify.A_FaceDetectionForced = 2;
+            paramsIdentify.A_IdentificationSpeed = 5;
+            identify.Params = paramsIdentify;
+            diskPresenter.SaveIdentifyConfiguration(identify);
+            
+        }
+
         private void VerifyFileConfiguration()
         {
             if (!diskPresenter.VerifyFileOfConfiguration())
@@ -121,8 +174,10 @@ namespace WhoIsDemo
                 diskPresenter.CreateContentDirectoryWork();
                 CreateParamsDatabase();
                 CreateParamsDetect();
+                CreateParamsIdentify();
                 this.statusStrip.Invoke(new Action(() => managerControlView
-                    .SetValueTextStatusStrip(StringResource.configuration_empty, 0, this.statusStrip)));
+                    .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                    .GetString("configuration_empty"), 0, this.statusStrip)));
 
             }
             else
@@ -139,15 +194,7 @@ namespace WhoIsDemo
             closeLibrary.Start();
             
         }
-
-        //private void btnLoadLibrary_Click(object sender, EventArgs e)
-        //{
-        //    if (!AipuFace.Instance.IsLoadConfiguration)
-        //    {
-        //        IntAipuFace();
-        //    }
-            
-        //}
+        
 
         private void GetListVideos()
         {
@@ -185,7 +232,7 @@ namespace WhoIsDemo
 
         private void enrolamientoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Task taskLoadPeoples = SynchronizationPeoplePresenter.Instance.TaskLoadPeoples();
+            
             managerControlView.SetValueTextStatusStrip("", 0, statusStrip);
             frmEnroll frmWork = new frmEnroll() { MdiParent = this };
             frmWork.strNameMenu = "enrolamientoToolStripMenuItem";

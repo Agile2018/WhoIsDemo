@@ -22,14 +22,14 @@ namespace WhoIsDemo.locatable_resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class StringResource {
+    internal class StringResource_es {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal StringResource() {
+        internal StringResource_es() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WhoIsDemo.locatable_resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WhoIsDemo.locatable_resources.StringResource", typeof(StringResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WhoIsDemo.locatable_resources.StringResource_es", typeof(StringResource_es).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,7 +70,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operation Completed..
+        ///   Looks up a localized string similar to Operación completada..
         /// </summary>
         internal static string complete {
             get {
@@ -79,7 +79,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Define configuration parameters, please.
+        ///   Looks up a localized string similar to Defina los parámetros de configuración, por favor..
         /// </summary>
         internal static string configuration_empty {
             get {
@@ -88,7 +88,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to delete the database?.
+        ///   Looks up a localized string similar to Esta seguro de borrar la base de datos?.
         /// </summary>
         internal static string delete_database {
             get {
@@ -97,7 +97,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The configuration directory es empty .
+        ///   Looks up a localized string similar to El directorio de configuración está vacio..
         /// </summary>
         internal static string directory_config_empty {
             get {
@@ -106,7 +106,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error in the task performed..
+        ///   Looks up a localized string similar to Error en la tarea realizada..
         /// </summary>
         internal static string error {
             get {
@@ -115,7 +115,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The video address is empty..
+        ///   Looks up a localized string similar to La dirección de video está vacia..
         /// </summary>
         internal static string ip_video_empty {
             get {
@@ -124,7 +124,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The library is not loaded, please check..
+        ///   Looks up a localized string similar to La librería no está cargada, verifique por favor..
         /// </summary>
         internal static string load_library {
             get {
@@ -133,7 +133,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reloaded library.
+        ///   Looks up a localized string similar to Librería recargada..
         /// </summary>
         internal static string reload_library {
             get {
@@ -142,7 +142,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset application, please..
+        ///   Looks up a localized string similar to Reinice la aplicación, por favor..
         /// </summary>
         internal static string reset {
             get {
@@ -151,7 +151,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop Library..
+        ///   Looks up a localized string similar to Librería detenida..
         /// </summary>
         internal static string stop_library {
             get {
@@ -160,7 +160,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value key is empty.
+        ///   Looks up a localized string similar to El valor de la llave está vacio..
         /// </summary>
         internal static string value_key_empty {
             get {
@@ -169,7 +169,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verify Key..
+        ///   Looks up a localized string similar to Verifique la llave, por favor..
         /// </summary>
         internal static string verify_key {
             get {
@@ -178,7 +178,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Working....
+        ///   Looks up a localized string similar to Espere....
         /// </summary>
         internal static string work {
             get {

@@ -20,6 +20,7 @@ namespace WhoIsDemo.form
         private Image photo;
         private Image photoCamera;
         private string idFace;
+        private string dateTime;
         #endregion
         public CardTwoImage()
         {
@@ -96,6 +97,21 @@ namespace WhoIsDemo.form
             {
                 photoCamera = value;
                 picPhotoCamera.Image = value;
+            }
+            
+        }
+
+        [Category("CardTwo Props")]
+        public string DateTime {
+            get
+            {
+                return dateTime;
+            }
+
+            set
+            {
+                dateTime = value;
+                txtDatetime.Text = value;
             }
             
         }

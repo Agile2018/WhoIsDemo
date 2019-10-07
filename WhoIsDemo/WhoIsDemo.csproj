@@ -14,6 +14,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -170,6 +185,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StringResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="locatable resources\StringResource_es.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringResource_es.resx</DependentUpon>
+    </Compile>
     <Compile Include="model\AipuFace.cs" />
     <Compile Include="model\AipuObserver.cs" />
     <Compile Include="domain\interactor\HearInvalid.cs" />
@@ -184,11 +204,13 @@
     <Compile Include="model\DatabaseConfig.cs" />
     <Compile Include="model\Detect.cs" />
     <Compile Include="model\FileConfiguration.cs" />
+    <Compile Include="model\Identify.cs" />
     <Compile Include="model\Image.cs" />
     <Compile Include="model\Params.cs" />
     <Compile Include="model\ParamsDatabase.cs" />
     <Compile Include="model\ParamsDetect.cs" />
     <Compile Include="model\ParamsFile.cs" />
+    <Compile Include="model\ParamsIdentify.cs" />
     <Compile Include="model\People.cs" />
     <Compile Include="model\Person.cs" />
     <Compile Include="model\PersonDb.cs" />
@@ -210,20 +232,36 @@
     <Compile Include="repository\Disk.cs" />
     <Compile Include="repository\RegistryValueDataReader.cs" />
     <Compile Include="view\tool\ManagerControlView.cs" />
+    <Compile Include="view\tool\ManagerResource.cs" />
+    <EmbeddedResource Include="form\CardPerson.es.resx">
+      <DependentUpon>CardPerson.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\CardPerson.resx">
       <DependentUpon>CardPerson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\CardSimple.resx">
       <DependentUpon>CardSimple.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\CardTwoImage.es.resx">
+      <DependentUpon>CardTwoImage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\CardTwoImage.resx">
       <DependentUpon>CardTwoImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\frmConfiguration.es.resx">
+      <DependentUpon>frmConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\frmConfiguration.resx">
       <DependentUpon>frmConfiguration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\frmEnroll.es.resx">
+      <DependentUpon>frmEnroll.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\frmEnroll.resx">
       <DependentUpon>frmEnroll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\frmEntryControl.es.resx">
+      <DependentUpon>frmEntryControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\frmEntryControl.resx">
       <DependentUpon>frmEntryControl.cs</DependentUpon>
@@ -231,6 +269,13 @@
     <EmbeddedResource Include="locatable resources\StringResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="locatable resources\StringResource_es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringResource_es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mdiMain.es.resx">
+      <DependentUpon>mdiMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mdiMain.resx">
       <DependentUpon>mdiMain.cs</DependentUpon>
@@ -262,6 +307,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="License-LGPL.txt" />
+    <None Include="Resources\arrow-down-bold.png" />
+    <None Include="Resources\arrow-up-bold.png" />
+    <None Include="Resources\arrow-right.png" />
+    <None Include="Resources\arrow-left.png" />
     <None Include="Resources\cached.png" />
     <None Include="Resources\lock-reset.png" />
     <None Include="Resources\ic_save_black_48dp.png" />
@@ -291,6 +340,18 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.CV.4.1.0.3420\build\EMGU.CV.targets" Condition="Exists('..\packages\EMGU.CV.4.1.0.3420\build\EMGU.CV.targets')" />

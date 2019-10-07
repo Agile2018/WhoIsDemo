@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WhoIsDemo.domain.interactor;
@@ -22,6 +23,8 @@ namespace WhoIsDemo.form
     {
         #region constants
         private const int queueImage = 9;
+        private const int sizeMaxFlowLayout = 30;
+        private const int sizeCoordinates = 20;
         const int SWP_NOSIZE = 0x1;
         const int SWP_NOMOVE = 0x2;
         const int SWP_NOACTIVATE = 0x10;
@@ -37,13 +40,14 @@ namespace WhoIsDemo.form
         
         public string strNameMenu;
         private int indexPerson = 0;
-        private int countRepeatFrame = 0;
+        //private int countRepeatFrame = 0;
+        private int countFlowLayoutControls = 0;
         private float[] coordinatesRectFace;
-        private float[] coordinatesVolatile = new float[2];
+        private float[] coordinatesVolatile = new float[sizeCoordinates];
         private double totalFrame;
         private double fps;
         private ImageViewer viewer;
-        
+        //private int coordinateX1, coordinateY1, rectangleWidth, rectangleHeight;
         private StatusStrip status;
         private Person personTransition = new Person();
         private List<Person> listPersonSlider = new List<Person>();
@@ -164,7 +168,8 @@ namespace WhoIsDemo.form
                 this.btnStart.Enabled = false;
 
                 managerControlView
-                    .SetValueTextStatusStrip(StringResource.ip_video_empty,
+                    .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                    .GetString("ip_video_empty"),
                     0, this.status);
             }
         }
@@ -179,7 +184,8 @@ namespace WhoIsDemo.form
             if (!hearUserPresenter.EnableObserverUser())
             {
                 managerControlView.SetValueTextStatusStrip(
-                    StringResource.load_library, 0, this.status);
+                    ManagerResource.Instance.resourceManager
+                    .GetString("load_library"), 0, this.status);
 
             }
             hearCoordinatesPresenter.EnabledCoordinates(true);
@@ -202,7 +208,11 @@ namespace WhoIsDemo.form
         private void SetCoordinatesFace(float[] coordinateFlow)
         {
             this.coordinatesRectFace = coordinateFlow;
+            Task.Run(() =>
+            {
+                RefreshRectangle();
 
+            });
         }
 
         private void ThreadAddImageOfPerson(List<Bitmap> listImage)
@@ -218,8 +228,12 @@ namespace WhoIsDemo.form
             if (personTransition.Params.Register == "0" && !SearchPersonList(Convert.ToInt32(personTransition.Params.Id_face),
                     this.listPersonRegister))
             {
-                this.listPersonRegister.Add(personTransition);
-                
+                if (this.countFlowLayoutControls >= sizeMaxFlowLayout)
+                {
+                    this.listPersonRegister.Clear();
+                }
+
+                this.listPersonRegister.Add(personTransition);                
                 this.AddNewCardPerson(listImage);
                 
             }
@@ -254,11 +268,20 @@ namespace WhoIsDemo.form
         }
         private void AddNewCardPerson(List<Bitmap> listImage)
         {
+            if (this.countFlowLayoutControls >= sizeMaxFlowLayout)
+            {
+                this.countFlowLayoutControls = 0;
+                this.flowLayoutPanel1.Invoke(new Action(() =>
+                this.flowLayoutPanel1.Controls.Clear()));
+                Task.Delay(20);
+            }
+
             CardTwoImage cardPerson = new CardTwoImage();
             cardPerson.IdFace = personTransition.Params.Id_face;
             cardPerson.Id = personTransition.Params.Identification;
             cardPerson.FirstName = personTransition.Params.Name;
             cardPerson.LastName = personTransition.Params.Lastname;
+            cardPerson.DateTime = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
             if (listImage.Count == 2)
             {
                 Bitmap imgGallery = findImagePresenter.ResizeBitmap(listImage[0]);
@@ -274,7 +297,9 @@ namespace WhoIsDemo.form
 
             this.flowLayoutPanel1.Invoke(new Action(() => 
             this.flowLayoutPanel1.Controls.Add(cardPerson)));
-            //flowLayoutPanel1.Controls.Add(cardPerson);
+            this.flowLayoutPanel1.Invoke(new Action(() =>
+            this.flowLayoutPanel1.Refresh()));
+            this.countFlowLayoutControls++;
         }
 
         private void AddPersonIndentify(Person person)
@@ -308,7 +333,8 @@ namespace WhoIsDemo.form
                 this.btnStart.Enabled = false;
 
                 managerControlView
-                    .SetValueTextStatusStrip(StringResource.ip_video_empty,
+                    .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                    .GetString("ip_video_empty"),
                     0, this.status);
             }
             
@@ -321,7 +347,7 @@ namespace WhoIsDemo.form
             {
                 capture.SetCaptureProperty(CapProp.FrameWidth, Configuration.Instance.Width);
                 capture.SetCaptureProperty(CapProp.FrameHeight, Configuration.Instance.Height);
-                int wait = 1000 / Convert.ToInt16(fps);
+                int wait = graffitsPresenter.SetFps(Convert.ToInt16(fps));
                 capture.ImageGrabbed += delegate (object sender, EventArgs e)
                 {
                     Mat frame = new Mat();
@@ -329,13 +355,15 @@ namespace WhoIsDemo.form
 
                     Mat frameClone = frame.Clone();
 
-                    Task taskTracking = graffitsPresenter.TaskTracking(frameClone);
-                    Task taskRecognition = graffitsPresenter.TaskImageForRecognition(frameClone);
+                    //Task taskTracking = graffitsPresenter.TaskTracking(frameClone);
+                    //Task taskRecognition = graffitsPresenter.TaskImageForRecognition(frameClone);
+                    ThreadPool.QueueUserWorkItem(new
+                        WaitCallback(graffitsPresenter.WriteImageForRecognition), frameClone);
                     DrawRectangleFace(frame);
                     graffitsPresenter.PutTextInFrame(frame, listPersonRegister.Count, fps);
                     viewer.Image = frame;
                     CvInvoke.WaitKey(wait);
-
+                    
                 };
 
                 viewer.ControlBox = false;
@@ -348,53 +376,115 @@ namespace WhoIsDemo.form
 
             }
 
-        }
+        }        
      
         private void DrawRectangleFace(Mat img)
         {
-
-            if (this.coordinatesRectFace[0] > 0)
+            if (this.coordinatesVolatile[0] != 0)
             {
-
-                float x1 = this.coordinatesRectFace[0] * graffitsPresenter.FactorScaling;
-                float y1 = this.coordinatesRectFace[1] * graffitsPresenter.FactorScaling;
-                float w = this.coordinatesRectFace[2] * graffitsPresenter.FactorScaling;
-                float h = this.coordinatesRectFace[3] * graffitsPresenter.FactorScaling;
-
-                if (this.coordinatesVolatile[0] == x1 &&
-                    this.coordinatesVolatile[1] == y1)
-                {
-                    this.countRepeatFrame += 1;
-                }
-                else
-                {
-                    this.coordinatesVolatile[0] = x1;
-                    this.coordinatesVolatile[1] = y1;
-                    this.countRepeatFrame = 0;
-                }
-
-
-                Console.WriteLine(x1 + ", " + y1 + ", " + w + ", " + h);
-                if (this.countRepeatFrame < 3)
-                {
-                    try
-                    {
-                        Rectangle rectangle = new Rectangle(Convert.ToInt32(x1),
-                        Convert.ToInt32(y1),
-                        Convert.ToInt32(w), Convert.ToInt32(h));
-                        CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 0.0, 0.0), 1);
-                    }
-                    catch (Exception ex)
-                    {
-
-                        Console.WriteLine("Error Rectangle dimension " + ex.Message);
-                    }
-
-                }
-
-
+                int indexVolatile = 0;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
             }
 
+            if (this.coordinatesVolatile[4] != 0)
+            {
+                int indexVolatile = 4;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            }
+
+            if (this.coordinatesVolatile[8] != 0)
+            {
+                int indexVolatile = 8;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            }
+
+            if (this.coordinatesVolatile[12] != 0)
+            {
+                int indexVolatile = 12;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            }
+
+            if (this.coordinatesVolatile[16] != 0)
+            {
+                int indexVolatile = 16;
+                int x1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile]);
+                int y1 = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 1]);
+                int w = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 2]);
+                int h = Convert.ToInt16(this.coordinatesVolatile[indexVolatile + 3]);
+                Rectangle rectangle = new Rectangle(x1, y1, w, h);
+                CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            }
+
+            //if (this.coordinatesRectFace[0] > 0)
+            //{
+
+            //    float x1 = this.coordinatesRectFace[0] * graffitsPresenter.FactorScaling;
+            //    float y1 = this.coordinatesRectFace[1] * graffitsPresenter.FactorScaling;
+            //    float w = this.coordinatesRectFace[2] * graffitsPresenter.FactorScaling;
+            //    float h = this.coordinatesRectFace[3] * graffitsPresenter.FactorScaling;
+
+            //    if (this.coordinatesVolatile[0] == x1 &&
+            //        this.coordinatesVolatile[1] == y1)
+            //    {
+            //        this.countRepeatFrame += 1;
+            //    }
+            //    else
+            //    {
+            //        this.coordinatesVolatile[0] = x1;
+            //        this.coordinatesVolatile[1] = y1;
+            //        this.countRepeatFrame = 0;
+            //    }
+
+
+            //    Console.WriteLine(x1 + ", " + y1 + ", " + w + ", " + h);
+            //    if (this.countRepeatFrame < 3)
+            //    {
+            //        try
+            //        {
+            //            Rectangle rectangle = new Rectangle(Convert.ToInt32(x1),
+            //            Convert.ToInt32(y1),
+            //            Convert.ToInt32(w), Convert.ToInt32(h));
+            //            CvInvoke.Rectangle(img, rectangle, new MCvScalar(255.0, 255.0, 255.0), 2);
+            //        }
+            //        catch (Exception ex)
+            //        {
+
+            //            Console.WriteLine("Error Rectangle dimension " + ex.Message);
+            //        }
+
+            //    }
+
+
+            //}
+
+        }
+
+        private void RefreshRectangle()
+        {
+            for (int i = 0; i < sizeCoordinates; i++)
+            {
+                this.coordinatesVolatile[i] = this.coordinatesRectFace[i] * graffitsPresenter.FactorScaling;
+            }
         }
 
         private void BringToFrontImageViewer(IntPtr handle, int position)
@@ -419,7 +509,9 @@ namespace WhoIsDemo.form
             {
                 CaptureFrame();
 
-            });            
+            });
+            //Thread thr = new Thread(CaptureFrame);
+            //thr.Start();
             this.btnStart.Enabled = false;
             this.btnStop.Enabled = true;
             this.btnFrontVideo.Enabled = true;
