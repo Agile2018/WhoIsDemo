@@ -132,7 +132,7 @@ namespace WhoIsDemo.form
             this.PerformAutoScale();
             this.Top = 0;
             this.Left = 0;
-            this.Width = 1073;
+            this.Width = 1205;
             this.Height = 894;
             //this.Left = (int)((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2);
 
@@ -247,6 +247,26 @@ namespace WhoIsDemo.form
                     .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
                     .GetString("complete"),
                     0, this.status)));
+                int countLowScore = RequestAipu.Instance.GetCountLowScore();
+                int countRepeatUser = RequestAipu.Instance.GetCountRepeatUser();
+               // int countNotDetect = RequestAipu.Instance.GetCountNotDetect();
+                this.lblLowScore.Invoke(new Action(() => this.lblLowScore.Text =
+                ManagerResource.Instance.resourceManager
+                    .GetString("low_score") + countLowScore.ToString()));
+
+                this.lblRepeated.Invoke(new Action(() => this.lblRepeated.Text =
+                ManagerResource.Instance.resourceManager
+                    .GetString("repetead_user") + countRepeatUser.ToString()));
+
+                //this.lblNotDetect.Invoke(new Action(() => this.lblNotDetect.Text =
+                //"ND: " + countNotDetect.ToString()));
+
+                this.lblLowScore.Invoke(new Action(() => this.lblLowScore.Visible = true));
+
+                this.lblRepeated.Invoke(new Action(() => this.lblRepeated.Visible = true));
+
+                //this.lblNotDetect.Invoke(new Action(() => this.lblNotDetect.Visible = true));
+
             }
         }
 
@@ -514,9 +534,13 @@ namespace WhoIsDemo.form
 
         private void RefreshRectangle()
         {
-            for (int i = 0; i < sizeCoordinates; i++)
+            for (int i = 0; i < sizeCoordinates; i += 4)
             {
-                this.coordinatesVolatile[i] = this.coordinatesRectFace[i] * graffitsPresenter.FactorScaling;
+                this.coordinatesVolatile[i] = this.coordinatesRectFace[i] * graffitsPresenter.FactorScalingWidth;
+                this.coordinatesVolatile[i + 1] = this.coordinatesRectFace[i + 1] * graffitsPresenter.FactorScalingHeight;
+                this.coordinatesVolatile[i + 2] = this.coordinatesRectFace[i + 2] * graffitsPresenter.FactorScalingWidth;
+                this.coordinatesVolatile[i + 3] = this.coordinatesRectFace[i + 3] * graffitsPresenter.FactorScalingHeight;
+                
             }
 
             //float x1 = this.coordinatesRectFace[0] * graffitsPresenter.FactorScaling;
@@ -741,6 +765,10 @@ namespace WhoIsDemo.form
             this.btnStop.Enabled = true;
             this.btnFrontVideo.Enabled = true;
             this.btnBackVideo.Enabled = true;
+            this.lblFiles.Visible = false;
+            this.lblLowScore.Visible = false;
+            this.lblRepeated.Visible = false;
+            this.lblNotDetect.Visible = false;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -774,8 +802,16 @@ namespace WhoIsDemo.form
                 managerControlView
                     .SetValueTextStatusStrip(StringResource.work,
                     0, this.status);
+                this.lblRepeated.Visible = false;
+                this.lblLowScore.Visible = false;
+                this.lblNotDetect.Visible = false;
+                this.lblFiles.Visible = true;
+                this.lblFiles.Text = ManagerResource.Instance.resourceManager
+                    .GetString("files") + openFileDialog.FileNames.Count().ToString();
                 managerControlView.StartProgressStatusStrip(1, this.status);
                 RequestAipu.Instance.WorkMode(1);
+                RequestAipu.Instance.ResetCountRepeatUser();
+                RequestAipu.Instance.ResetLowScore();
                 Task taskRecognition = graffitsPresenter
                     .TaskImageFileForRecognition(openFileDialog.FileNames);
 

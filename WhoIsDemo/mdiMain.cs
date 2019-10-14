@@ -25,7 +25,7 @@ namespace WhoIsDemo
         private ManagerControlView managerControlView = new ManagerControlView();
         DiskPresenter diskPresenter = new DiskPresenter();
         private RegistryValueDataReader registryValueDataReader = new RegistryValueDataReader();
-        
+        private Random random = new Random();
         IDisposable subscriptionHearInvalid;
         #endregion
 
@@ -80,6 +80,7 @@ namespace WhoIsDemo
             VerifyFileConfiguration();
             GetListVideos();
             SetValueRegistryLevelResolution();
+            SetValueRegistryTimeRefreshEntryControl();
         }
 
         private void SetValueRegistryLevelResolution()
@@ -97,6 +98,23 @@ namespace WhoIsDemo
                     .Instance.ListWidthResolution[Convert.ToInt16(level)];
             Configuration.Instance.ResolutionHeightDefault = Configuration
                 .Instance.ListHeightResolution[Convert.ToInt16(level)];
+        }
+
+        private void SetValueRegistryTimeRefreshEntryControl()
+        {
+            string timeIndex = "0";
+            if (!string.IsNullOrEmpty(registryValueDataReader
+                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                RegistryValueDataReader.REFRESH_ENTRY_CONTROL)))
+            {
+                timeIndex = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.REFRESH_ENTRY_CONTROL);
+            }
+           
+            Configuration.Instance.TimeRefreshEntryControl = Configuration
+                    .Instance.ListTimeRefreshEntryControl[Convert.ToInt16(timeIndex)];
+
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,7 +221,7 @@ namespace WhoIsDemo
             {
                 foreach(Video vid in Configuration.Instance.ListVideo)
                 {
-                    cboVideo.Items.Add(vid.id);
+                    cboVideo.Items.Add(vid.path);
                 }
             }
         }
@@ -236,7 +254,7 @@ namespace WhoIsDemo
             managerControlView.SetValueTextStatusStrip("", 0, statusStrip);
             frmEnroll frmWork = new frmEnroll() { MdiParent = this };
             frmWork.strNameMenu = "enrolamientoToolStripMenuItem";
-            frmWork.LinkVideo = 1;
+            frmWork.LinkVideo = random.Next(51);
             enrolamientoToolStripMenuItem.Enabled = false;
             controlDeEntradaToolStripMenuItem.Enabled = false;
             configuraciónToolStripMenuItem.Enabled = false;
@@ -245,10 +263,11 @@ namespace WhoIsDemo
 
         private void controlDeEntradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             managerControlView.SetValueTextStatusStrip("", 0, statusStrip);
             frmEntryControl frmWork = new frmEntryControl() { MdiParent = this };
             frmWork.strNameMenu = "controlDeEntradaToolStripMenuItem";
-            frmWork.LinkVideo = 2;
+            frmWork.LinkVideo = random.Next(50, 101);
             controlDeEntradaToolStripMenuItem.Enabled = false;
             enrolamientoToolStripMenuItem.Enabled = false;
             configuraciónToolStripMenuItem.Enabled = false;

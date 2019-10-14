@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WhoIsDemo.model;
+﻿using WhoIsDemo.model;
 
 namespace WhoIsDemo.domain.interactor
 {
@@ -66,6 +61,32 @@ namespace WhoIsDemo.domain.interactor
         public void ResetIdUser()
         {
             AipuFace.Instance.ResetIdUser();
+        }
+
+        public void ResetLowScore()
+        {
+            AipuFace.Instance.ResetLowScore();
+        }
+        public int GetCountLowScore()
+        {
+            return AipuFace.Instance.GetCountLowScore();
+        }
+        public void ResetCountRepeatUser()
+        {
+            AipuFace.Instance.ResetCountRepeatUser();
+        }
+        public int GetCountRepeatUser()
+        {
+            return AipuFace.Instance.GetCountRepeatUser();
+        }
+
+        public void ResetCountNotDetect()
+        {
+            AipuFace.Instance.ResetCountNotDetect();
+        }
+        public int GetCountNotDetect()
+        {
+            return AipuFace.Instance.GetCountNotDetect();
         }
 
         public void SetConfigurationDatabase()

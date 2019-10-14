@@ -139,7 +139,7 @@
     <value>Tahoma, 14pt, style=Bold</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 9</value>
+    <value>537, 9</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 23</value>
@@ -244,7 +244,7 @@
     <value>2</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 9</value>
+    <value>104, 9</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 57</value>
@@ -346,7 +346,7 @@
     <value>2</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>811, 3</value>
+    <value>852, 3</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 57</value>
@@ -370,7 +370,7 @@
     <value>Top</value>
   </data>
   <data name="pic1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>469, 62</value>
+    <value>510, 62</value>
   </data>
   <data name="pic1.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 230</value>
@@ -411,7 +411,7 @@
 </value>
   </data>
   <data name="pic8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1023, 237</value>
+    <value>1064, 237</value>
   </data>
   <data name="pic8.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 54</value>
@@ -452,7 +452,7 @@
 </value>
   </data>
   <data name="pic6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>937, 183</value>
+    <value>978, 183</value>
   </data>
   <data name="pic6.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 108</value>
@@ -493,7 +493,7 @@
 </value>
   </data>
   <data name="pic4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>811, 130</value>
+    <value>852, 130</value>
   </data>
   <data name="pic4.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 162</value>
@@ -534,7 +534,7 @@
 </value>
   </data>
   <data name="pic2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>645, 76</value>
+    <value>686, 76</value>
   </data>
   <data name="pic2.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 216</value>
@@ -575,7 +575,7 @@
 </value>
   </data>
   <data name="pic3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 76</value>
+    <value>344, 76</value>
   </data>
   <data name="pic3.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 216</value>
@@ -616,7 +616,7 @@
 </value>
   </data>
   <data name="pic5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 129</value>
+    <value>218, 129</value>
   </data>
   <data name="pic5.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 162</value>
@@ -657,7 +657,7 @@
 </value>
   </data>
   <data name="pic7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 183</value>
+    <value>132, 183</value>
   </data>
   <data name="pic7.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 108</value>
@@ -698,7 +698,7 @@
 </value>
   </data>
   <data name="pic9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 237</value>
+    <value>86, 237</value>
   </data>
   <data name="pic9.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 54</value>
@@ -733,6 +733,150 @@
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblNotDetect.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNotDetect.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 12pt, style=Bold</value>
+  </data>
+  <data name="lblNotDetect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblNotDetect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1098, 8</value>
+  </data>
+  <data name="lblNotDetect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 19</value>
+  </data>
+  <data name="lblNotDetect.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="lblNotDetect.Text" xml:space="preserve">
+    <value>ND:</value>
+  </data>
+  <data name="lblNotDetect.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblNotDetect.Name" xml:space="preserve">
+    <value>lblNotDetect</value>
+  </data>
+  <data name="&gt;&gt;lblNotDetect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNotDetect.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;lblNotDetect.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblRepeated.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRepeated.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 12pt, style=Bold</value>
+  </data>
+  <data name="lblRepeated.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblRepeated.Location" type="System.Drawing.Point, System.Drawing">
+    <value>951, 8</value>
+  </data>
+  <data name="lblRepeated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 19</value>
+  </data>
+  <data name="lblRepeated.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="lblRepeated.Text" xml:space="preserve">
+    <value>Repeated</value>
+  </data>
+  <data name="lblRepeated.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblRepeated.Name" xml:space="preserve">
+    <value>lblRepeated</value>
+  </data>
+  <data name="&gt;&gt;lblRepeated.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRepeated.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;lblRepeated.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblLowScore.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLowScore.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 12pt, style=Bold</value>
+  </data>
+  <data name="lblLowScore.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblLowScore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>796, 8</value>
+  </data>
+  <data name="lblLowScore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 19</value>
+  </data>
+  <data name="lblLowScore.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="lblLowScore.Text" xml:space="preserve">
+    <value>Low Score</value>
+  </data>
+  <data name="lblLowScore.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblLowScore.Name" xml:space="preserve">
+    <value>lblLowScore</value>
+  </data>
+  <data name="&gt;&gt;lblLowScore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLowScore.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;lblLowScore.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblFiles.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFiles.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 12pt, style=Bold</value>
+  </data>
+  <data name="lblFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblFiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>684, 8</value>
+  </data>
+  <data name="lblFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 19</value>
+  </data>
+  <data name="lblFiles.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="lblFiles.Text" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="lblFiles.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblFiles.Name" xml:space="preserve">
+    <value>lblFiles</value>
+  </data>
+  <data name="&gt;&gt;lblFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFiles.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;lblFiles.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="lblCountNewPersons.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -740,7 +884,7 @@
     <value>Tahoma, 12pt, style=Bold</value>
   </data>
   <data name="lblCountNewPersons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>638, 8</value>
+    <value>599, 8</value>
   </data>
   <data name="lblCountNewPersons.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 19</value>
@@ -761,7 +905,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;lblCountNewPersons.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="lblQuantityRecords.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -791,7 +935,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;lblQuantityRecords.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="btnDownRecords.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -818,7 +962,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;btnDownRecords.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="btnUploadRecords.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -842,7 +986,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;btnUploadRecords.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="btnStopLoadFile.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -851,7 +995,7 @@
     <value>Flat</value>
   </data>
   <data name="btnStopLoadFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>794, 4</value>
+    <value>303, 5</value>
   </data>
   <data name="btnStopLoadFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 30</value>
@@ -869,7 +1013,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;btnStopLoadFile.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="flpDatabase.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -896,13 +1040,13 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;flpDatabase.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="btnLoadFile.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
   <data name="btnLoadFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>749, 4</value>
+    <value>258, 5</value>
   </data>
   <data name="btnLoadFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 30</value>
@@ -920,7 +1064,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;btnLoadFile.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -932,13 +1076,13 @@
     <value>437, 8</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 19</value>
+    <value>153, 19</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>New enrollments</value>
+    <value>New enrollments:</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -950,7 +1094,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="flowLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -962,7 +1106,7 @@
     <value>432, 37</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>662, 480</value>
+    <value>745, 480</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -977,7 +1121,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -989,13 +1133,13 @@
     <value>12, 8</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 19</value>
+    <value>82, 19</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Enrolled</value>
+    <value>Enrolled:</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -1007,7 +1151,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
@@ -1022,7 +1166,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1106, 859</value>
+    <value>1189, 859</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>306</value>
@@ -1049,7 +1193,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1106, 859</value>
+    <value>1189, 859</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>Manual</value>

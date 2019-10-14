@@ -135,14 +135,23 @@
   <data name="error" xml:space="preserve">
     <value>Error en la tarea realizada.</value>
   </data>
+  <data name="files" xml:space="preserve">
+    <value>Archivos:</value>
+  </data>
   <data name="ip_video_empty" xml:space="preserve">
     <value>La dirección de video está vacia.</value>
   </data>
   <data name="load_library" xml:space="preserve">
     <value>La librería no está cargada, verifique por favor.</value>
   </data>
+  <data name="low_score" xml:space="preserve">
+    <value>Score bajo:</value>
+  </data>
   <data name="reload_library" xml:space="preserve">
     <value>Librería recargada.</value>
+  </data>
+  <data name="repetead_user" xml:space="preserve">
+    <value>Repetidos:</value>
   </data>
   <data name="reset" xml:space="preserve">
     <value>Reinice la aplicación, por favor.</value>

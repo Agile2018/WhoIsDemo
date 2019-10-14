@@ -9,7 +9,7 @@ namespace WhoIsDemo.model
     public class Configuration
     {
         #region constants
-        public const int templateHeight = 360;
+        public const int templateHeight = 400;
         public const int templateWidth = 640;
         public const float scalingFontSize = 0.4f;
         public const float incrementHeight = 20;
@@ -38,19 +38,23 @@ namespace WhoIsDemo.model
         public int CoordinatesYText { get => coordinatesYText; set => coordinatesYText = value; }
         public float FactorScalingSizeFont { get => factorScalingSizeFont; set => factorScalingSizeFont = value; }
         public float FactorScalingIncrementHeight { get => factorScalingIncrementHeight; set => factorScalingIncrementHeight = value; }
+        public List<int> ListTimeRefreshEntryControl { get => listTimeRefreshEntryControl; set => listTimeRefreshEntryControl = value; }
+        public int TimeRefreshEntryControl { get => timeRefreshEntryControl; set => timeRefreshEntryControl = value; }
 
         private List<Video> listVideo = new List<Video>();
         private List<int> listHeightResolution = new List<int>();
         private List<int> listWidthResolution = new List<int>();
+        private List<int> listTimeRefreshEntryControl = new List<int>();
+        private int timeRefreshEntryControl = 1; 
         private string videoDefault;
         private int width = 320;
         private int height = 240;
         private int resolutionWidthDefault = 640;
-        private int resolutionHeightDefault = 480;
-        private int areaDefault = 640 * 480;
-        private int maximumResolutionAccepted = 1280;
+        private int resolutionHeightDefault = 400;
+        private int areaDefault = 640 * 400;
+        private int maximumResolutionAccepted = 1920;
         private int widthReal = 640;
-        private int heightReal = 480;
+        private int heightReal = 400;
         private string connectDatabase;
         private string nameDatabase;
         private float factorScalingHeightText = 1;
@@ -69,13 +73,24 @@ namespace WhoIsDemo.model
         public Configuration()
         {
             ListWidthResolution.Add(640);
-            ListHeightResolution.Add(480);
+            ListHeightResolution.Add(400);
             ListWidthResolution.Add(800);
-            ListHeightResolution.Add(450);
+            ListHeightResolution.Add(500);
+            ListWidthResolution.Add(1024);
+            ListHeightResolution.Add(640);
             ListWidthResolution.Add(1280);
-            ListHeightResolution.Add(720);
+            ListHeightResolution.Add(800);
             ListWidthResolution.Add(1920);
-            ListHeightResolution.Add(1080);
+            ListHeightResolution.Add(1200);
+
+            ListTimeRefreshEntryControl.Add(1);
+            ListTimeRefreshEntryControl.Add(5);
+            ListTimeRefreshEntryControl.Add(10);
+            ListTimeRefreshEntryControl.Add(15);
+            ListTimeRefreshEntryControl.Add(20);
+            ListTimeRefreshEntryControl.Add(25);
+            ListTimeRefreshEntryControl.Add(30);
+
         }
 
         public void CalculeArea()

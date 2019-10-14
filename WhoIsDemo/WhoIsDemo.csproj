@@ -214,11 +214,11 @@
     <Compile Include="model\People.cs" />
     <Compile Include="model\Person.cs" />
     <Compile Include="model\PersonDb.cs" />
+    <Compile Include="model\TimePerson.cs" />
     <Compile Include="model\Video.cs" />
     <Compile Include="model\VideoConfig.cs" />
     <Compile Include="presenter\DiskPresenter.cs" />
     <Compile Include="presenter\DropDatabasePresenter.cs" />
-    <Compile Include="presenter\EnrollPresenter.cs" />
     <Compile Include="presenter\FindImagePresenter.cs" />
     <Compile Include="presenter\GraffitsPresenter.cs" />
     <Compile Include="presenter\HearCoordinatesPresenter.cs" />

@@ -40,6 +40,7 @@ namespace WhoIsDemo.form
                 GetVideoConfiguration();
                 GetDatabaseConfiguration();
                 SetValueRegistryLevelResolution();
+                SetValueRegistryTimeRefreshEntryControl();
                 dropDatabasePresenter.Connect();
             }
             catch (FieldAccessException fe)
@@ -215,22 +216,7 @@ namespace WhoIsDemo.form
                 cboDetectForced.SelectedIndex != -1 && 
                 cboIdentificationSpeed.SelectedIndex != -1 && 
                 cboDetectorMode.SelectedIndex != -1);
-        }
-
-        private void cboLevelResolution_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = cboLevelResolution.SelectedIndex;
-            if (index != -1)
-            {
-                Configuration.Instance.ResolutionWidthDefault = Configuration
-                    .Instance.ListWidthResolution[index];
-                Configuration.Instance.ResolutionHeightDefault = Configuration
-                    .Instance.ListHeightResolution[index];
-                registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
-                    RegistryValueDataReader.LEVEL_RESOLUTION, index.ToString());
-
-            }
-        }
+        }        
 
         private void btnSaveVideoList_Click(object sender, EventArgs e)
         {
@@ -269,7 +255,7 @@ namespace WhoIsDemo.form
                 cboVideos.Items.Clear();
                 foreach (Video vid in Configuration.Instance.ListVideo)
                 {
-                    cboVideos.Items.Add(vid.id);
+                    cboVideos.Items.Add(vid.path);
                 }
             }
         }
@@ -352,6 +338,50 @@ namespace WhoIsDemo.form
                     .Instance.ListWidthResolution[Convert.ToInt16(level)];
             Configuration.Instance.ResolutionHeightDefault = Configuration
                 .Instance.ListHeightResolution[Convert.ToInt16(level)];
+        }
+
+        private void SetValueRegistryTimeRefreshEntryControl()
+        {
+            string timeIndex = "0";
+            if (!string.IsNullOrEmpty(registryValueDataReader
+                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                RegistryValueDataReader.REFRESH_ENTRY_CONTROL)))
+            {
+                timeIndex = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.REFRESH_ENTRY_CONTROL);
+            }
+            cboRefreshCapture.SelectedIndex = Convert.ToInt16(timeIndex);
+            Configuration.Instance.TimeRefreshEntryControl = Configuration
+                    .Instance.ListTimeRefreshEntryControl[Convert.ToInt16(timeIndex)];
+
+        }
+
+        private void cboLevelResolution_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = cboLevelResolution.SelectedIndex;
+            if (index != -1)
+            {
+                Configuration.Instance.ResolutionWidthDefault = Configuration
+                    .Instance.ListWidthResolution[index];
+                Configuration.Instance.ResolutionHeightDefault = Configuration
+                    .Instance.ListHeightResolution[index];
+                registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.LEVEL_RESOLUTION, index.ToString());
+
+            }
+        }
+
+        private void cboRefreshCapture_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = cboRefreshCapture.SelectedIndex;
+            if (index != -1)
+            {
+                Configuration.Instance.TimeRefreshEntryControl = Configuration
+                    .Instance.ListTimeRefreshEntryControl[index];
+                registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.REFRESH_ENTRY_CONTROL, index.ToString());
+            }
         }
     }
 }

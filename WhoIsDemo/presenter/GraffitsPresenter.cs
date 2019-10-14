@@ -19,11 +19,12 @@ namespace WhoIsDemo.presenter
     class GraffitsPresenter
     {
         #region constants
-        
+        private const float aspectRatio = 1.6F;
         #endregion
         #region variables
         private int heightScaling;
-        private float factorScaling = -1;
+        private float factorScalingWidth = -1;
+        private float factorScalingHeight = -1;
         private int widthScaling;
         private bool isWritingImage = false;
         private bool isWritingImageForCoordinates = false;
@@ -39,7 +40,7 @@ namespace WhoIsDemo.presenter
         public GraffitsPresenter() { }
 
         public int HeightScaling { get => heightScaling; }
-        public float FactorScaling { get => factorScaling;}
+        public float FactorScalingWidth { get => factorScalingWidth;}
         public int WidthScaling { get => widthScaling;}
         public bool IsWritingImage { get => isWritingImage; set => isWritingImage = value; }
         public bool IsWritingImageForCoordinates { get => isWritingImageForCoordinates; set => isWritingImageForCoordinates = value; }
@@ -47,6 +48,7 @@ namespace WhoIsDemo.presenter
         public bool IsWritingImageForTracking { get => isWritingImageForTracking; set => isWritingImageForTracking = value; }
         public bool CancelLoad { get => cancelLoad; set => cancelLoad = value; }
         public bool IsLoadFile { get => isLoadFile; set => isLoadFile = value; }
+        public float FactorScalingHeight { get => factorScalingHeight; set => factorScalingHeight = value; }
 
         public void DimesionAdjustment(int width, int height)
         {
@@ -96,24 +98,30 @@ namespace WhoIsDemo.presenter
 
             if (approximateArea > Configuration.Instance.AreaDefault)
             {
-                float aspectRatio = Convert.ToSingle(width) / Convert.ToSingle(height);
-
+                //float aspectRatio = Convert.ToSingle(width) / Convert.ToSingle(height);
+                
                 float approximateHigh = Convert.ToSingle(Configuration
                     .Instance.ResolutionWidthDefault) / aspectRatio;
                 heightScaling = Convert.ToInt32(approximateHigh);
                 widthScaling = Configuration
                     .Instance.ResolutionWidthDefault;
                 //factorScaling = Convert.ToSingle(approximateArea) / Convert.ToSingle(standardArea);
-                factorScaling = Convert.ToSingle(width) / Convert.ToSingle(widthScaling);
+                factorScalingWidth = Convert.ToSingle(width) / Convert.ToSingle(widthScaling);
+                
             }
             else
-            {
-                heightScaling = height;
+            {                
                 widthScaling = width;
-                factorScaling = 1f;
+                float approximateHigh = Convert.ToSingle(widthScaling) / aspectRatio;
+                heightScaling = Convert.ToInt32(approximateHigh);
+                //heightScaling = height;
+                factorScalingWidth = 1f;
+                
 
             }
-            
+
+            factorScalingHeight = Convert.ToSingle(height) / Convert.ToSingle(heightScaling);            
+
         }
 
         private void WriteImageForRecognition(string pathImage)
@@ -133,9 +141,9 @@ namespace WhoIsDemo.presenter
                     clone.Width, linkVideo);
                 clone.Dispose();
                 
-            }            
+            }
+            isWritingImage = false;
 
-            
         }
         public void WriteImageForRecognition(object state)
         {
@@ -147,7 +155,10 @@ namespace WhoIsDemo.presenter
                 //{
                 //    CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
                 //}
-                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Lanczos4);
+                //CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Lanczos4);
+                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
+                //Console.WriteLine("IMAGE RECOGNTION WIDTH: {0} HEIGHT: {1} NUMBER CHANNELS: {2}",
+                //    widthScaling, heightScaling, clone.NumberOfChannels);
                 int length = clone.Width * clone.Height * clone.NumberOfChannels;
                 byte[] data = new byte[length];
 
@@ -168,13 +179,13 @@ namespace WhoIsDemo.presenter
    
         }
 
-        private void LaunchImageForRecognition(Mat img)
-        {
-            isWritingImage = true;
+        //private void LaunchImageForRecognition(Mat img)
+        //{
+        //    isWritingImage = true;
             
-            WriteImageForRecognition(img);
+        //    WriteImageForRecognition(img);
 
-        }
+        //}
 
         public async Task TaskImageFileForRecognition(string[] listPath)
         {
@@ -192,83 +203,84 @@ namespace WhoIsDemo.presenter
             int count = 0;
             while (count < listPath.Count() && !CancelLoad)
             {
-                if (!RequestAipu.Instance.GetStateProccessRecognition())
+                if (!RequestAipu.Instance.GetStateProccessRecognition() && !isWritingImage)
                 {
+                    isWritingImage = true;
                     WriteImageForRecognition(listPath[count]);
                     count++;
                 }
-                Task.Delay(10).Wait();
+                //Task.Delay(10).Wait();
             }
             CancelLoad = false;
             subjectLoad.OnNext(true);
         }
-        public async Task TaskImageForRecognition(Mat img)
-        {
+        //public async Task TaskImageForRecognition(Mat img)
+        //{
 
-            await Task.Run(() =>
-            {
-                LaunchImageForRecognition(img);
+        //    await Task.Run(() =>
+        //    {
+        //        LaunchImageForRecognition(img);
 
-            });
+        //    });
 
-        }
+        //}
 
-        private void WriteImageForCoordinates(Mat img)
-        {
-            Mat clone = img.Clone();
+        //private void WriteImageForCoordinates(Mat img)
+        //{
+        //    Mat clone = img.Clone();
 
-            //GpuMat gMatSrc = new GpuMat();
-            //GpuMat gMatDst = new GpuMat();
-            //gMatSrc.Upload(clone);
-            //Emgu.CV.Cuda.CudaInvoke.Resize(gMatSrc, gMatDst,
-            //        new Size(widthScaling, heightScaling));
-            //gMatDst.Download(clone);
-            //using (GpuMat gMatSrc = new GpuMat())
-            //using (GpuMat gMatDst = new GpuMat())
-            //{
-            //    gMatSrc.Upload(clone);
-            //    Emgu.CV.Cuda.CudaInvoke.Resize(gMatSrc, gMatDst, 
-            //        new Size(widthScaling, heightScaling));
-            //    gMatDst.Download(clone);
-            //}
+        //    //GpuMat gMatSrc = new GpuMat();
+        //    //GpuMat gMatDst = new GpuMat();
+        //    //gMatSrc.Upload(clone);
+        //    //Emgu.CV.Cuda.CudaInvoke.Resize(gMatSrc, gMatDst,
+        //    //        new Size(widthScaling, heightScaling));
+        //    //gMatDst.Download(clone);
+        //    //using (GpuMat gMatSrc = new GpuMat())
+        //    //using (GpuMat gMatDst = new GpuMat())
+        //    //{
+        //    //    gMatSrc.Upload(clone);
+        //    //    Emgu.CV.Cuda.CudaInvoke.Resize(gMatSrc, gMatDst, 
+        //    //        new Size(widthScaling, heightScaling));
+        //    //    gMatDst.Download(clone);
+        //    //}
 
-            if (factorScaling != 1)
-            {
-                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
-            }
-            int length = clone.Width * clone.Height * clone.NumberOfChannels;
-            byte[] data = new byte[length];
+        //    if (factorScaling != 1)
+        //    {
+        //        CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
+        //    }
+        //    int length = clone.Width * clone.Height * clone.NumberOfChannels;
+        //    byte[] data = new byte[length];
 
-            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-            using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
-                handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
-                CvInvoke.BitwiseNot(clone, m2);
-            handle.Free();
+        //    GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+        //    using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
+        //        handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
+        //        CvInvoke.BitwiseNot(clone, m2);
+        //    handle.Free();
 
-            RequestAipu.Instance.SendFastFrame(data, clone.Height,
-                clone.Width);
-            clone.Dispose();
-            isWritingImageForCoordinates = false;
-        }
+        //    RequestAipu.Instance.SendFastFrame(data, clone.Height,
+        //        clone.Width);
+        //    clone.Dispose();
+        //    isWritingImageForCoordinates = false;
+        //}
 
-        private void LaunchImageForCoordinates(Mat img)
-        {
-            isWritingImageForCoordinates = true;
+        //private void LaunchImageForCoordinates(Mat img)
+        //{
+        //    isWritingImageForCoordinates = true;
             
-            WriteImageForCoordinates(img);
+        //    WriteImageForCoordinates(img);
 
-        }
+        //}
 
-        public async Task TaskImageForCoordinates(Mat img)
-        {
+        //public async Task TaskImageForCoordinates(Mat img)
+        //{
 
-            await Task.Run(() =>
-            {
-                LaunchImageForCoordinates(img);
+        //    await Task.Run(() =>
+        //    {
+        //        LaunchImageForCoordinates(img);
 
-            });
+        //    });
 
-        }
+        //}
 
         public async Task TaskInitTracking()
         {
@@ -284,8 +296,10 @@ namespace WhoIsDemo.presenter
         {
             Mat clone = CvInvoke.Imread("camera\\mask.png");
             if (clone != null)
-            {
+            {                
                 CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
+                //Console.WriteLine("MASK TRACKING WIDTH: {0} HEIGHT: {1} NUMBER CHANNELS: {2}", 
+                //    widthScaling, heightScaling, clone.NumberOfChannels);
                 
                 int length = clone.Width * clone.Height * clone.NumberOfChannels;
                 byte[] data = new byte[length];
@@ -307,48 +321,48 @@ namespace WhoIsDemo.presenter
             
         }
 
-        public async Task TaskTracking(Mat img)
-        {
+        //public async Task TaskTracking(Mat img)
+        //{
 
-            await Task.Run(() =>
-            {
-                LaunchImageForTracking(img);
+        //    await Task.Run(() =>
+        //    {
+        //        LaunchImageForTracking(img);
 
-            });
+        //    });
 
-        }
+        //}
 
-        private void LaunchImageForTracking(Mat img)
-        {
-            isWritingImageForTracking = true;
+        //private void LaunchImageForTracking(Mat img)
+        //{
+        //    isWritingImageForTracking = true;
 
-            WriteImageForTracking(img);
+        //    WriteImageForTracking(img);
 
-        }
+        //}
 
-        private void WriteImageForTracking(Mat img)
-        {
-            Mat clone = img.Clone();
-            if (factorScaling != 1)
-            {
-                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
+        //private void WriteImageForTracking(Mat img)
+        //{
+        //    Mat clone = img.Clone();
+        //    if (factorScaling != 1)
+        //    {
+        //        CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
                 
-            }
+        //    }
 
-            int length = clone.Width * clone.Height * clone.NumberOfChannels;
-            byte[] data = new byte[length];
+        //    int length = clone.Width * clone.Height * clone.NumberOfChannels;
+        //    byte[] data = new byte[length];
 
-            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-            using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
-                handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
-                CvInvoke.BitwiseNot(clone, m2);
-            handle.Free();
+        //    GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+        //    using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
+        //        handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
+        //        CvInvoke.BitwiseNot(clone, m2);
+        //    handle.Free();
 
-            RequestAipu.Instance.Tracking(data, clone.Height,
-                clone.Width);
-            clone.Dispose();
-            isWritingImageForTracking = false;
-        }
+        //    RequestAipu.Instance.Tracking(data, clone.Height,
+        //        clone.Width);
+        //    clone.Dispose();
+        //    isWritingImageForTracking = false;
+        //}
         
         public void SetSequenceFps(int value)
         {

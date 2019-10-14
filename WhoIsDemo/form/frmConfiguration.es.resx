@@ -117,14 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Reconocimiento</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 13</value>
   </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Base de datos</value>
+  <data name="label11.Text" xml:space="preserve">
+    <value>Refrescar control entrada (min):</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Biometría</value>
+  <data name="cboRefreshCapture.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 77</value>
+  </data>
+  <data name="cboLevelResolution.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 37</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Nivel de resolución:</value>
   </data>
   <data name="cboDetectorMode.Items" xml:space="preserve">
     <value>Modo balanceado</value>
@@ -132,7 +142,6 @@
   <data name="cboDetectorMode.Items1" xml:space="preserve">
     <value>Modo veloz</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
   </data>
@@ -187,14 +196,11 @@
   <data name="label7.Text" xml:space="preserve">
     <value>Detección Máxima:</value>
   </data>
-  <data name="cboLevelResolution.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 363</value>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Biometría</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Nivel de resolución:</value>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Reconocimiento</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>28, 24</value>
@@ -207,9 +213,6 @@
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>Limpiar base de datos</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Cambiar base de datos</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>32, 86</value>
@@ -228,6 +231,12 @@
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Nombre base de datos:</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Cambiar base de datos</value>
+  </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Base de datos</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configuración</value>

@@ -262,7 +262,7 @@
     <value>&amp;File</value>
   </data>
   <data name="cboVideo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
+    <value>400, 25</value>
   </data>
   <data name="&gt;&gt;configuraciónToolStripMenuItem.Name" xml:space="preserve">
     <value>configuraciónToolStripMenuItem</value>
@@ -306,9 +306,6 @@
   <data name="&gt;&gt;cboVideo.Name" xml:space="preserve">
     <value>cboVideo</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>es</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConfiguration));
             this.tcConfiguration = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cboRefreshCapture = new System.Windows.Forms.ComboBox();
+            this.cboLevelResolution = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cboDetectorMode = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -48,8 +53,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtMaxDetect = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.cboLevelResolution = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblVideoOk = new System.Windows.Forms.Label();
             this.btnSaveVideosFile = new System.Windows.Forms.Button();
@@ -70,6 +73,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.tcConfiguration.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -79,24 +83,72 @@
             // 
             // tcConfiguration
             // 
+            resources.ApplyResources(this.tcConfiguration, "tcConfiguration");
             this.tcConfiguration.Controls.Add(this.tabPage1);
             this.tcConfiguration.Controls.Add(this.tabPage2);
             this.tcConfiguration.Controls.Add(this.tabPage3);
-            resources.ApplyResources(this.tcConfiguration, "tcConfiguration");
             this.tcConfiguration.Name = "tcConfiguration";
             this.tcConfiguration.SelectedIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.cboLevelResolution);
-            this.tabPage1.Controls.Add(this.label1);
             resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.cboRefreshCapture);
+            this.groupBox4.Controls.Add(this.cboLevelResolution);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // cboRefreshCapture
+            // 
+            resources.ApplyResources(this.cboRefreshCapture, "cboRefreshCapture");
+            this.cboRefreshCapture.FormattingEnabled = true;
+            this.cboRefreshCapture.Items.AddRange(new object[] {
+            resources.GetString("cboRefreshCapture.Items"),
+            resources.GetString("cboRefreshCapture.Items1"),
+            resources.GetString("cboRefreshCapture.Items2"),
+            resources.GetString("cboRefreshCapture.Items3"),
+            resources.GetString("cboRefreshCapture.Items4"),
+            resources.GetString("cboRefreshCapture.Items5"),
+            resources.GetString("cboRefreshCapture.Items6")});
+            this.cboRefreshCapture.Name = "cboRefreshCapture";
+            this.cboRefreshCapture.SelectedIndexChanged += new System.EventHandler(this.cboRefreshCapture_SelectedIndexChanged);
+            // 
+            // cboLevelResolution
+            // 
+            resources.ApplyResources(this.cboLevelResolution, "cboLevelResolution");
+            this.cboLevelResolution.FormattingEnabled = true;
+            this.cboLevelResolution.Items.AddRange(new object[] {
+            resources.GetString("cboLevelResolution.Items"),
+            resources.GetString("cboLevelResolution.Items1"),
+            resources.GetString("cboLevelResolution.Items2"),
+            resources.GetString("cboLevelResolution.Items3"),
+            resources.GetString("cboLevelResolution.Items4")});
+            this.cboLevelResolution.Name = "cboLevelResolution";
+            this.cboLevelResolution.SelectedIndexChanged += new System.EventHandler(this.cboLevelResolution_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.cboDetectorMode);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.cboDetectForced);
@@ -113,17 +165,16 @@
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.txtMaxDetect);
             this.groupBox3.Controls.Add(this.label7);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
             // cboDetectorMode
             // 
+            resources.ApplyResources(this.cboDetectorMode, "cboDetectorMode");
             this.cboDetectorMode.FormattingEnabled = true;
             this.cboDetectorMode.Items.AddRange(new object[] {
             resources.GetString("cboDetectorMode.Items"),
             resources.GetString("cboDetectorMode.Items1")});
-            resources.ApplyResources(this.cboDetectorMode, "cboDetectorMode");
             this.cboDetectorMode.Name = "cboDetectorMode";
             // 
             // label6
@@ -133,6 +184,7 @@
             // 
             // cboDetectForced
             // 
+            resources.ApplyResources(this.cboDetectForced, "cboDetectForced");
             this.cboDetectForced.FormattingEnabled = true;
             this.cboDetectForced.Items.AddRange(new object[] {
             resources.GetString("cboDetectForced.Items"),
@@ -155,7 +207,6 @@
             resources.GetString("cboDetectForced.Items17"),
             resources.GetString("cboDetectForced.Items18"),
             resources.GetString("cboDetectForced.Items19")});
-            resources.ApplyResources(this.cboDetectForced, "cboDetectForced");
             this.cboDetectForced.Name = "cboDetectForced";
             // 
             // label3
@@ -165,6 +216,7 @@
             // 
             // cboIdentificationSpeed
             // 
+            resources.ApplyResources(this.cboIdentificationSpeed, "cboIdentificationSpeed");
             this.cboIdentificationSpeed.FormattingEnabled = true;
             this.cboIdentificationSpeed.Items.AddRange(new object[] {
             resources.GetString("cboIdentificationSpeed.Items"),
@@ -178,7 +230,6 @@
             resources.GetString("cboIdentificationSpeed.Items8"),
             resources.GetString("cboIdentificationSpeed.Items9"),
             resources.GetString("cboIdentificationSpeed.Items10")});
-            resources.ApplyResources(this.cboIdentificationSpeed, "cboIdentificationSpeed");
             this.cboIdentificationSpeed.Name = "cboIdentificationSpeed";
             // 
             // label2
@@ -194,9 +245,9 @@
             // 
             // btnDetect
             // 
+            resources.ApplyResources(this.btnDetect, "btnDetect");
             this.btnDetect.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnDetect.BackgroundImage = global::WhoIsDemo.Properties.Resources.ic_save_black_48dp;
-            resources.ApplyResources(this.btnDetect, "btnDetect");
             this.btnDetect.Name = "btnDetect";
             this.btnDetect.UseVisualStyleBackColor = false;
             this.btnDetect.Click += new System.EventHandler(this.btnDetect_Click);
@@ -245,32 +296,15 @@
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
             // 
-            // cboLevelResolution
-            // 
-            this.cboLevelResolution.FormattingEnabled = true;
-            this.cboLevelResolution.Items.AddRange(new object[] {
-            resources.GetString("cboLevelResolution.Items"),
-            resources.GetString("cboLevelResolution.Items1"),
-            resources.GetString("cboLevelResolution.Items2"),
-            resources.GetString("cboLevelResolution.Items3")});
-            resources.ApplyResources(this.cboLevelResolution, "cboLevelResolution");
-            this.cboLevelResolution.Name = "cboLevelResolution";
-            this.cboLevelResolution.SelectedIndexChanged += new System.EventHandler(this.cboLevelResolution_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
             // tabPage2
             // 
+            resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Controls.Add(this.lblVideoOk);
             this.tabPage2.Controls.Add(this.btnSaveVideosFile);
             this.tabPage2.Controls.Add(this.lvwVideo);
             this.tabPage2.Controls.Add(this.txtIpVideo);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.btnSaveVideoList);
-            resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
@@ -282,19 +316,19 @@
             // 
             // btnSaveVideosFile
             // 
+            resources.ApplyResources(this.btnSaveVideosFile, "btnSaveVideosFile");
             this.btnSaveVideosFile.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSaveVideosFile.BackgroundImage = global::WhoIsDemo.Properties.Resources.ic_save_black_48dp;
-            resources.ApplyResources(this.btnSaveVideosFile, "btnSaveVideosFile");
             this.btnSaveVideosFile.Name = "btnSaveVideosFile";
             this.btnSaveVideosFile.UseVisualStyleBackColor = false;
             this.btnSaveVideosFile.Click += new System.EventHandler(this.btnSaveVideosFile_Click);
             // 
             // lvwVideo
             // 
+            resources.ApplyResources(this.lvwVideo, "lvwVideo");
             this.lvwVideo.FullRowSelect = true;
             this.lvwVideo.GridLines = true;
             this.lvwVideo.HideSelection = false;
-            resources.ApplyResources(this.lvwVideo, "lvwVideo");
             this.lvwVideo.Name = "lvwVideo";
             this.lvwVideo.UseCompatibleStateImageBehavior = false;
             this.lvwVideo.View = System.Windows.Forms.View.Details;
@@ -312,26 +346,26 @@
             // 
             // btnSaveVideoList
             // 
+            resources.ApplyResources(this.btnSaveVideoList, "btnSaveVideoList");
             this.btnSaveVideoList.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSaveVideoList.BackgroundImage = global::WhoIsDemo.Properties.Resources.done;
-            resources.ApplyResources(this.btnSaveVideoList, "btnSaveVideoList");
             this.btnSaveVideoList.Name = "btnSaveVideoList";
             this.btnSaveVideoList.UseVisualStyleBackColor = false;
             this.btnSaveVideoList.Click += new System.EventHandler(this.btnSaveVideoList_Click);
             // 
             // tabPage3
             // 
+            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Controls.Add(this.groupBox2);
             this.tabPage3.Controls.Add(this.groupBox1);
-            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.lblOkClearDatabase);
             this.groupBox2.Controls.Add(this.btnClearDatabase);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -343,29 +377,29 @@
             // 
             // btnClearDatabase
             // 
+            resources.ApplyResources(this.btnClearDatabase, "btnClearDatabase");
             this.btnClearDatabase.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnClearDatabase.BackgroundImage = global::WhoIsDemo.Properties.Resources.cached;
-            resources.ApplyResources(this.btnClearDatabase, "btnClearDatabase");
             this.btnClearDatabase.Name = "btnClearDatabase";
             this.btnClearDatabase.UseVisualStyleBackColor = false;
             this.btnClearDatabase.Click += new System.EventHandler(this.btnClearDatabase_Click);
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.btnSaveDatabase);
             this.groupBox1.Controls.Add(this.txtConnect);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtNameDatabase);
             this.groupBox1.Controls.Add(this.label4);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // btnSaveDatabase
             // 
+            resources.ApplyResources(this.btnSaveDatabase, "btnSaveDatabase");
             this.btnSaveDatabase.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnSaveDatabase.BackgroundImage = global::WhoIsDemo.Properties.Resources.lock_reset;
-            resources.ApplyResources(this.btnSaveDatabase, "btnSaveDatabase");
             this.btnSaveDatabase.Name = "btnSaveDatabase";
             this.btnSaveDatabase.UseVisualStyleBackColor = false;
             this.btnSaveDatabase.Click += new System.EventHandler(this.btnSaveDatabase_Click);
@@ -392,9 +426,9 @@
             // 
             // btnClose
             // 
+            resources.ApplyResources(this.btnClose, "btnClose");
             this.btnClose.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnClose.BackgroundImage = global::WhoIsDemo.Properties.Resources.ic_clear_black_48dp;
-            resources.ApplyResources(this.btnClose, "btnClose");
             this.btnClose.Name = "btnClose";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -411,7 +445,8 @@
             this.Load += new System.EventHandler(this.frmConfiguration_Load);
             this.tcConfiguration.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -431,8 +466,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ComboBox cboLevelResolution;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSaveVideosFile;
         private System.Windows.Forms.ListView lvwVideo;
         private System.Windows.Forms.Button btnSaveVideoList;
@@ -466,5 +499,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cboDetectorMode;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox cboLevelResolution;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cboRefreshCapture;
     }
 }

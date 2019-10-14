@@ -115,6 +115,15 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Files:.
+        /// </summary>
+        internal static string files {
+            get {
+                return ResourceManager.GetString("files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The video address is empty..
         /// </summary>
         internal static string ip_video_empty {
@@ -133,11 +142,29 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Low Score:.
+        /// </summary>
+        internal static string low_score {
+            get {
+                return ResourceManager.GetString("low_score", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reloaded library.
         /// </summary>
         internal static string reload_library {
             get {
                 return ResourceManager.GetString("reload_library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeated:.
+        /// </summary>
+        internal static string repetead_user {
+            get {
+                return ResourceManager.GetString("repetead_user", resourceCulture);
             }
         }
         

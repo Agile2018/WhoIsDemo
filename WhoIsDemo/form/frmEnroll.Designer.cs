@@ -50,6 +50,10 @@ namespace WhoIsDemo.form
             this.pic5 = new System.Windows.Forms.PictureBox();
             this.pic7 = new System.Windows.Forms.PictureBox();
             this.pic9 = new System.Windows.Forms.PictureBox();
+            this.lblNotDetect = new System.Windows.Forms.Label();
+            this.lblRepeated = new System.Windows.Forms.Label();
+            this.lblLowScore = new System.Windows.Forms.Label();
+            this.lblFiles = new System.Windows.Forms.Label();
             this.lblCountNewPersons = new System.Windows.Forms.Label();
             this.lblQuantityRecords = new System.Windows.Forms.Label();
             this.btnDownRecords = new System.Windows.Forms.Button();
@@ -100,6 +104,10 @@ namespace WhoIsDemo.form
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblNotDetect);
+            this.splitContainer1.Panel2.Controls.Add(this.lblRepeated);
+            this.splitContainer1.Panel2.Controls.Add(this.lblLowScore);
+            this.splitContainer1.Panel2.Controls.Add(this.lblFiles);
             this.splitContainer1.Panel2.Controls.Add(this.lblCountNewPersons);
             this.splitContainer1.Panel2.Controls.Add(this.lblQuantityRecords);
             this.splitContainer1.Panel2.Controls.Add(this.btnDownRecords);
@@ -263,6 +271,30 @@ namespace WhoIsDemo.form
             this.pic9.TabStop = false;
             this.pic9.Paint += new System.Windows.Forms.PaintEventHandler(this.pic9_Paint);
             // 
+            // lblNotDetect
+            // 
+            resources.ApplyResources(this.lblNotDetect, "lblNotDetect");
+            this.lblNotDetect.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblNotDetect.Name = "lblNotDetect";
+            // 
+            // lblRepeated
+            // 
+            resources.ApplyResources(this.lblRepeated, "lblRepeated");
+            this.lblRepeated.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblRepeated.Name = "lblRepeated";
+            // 
+            // lblLowScore
+            // 
+            resources.ApplyResources(this.lblLowScore, "lblLowScore");
+            this.lblLowScore.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblLowScore.Name = "lblLowScore";
+            // 
+            // lblFiles
+            // 
+            resources.ApplyResources(this.lblFiles, "lblFiles");
+            this.lblFiles.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblFiles.Name = "lblFiles";
+            // 
             // lblCountNewPersons
             // 
             resources.ApplyResources(this.lblCountNewPersons, "lblCountNewPersons");
@@ -408,5 +440,9 @@ namespace WhoIsDemo.form
         private System.Windows.Forms.Button btnUploadRecords;
         private System.Windows.Forms.Label lblQuantityRecords;
         private System.Windows.Forms.Label lblCountNewPersons;
+        private System.Windows.Forms.Label lblFiles;
+        private System.Windows.Forms.Label lblRepeated;
+        private System.Windows.Forms.Label lblLowScore;
+        private System.Windows.Forms.Label lblNotDetect;
     }
 }

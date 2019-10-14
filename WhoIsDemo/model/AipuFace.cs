@@ -102,6 +102,32 @@ namespace WhoIsDemo.model
             aipu.SetIsRegister(option);
         }
 
+        public void ResetLowScore()
+        {
+            aipu.ResetLowScore();
+        }
+        public int GetCountLowScore()
+        {
+            return aipu.GetCountLowScore;
+        }
+        public void ResetCountRepeatUser()
+        {
+            aipu.ResetCountRepeatUser();
+        }
+        public int GetCountRepeatUser()
+        {
+            return aipu.GetCountRepeatUser;
+        }
+
+        public void ResetCountNotDetect()
+        {
+            aipu.ResetCountNotDetect();
+        }
+        public int GetCountNotDetect()
+        {
+            return aipu.GetCountNotDetect;
+        }
+
         public void SendFrame(byte[] data, int rows, int cols, int client)
         {
             aipu.SetFrame(data, rows, cols, client);

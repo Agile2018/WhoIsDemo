@@ -236,6 +236,36 @@
         Ci1T1lAURVEUB7XaL+Ci/EfUcMYgAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="lblRepeated.Location" type="System.Drawing.Point, System.Drawing">
+    <value>962, 8</value>
+  </data>
+  <data name="lblRepeated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 19</value>
+  </data>
+  <data name="lblRepeated.Text" xml:space="preserve">
+    <value>Repetidos</value>
+  </data>
+  <data name="lblLowScore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>818, 8</value>
+  </data>
+  <data name="lblLowScore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 19</value>
+  </data>
+  <data name="lblLowScore.Text" xml:space="preserve">
+    <value>Bajo Score</value>
+  </data>
+  <data name="lblFiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>693, 8</value>
+  </data>
+  <data name="lblFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 19</value>
+  </data>
+  <data name="lblFiles.Text" xml:space="preserve">
+    <value>Archivos</value>
+  </data>
+  <data name="lblCountNewPersons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>637, 8</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 19</value>
   </data>

@@ -52,6 +52,7 @@ namespace WhoIsDemo.form
         private Person personTransition = new Person();
         private List<Person> listPersonSlider = new List<Person>();
         private List<Person> listPersonRegister = new List<Person>();
+        private List<TimePerson> lisTimePerson = new List<TimePerson>();
         ManagerControlView managerControlView = new ManagerControlView();
         HearUserPresenter hearUserPresenter = new HearUserPresenter();
         FindImagePresenter findImagePresenter = new FindImagePresenter();
@@ -225,17 +226,31 @@ namespace WhoIsDemo.form
                 this.Invoke(new Action(() => this.SetImage(listImage[0])));
             }
 
-            if (personTransition.Params.Register == "0" && !SearchPersonList(Convert.ToInt32(personTransition.Params.Id_face),
-                    this.listPersonRegister))
+            if (personTransition.Params.Register == "0")
             {
-                if (this.countFlowLayoutControls >= sizeMaxFlowLayout)
+                if (!SearchPersonList(Convert.ToInt32(personTransition.Params.Id_face),
+                    this.listPersonRegister))
                 {
-                    this.listPersonRegister.Clear();
+                    if (this.countFlowLayoutControls >= sizeMaxFlowLayout)
+                    {
+                        this.listPersonRegister.Clear();
+                        this.lisTimePerson.Clear();
+                    }
+                    TimePerson timePerson = new TimePerson();
+                    timePerson.id = Convert.ToInt32(personTransition.Params.Id_face);
+                    timePerson.income = DateTime.Now;
+                    this.lisTimePerson.Add(timePerson);
+                    this.listPersonRegister.Add(personTransition);
+                    this.AddNewCardPerson(listImage);
                 }
-
-                this.listPersonRegister.Add(personTransition);                
-                this.AddNewCardPerson(listImage);
-                
+                else
+                {
+                    if (VerifyTimePerson(Convert.ToInt32(personTransition.Params.Id_face)))
+                    {
+                        this.AddNewCardPerson(listImage);
+                    }
+                }
+                               
             }
         }
 
@@ -257,6 +272,35 @@ namespace WhoIsDemo.form
                 return false;
             }
         }
+
+        private bool VerifyTimePerson(int id)
+        {
+            TimePerson timePerson = this.lisTimePerson
+                .FirstOrDefault(item => item.id == id);
+            int index = this.lisTimePerson.IndexOf(timePerson);
+
+            if (timePerson != null)
+            {
+                DateTime now = DateTime.Now;
+                TimeSpan ts = now - timePerson.income;
+                if (ts.Minutes > Configuration.Instance.TimeRefreshEntryControl)
+                {
+                    this.lisTimePerson[index].income = now;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
         private void SetPersonInList()
         {
             listPersonSlider[indexPerson] = personTransition;
@@ -481,9 +525,13 @@ namespace WhoIsDemo.form
 
         private void RefreshRectangle()
         {
-            for (int i = 0; i < sizeCoordinates; i++)
+            for (int i = 0; i < sizeCoordinates; i += 4)
             {
-                this.coordinatesVolatile[i] = this.coordinatesRectFace[i] * graffitsPresenter.FactorScaling;
+                this.coordinatesVolatile[i] = this.coordinatesRectFace[i] * graffitsPresenter.FactorScalingWidth;
+                this.coordinatesVolatile[i + 1] = this.coordinatesRectFace[i + 1] * graffitsPresenter.FactorScalingHeight;
+                this.coordinatesVolatile[i + 2] = this.coordinatesRectFace[i + 2] * graffitsPresenter.FactorScalingWidth;
+                this.coordinatesVolatile[i + 3] = this.coordinatesRectFace[i + 3] * graffitsPresenter.FactorScalingHeight;
+
             }
         }
 
