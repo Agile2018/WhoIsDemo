@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WhoIsDemo.domain.interactor;
 using WhoIsDemo.form;
-using WhoIsDemo.locatable_resources;
 using WhoIsDemo.model;
 using WhoIsDemo.presenter;
 using WhoIsDemo.repository;
@@ -56,7 +53,7 @@ namespace WhoIsDemo
             subscriptionHearInvalid = HearInvalidPresenter.Instance.subjectError.Subscribe(
                 result => LaunchMessage(result),
                 () => Console.WriteLine(ManagerResource.Instance.resourceManager
-                    .GetString("complete")));            
+                    .GetString("complete")));
 
         }
 
@@ -81,6 +78,7 @@ namespace WhoIsDemo
             GetListVideos();
             SetValueRegistryLevelResolution();
             SetValueRegistryTimeRefreshEntryControl();
+            GetParamsTracking();
         }
 
         private void SetValueRegistryLevelResolution()
@@ -130,8 +128,8 @@ namespace WhoIsDemo
         {
             if (!string.IsNullOrEmpty(Configuration.Instance.ConnectDatabase))
             {
-                AipuFace.Instance.InitLibrary();
-                AipuFace.Instance.LoadConfiguration(DiskPresenter.directory);
+                RequestAipu.Instance.InitLibrary();
+                RequestAipu.Instance.LoadConfiguration(DiskPresenter.directory);
             }
             else
             {
@@ -166,7 +164,8 @@ namespace WhoIsDemo
             paramsDetect.maxeye = 250 ;
             paramsDetect.maxfaces = 1;
             paramsDetect.mineye = 35;
-            paramsDetect.modedetect = 1;            
+            paramsDetect.modedetect = 1;
+            //paramsDetect.refreshInterval = 2000;
             detect.Params = paramsDetect;
             diskPresenter.SaveDetectConfiguration(detect);
         }
@@ -244,6 +243,8 @@ namespace WhoIsDemo
             {
                 Configuration.Instance.VideoDefault = Configuration
                     .Instance.ListVideo[index].path;
+                Configuration.Instance.VideoTypeDefault = Configuration
+                    .Instance.ListVideo[index].type;
             }
         }     
        
@@ -287,6 +288,50 @@ namespace WhoIsDemo
             controlDeEntradaToolStripMenuItem.Enabled = false;
             enrolamientoToolStripMenuItem.Enabled = false;
             frmWork.Show();
+        }
+
+        private void GetParamsTracking()
+        {
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                RegistryValueDataReader.MAXEYE_KEY)))
+            {
+                Configuration.Instance.MaxEyeTrack = Convert.ToInt16(registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.MAXEYE_KEY));
+                
+            }
+            if (!string.IsNullOrEmpty(registryValueDataReader
+                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                RegistryValueDataReader.MINEYE_KEY)))
+            {
+                Configuration.Instance.MinEyeTrack = Convert.ToInt16(registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.MINEYE_KEY));
+               
+            }
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.REFRESH_INTERVAL_KEY)))
+            {
+                Configuration.Instance.RefreshIntervalTrack = Convert.ToInt16(registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.REFRESH_INTERVAL_KEY));
+                
+            }
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.CONFIDENCE_KEY)))
+            {
+                Configuration.Instance.ConfidenceTrack = Convert.ToInt16(registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.CONFIDENCE_KEY));
+                
+            }
+
         }
     }
 }

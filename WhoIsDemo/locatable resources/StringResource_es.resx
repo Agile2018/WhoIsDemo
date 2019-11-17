@@ -159,6 +159,9 @@
   <data name="stop_library" xml:space="preserve">
     <value>Librería detenida.</value>
   </data>
+  <data name="type_video_incorrect" xml:space="preserve">
+    <value>El tipo de video es incorrecto.</value>
+  </data>
   <data name="value_key_empty" xml:space="preserve">
     <value>El valor de la llave está vacio.</value>
   </data>

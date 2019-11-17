@@ -159,6 +159,9 @@
   <data name="stop_library" xml:space="preserve">
     <value>Stop Library.</value>
   </data>
+  <data name="type_video_incorrect" xml:space="preserve">
+    <value>The type of video is incorrect.</value>
+  </data>
   <data name="value_key_empty" xml:space="preserve">
     <value>The value key is empty</value>
   </data>

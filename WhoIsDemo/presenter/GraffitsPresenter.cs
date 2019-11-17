@@ -34,6 +34,7 @@ namespace WhoIsDemo.presenter
         private bool cancelLoad = false;
         private bool isLoadFile = false;
         private static readonly object _balanceLocker = new object();
+        
         #endregion
 
         #region methods
@@ -52,19 +53,19 @@ namespace WhoIsDemo.presenter
 
         public void DimesionAdjustment(int width, int height)
         {
-            if (width > Configuration.Instance.MaximumResolutionAccepted)
-            {
-                float aspectRatio = Convert.ToSingle(width) / Convert.ToSingle(height);
-                Configuration.Instance.Width = Configuration.Instance.MaximumResolutionAccepted;
-                float approximateHigh = Convert.ToSingle(Configuration.Instance.Width) / aspectRatio;
-                Configuration.Instance.Height = Convert.ToInt32(approximateHigh);
+            //if (width > Configuration.Instance.MaximumResolutionAccepted)
+            //{
+            //    float aspectRatio = Convert.ToSingle(width) / Convert.ToSingle(height);
+            //    Configuration.Instance.Width = Configuration.Instance.MaximumResolutionAccepted;
+            //    float approximateHigh = Convert.ToSingle(Configuration.Instance.Width) / aspectRatio;
+            //    Configuration.Instance.Height = Convert.ToInt32(approximateHigh);
 
-            }
-            else
-            {
-                Configuration.Instance.Width = width;
-                Configuration.Instance.Height = height;
-            }
+            //}
+            //else
+            //{
+            //    Configuration.Instance.Width = width;
+            //    Configuration.Instance.Height = height;
+            //}
             Configuration.Instance.WidthReal = width;
             Configuration.Instance.HeightReal = height;
             ScalingCoordinatesText();
@@ -124,65 +125,64 @@ namespace WhoIsDemo.presenter
 
         }
 
-        private void WriteImageForRecognition(string pathImage)
-        {
-            Mat clone = CvInvoke.Imread(pathImage, ImreadModes.Color);
-            if (clone != null)
-            {
-                int length = clone.Width * clone.Height * clone.NumberOfChannels;
-                byte[] data = new byte[length];                
-                GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-                using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
-                    handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
-                    CvInvoke.BitwiseNot(clone, m2);
-                handle.Free();
+        //private void WriteImageForRecognition(string pathImage)
+        //{
+        //    Mat clone = CvInvoke.Imread(pathImage, ImreadModes.Color);
+        //    if (clone != null)
+        //    {
+        //        int length = clone.Width * clone.Height * clone.NumberOfChannels;
+        //        byte[] data = new byte[length];                
+        //        GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+        //        using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
+        //            handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
+        //            CvInvoke.BitwiseNot(clone, m2);
+        //        handle.Free();
 
-                RequestAipu.Instance.SendFrame(data, clone.Height,
-                    clone.Width, linkVideo);
-                clone.Dispose();
-                
-            }
-            isWritingImage = false;
+        //        RequestAipu.Instance.SendFrame(data, clone.Height,
+        //            clone.Width, linkVideo);
+        //        clone.Dispose();
 
-        }
-        public void WriteImageForRecognition(object state)
-        {
-            lock (_balanceLocker)
-            {
-                Mat img = (Mat)state;
-                Mat clone = img.Clone();
-                //if (factorScaling != 1)
-                //{
-                //    CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
-                //}
-                //CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Lanczos4);
-                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
-                //Console.WriteLine("IMAGE RECOGNTION WIDTH: {0} HEIGHT: {1} NUMBER CHANNELS: {2}",
-                //    widthScaling, heightScaling, clone.NumberOfChannels);
-                int length = clone.Width * clone.Height * clone.NumberOfChannels;
-                byte[] data = new byte[length];
+        //    }
+        //    isWritingImage = false;
 
-                GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-                using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
-                    handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
-                    CvInvoke.BitwiseNot(clone, m2);
-                handle.Free();
+        //}
+        //public void WriteImageForRecognition(object state)
+        //{
+        //    lock (_balanceLocker)
+        //    {
+        //        Mat img = (Mat)state;
+        //        Mat clone = img.Clone();
+        //        //if (factorScaling != 1)
+        //        //{
+        //        //    CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
+        //        //}
+        //        //CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Lanczos4);
+        //        CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
 
-                RequestAipu.Instance.Tracking(data, clone.Height,
-                   clone.Width);
-                RequestAipu.Instance.SendFrame(data, clone.Height,
-                    clone.Width, linkVideo);
+        //        int length = clone.Width * clone.Height * clone.NumberOfChannels;
+        //        byte[] data = new byte[length];
 
-                clone.Dispose();
-                //isWritingImage = false;
-            }
-   
-        }
+        //        GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+        //        using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
+        //            handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
+        //            CvInvoke.BitwiseNot(clone, m2);
+        //        handle.Free();
+
+        //        RequestAipu.Instance.Tracking(data, clone.Height,
+        //           clone.Width);
+        //        RequestAipu.Instance.SendFrame(data, clone.Height,
+        //            clone.Width, linkVideo);
+
+        //        clone.Dispose();
+        //        //isWritingImage = false;
+        //    }
+
+        //}
 
         //private void LaunchImageForRecognition(Mat img)
         //{
         //    isWritingImage = true;
-            
+
         //    WriteImageForRecognition(img);
 
         //}
@@ -203,10 +203,11 @@ namespace WhoIsDemo.presenter
             int count = 0;
             while (count < listPath.Count() && !CancelLoad)
             {
-                if (!RequestAipu.Instance.GetStateProccessRecognition() && !isWritingImage)
+                if (RequestAipu.Instance.GetIsFinishLoadFiles())
                 {
-                    isWritingImage = true;
-                    WriteImageForRecognition(listPath[count]);
+
+                    //WriteImageForRecognition(listPath[count]);
+                    RequestAipu.Instance.RecognitionFaceFiles(listPath[count], linkVideo);
                     count++;
                 }
                 //Task.Delay(10).Wait();
@@ -266,7 +267,7 @@ namespace WhoIsDemo.presenter
         //private void LaunchImageForCoordinates(Mat img)
         //{
         //    isWritingImageForCoordinates = true;
-            
+
         //    WriteImageForCoordinates(img);
 
         //}
@@ -282,44 +283,45 @@ namespace WhoIsDemo.presenter
 
         //}
 
-        public async Task TaskInitTracking()
-        {
+        //public async Task TaskInitTracking()
+        //{
 
-            await Task.Run(() =>
-            {
-                InitTracking();
+        //    await Task.Run(() =>
+        //    {
+        //        InitTracking();
 
-            });
+        //    });
 
-        }
-        private void InitTracking()
-        {
-            Mat clone = CvInvoke.Imread("camera\\mask.png");
-            if (clone != null)
-            {                
-                CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
-                //Console.WriteLine("MASK TRACKING WIDTH: {0} HEIGHT: {1} NUMBER CHANNELS: {2}", 
-                //    widthScaling, heightScaling, clone.NumberOfChannels);
-                
-                int length = clone.Width * clone.Height * clone.NumberOfChannels;
-                byte[] data = new byte[length];
+        //}
+        //private void InitTracking()
+        //{
+        //    //RequestAipu.Instance.InitTracking();
+        //    //Mat clone = CvInvoke.Imread("camera\\mask.png");
+        //    //if (clone != null)
+        //    //{                
+        //    //    CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling), 0, 0, Inter.Area);
+        //    //    //Console.WriteLine("MASK TRACKING WIDTH: {0} HEIGHT: {1} NUMBER CHANNELS: {2}", 
+        //    //    //    widthScaling, heightScaling, clone.NumberOfChannels);
+        //    //    //CvInvoke.Imwrite("camera\\maskTest.png", clone);
 
-                GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-                using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
-                    handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
-                    CvInvoke.BitwiseNot(clone, m2);
-                handle.Free();
+        //    //    int length = clone.Width * clone.Height * clone.NumberOfChannels;
+        //    //    byte[] data = new byte[length];
 
-                RequestAipu.Instance.InitTracking(data, clone.Height,
-                    clone.Width);
-                clone.Dispose();
-            }
-            else
-            {
-                Console.WriteLine("Mask NULL...");
-            }
-            
-        }
+        //    //    GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+        //    //    using (Mat m2 = new Mat(clone.Size, DepthType.Cv8U, clone.NumberOfChannels,
+        //    //        handle.AddrOfPinnedObject(), clone.Width * clone.NumberOfChannels))
+        //    //        CvInvoke.BitwiseNot(clone, m2);
+        //    //    handle.Free();
+
+        //    //    RequestAipu.Instance.InitTracking();
+        //    //    clone.Dispose();
+        //    //}
+        //    //else
+        //    //{
+        //    //    Console.WriteLine("Mask NULL...");
+        //    //}
+
+        //}
 
         //public async Task TaskTracking(Mat img)
         //{
@@ -346,7 +348,7 @@ namespace WhoIsDemo.presenter
         //    if (factorScaling != 1)
         //    {
         //        CvInvoke.Resize(clone, clone, new Size(widthScaling, heightScaling));
-                
+
         //    }
 
         //    int length = clone.Width * clone.Height * clone.NumberOfChannels;
@@ -363,72 +365,124 @@ namespace WhoIsDemo.presenter
         //    clone.Dispose();
         //    isWritingImageForTracking = false;
         //}
-        
+
         public void SetSequenceFps(int value)
         {
             RequestAipu.Instance.SetSequenceFps(value);
         }
 
-        public void ResfreshBetweenFrame(int value)
+        public void SetWidthFrame(int value)
         {
-            RequestAipu.Instance.ResfreshBetweenFrame(value);
-
+            RequestAipu.Instance.SetWidthFrame(value);
         }
 
-        public void ResetIdUser()
+        public void SetHeightFrame(int value)
         {
-            RequestAipu.Instance.ResetIdUser();
+            RequestAipu.Instance.SetHeightFrame(value);
         }
 
+        public void SetClient(int value)
+        {
+            RequestAipu.Instance.SetClient(value);
+        }
+
+        public void SetMinEyeDistance(int minDistance)
+        {
+            RequestAipu.Instance.SetMinEyeDistance(minDistance);
+        }
+
+        public void SetMaxEyeDistance(int maxDistance)
+        {
+            RequestAipu.Instance.SetMaxEyeDistance(maxDistance);
+        }
+
+        public void SetFaceConfidenceThresh(int value)
+        {
+            RequestAipu.Instance.SetFaceConfidenceThresh(value);
+        }
+
+        public void SetRefreshInterval(int value)
+        {
+            RequestAipu.Instance.SetRefreshInterval(value);
+        }
+
+        public void SetFileVideo(string file)
+        {
+            RequestAipu.Instance.SetFileVideo(file);
+        }
+
+        public void SetIpCamera(string ip)
+        {
+            RequestAipu.Instance.SetIpCamera(ip);
+        }
+
+        public void SetNameWindow(string name)
+        {
+            RequestAipu.Instance.SetNameWindow(name);
+        }
+
+        public void CaptureFlow(int optionFlow)
+        {
+            RequestAipu.Instance.CaptureFlow(optionFlow);
+        }
+
+        public void ShowWindow(int option)
+        {
+            RequestAipu.Instance.ShowWindow(option);
+        }
         public void TerminateTracking()
         {
             RequestAipu.Instance.TerminateTracking();
 
         }
 
-        public void PutTextInFrame(Mat img, int countNewPerson, double fps)
+        public void SetFlagFlow(bool flag)
         {
-            string textBox = string.Format("Resolution:{0}x{1}",
-        Configuration.Instance.WidthReal, Configuration.Instance.HeightReal);
-            int x = Convert.ToInt32(Convert
-                .ToSingle(Configuration.Instance.CoordinatesXText) * Configuration
-                .Instance.FactorScalingWidthText);
-            int y = Convert.ToInt32(Convert
-                .ToSingle(Configuration.Instance.CoordinatesYText) * Configuration
-                .Instance.FactorScalingHeightText);
-            CvInvoke.PutText(img, textBox, new System.Drawing
-                .Point(x, y),
-                FontFace.HersheySimplex, 0.4,
-                new MCvScalar(255.0, 255.0, 255.0));
-            textBox = string.Format("FPS: {0}",
-                Convert.ToInt16(fps));
-            y += 25; //Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
-            CvInvoke.PutText(img, textBox, new System.Drawing
-                .Point(x, y),
-                FontFace.HersheySimplex, 0.4,
-                new MCvScalar(255.0, 255.0, 255.0));
-            textBox = string.Format("Identified: {0}",
-                countNewPerson);
-            y += 25; // Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
-            CvInvoke.PutText(img, textBox, new System.Drawing
-                .Point(x, y),
-                FontFace.HersheySimplex, 0.4,
-                new MCvScalar(255.0, 255.0, 255.0));
-            //Configuration.Instance.FactorScalingSizeFont
+            RequestAipu.Instance.SetFlagFlow(flag);
         }
+        //public void PutTextInFrame(Mat img, int countNewPerson, double fps)
+        //{
+        //    string textBox = string.Format("Resolution:{0}x{1}",
+        //Configuration.Instance.WidthReal, Configuration.Instance.HeightReal);
+        //    int x = Convert.ToInt32(Convert
+        //        .ToSingle(Configuration.Instance.CoordinatesXText) * Configuration
+        //        .Instance.FactorScalingWidthText);
+        //    int y = Convert.ToInt32(Convert
+        //        .ToSingle(Configuration.Instance.CoordinatesYText) * Configuration
+        //        .Instance.FactorScalingHeightText);
+        //    CvInvoke.PutText(img, textBox, new System.Drawing
+        //        .Point(x, y),
+        //        FontFace.HersheySimplex, 0.4,
+        //        new MCvScalar(255.0, 255.0, 255.0));
+        //    textBox = string.Format("FPS: {0}",
+        //        Convert.ToInt16(fps));
+        //    y += 25; //Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
+        //    CvInvoke.PutText(img, textBox, new System.Drawing
+        //        .Point(x, y),
+        //        FontFace.HersheySimplex, 0.4,
+        //        new MCvScalar(255.0, 255.0, 255.0));
+        //    textBox = string.Format("Identified: {0}",
+        //        countNewPerson);
+        //    y += 25; // Convert.ToInt32(Configuration.Instance.FactorScalingIncrementHeight);
+        //    CvInvoke.PutText(img, textBox, new System.Drawing
+        //        .Point(x, y),
+        //        FontFace.HersheySimplex, 0.4,
+        //        new MCvScalar(255.0, 255.0, 255.0));
+        //    //Configuration.Instance.FactorScalingSizeFont
+        //}
 
-        public int SetFps(int fps)
-        {
-            int indexProtocol = Configuration.Instance.VideoDefault.IndexOf(":");
-            if (indexProtocol >= 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return 1000 / fps;
-            }
-        }
+        //public int SetFps(int fps)
+        //{
+        //    int indexProtocol = Configuration.Instance.VideoDefault.IndexOf(":");
+        //    if (indexProtocol >= 0)
+        //    {
+        //        return 0;
+        //    }
+        //    else
+        //    {
+        //        return 1000 / fps;
+        //    }
+        //}
         #endregion
     }
 }

@@ -41,6 +41,7 @@ namespace WhoIsDemo.form
                 GetDatabaseConfiguration();
                 SetValueRegistryLevelResolution();
                 SetValueRegistryTimeRefreshEntryControl();
+                GetParamsTracking();
                 dropDatabasePresenter.Connect();
             }
             catch (FieldAccessException fe)
@@ -96,8 +97,9 @@ namespace WhoIsDemo.form
         {
 
             lvwVideo.Columns.Add("ID", 50, HorizontalAlignment.Center);
-            lvwVideo.Columns.Add("Ruta", 600, HorizontalAlignment.Center);
-            
+            lvwVideo.Columns.Add("Path", 600, HorizontalAlignment.Center);
+            lvwVideo.Columns.Add("Type", 50, HorizontalAlignment.Center);
+
         }
 
         private void GetDetectionConfiguration()
@@ -114,7 +116,8 @@ namespace WhoIsDemo.form
                     detect.Params.maxfaces.ToString();
                 txtMinEye.Text = (string.IsNullOrEmpty(detect.Params.mineye.ToString())) ? "0" :
                     detect.Params.mineye.ToString();
-
+                //txtTrackingRefresh.Text = (string.IsNullOrEmpty(detect.Params.refreshInterval.ToString())) ? "0" :
+                //    detect.Params.refreshInterval.ToString();
                 managerControlView.SetValueToComboBox(cboDetectForced,
                     identify.Params.A_FaceDetectionForced.ToString());
                 managerControlView.SetValueToComboBox(cboIdentificationSpeed,
@@ -142,6 +145,7 @@ namespace WhoIsDemo.form
                     ListViewItem item = new ListViewItem(vid.id,
                         lvwVideo.Items.Count);
                     item.SubItems.Add(vid.path);
+                    item.SubItems.Add(GetDescTypeVideo(vid.type));
                     lvwVideo.Items.Add(item);
                 }
             }
@@ -183,6 +187,7 @@ namespace WhoIsDemo.form
                 paramsIdentify.A_MaxEyeDist = Convert.ToInt16(txtMaxEye.Text);
                 paramsDetect.maxfaces = Convert.ToInt16(txtMaxDetect.Text); 
                 paramsDetect.mineye = Convert.ToInt16(txtMinEye.Text);
+                //paramsDetect.refreshInterval = Convert.ToInt16(txtTrackingRefresh.Text);
                 paramsIdentify.A_MinEyeDist = Convert.ToInt16(txtMinEye.Text);
                 paramsIdentify.A_FaceDetectionForced = Convert.ToInt16(cboDetectForced.Text);
                 paramsIdentify.A_IdentificationSpeed = Convert.ToInt16(cboIdentificationSpeed.Text);
@@ -212,20 +217,94 @@ namespace WhoIsDemo.form
             return (!string.IsNullOrEmpty(txtAccurancy.Text) &&
                 !string.IsNullOrEmpty(txtMaxDetect.Text) &&
                 !string.IsNullOrEmpty(txtMaxEye.Text) &&
-                !string.IsNullOrEmpty(txtMinEye.Text) && 
+                !string.IsNullOrEmpty(txtMinEye.Text) &&
+                !string.IsNullOrEmpty(txtMaxEyeTrack.Text) &&
                 cboDetectForced.SelectedIndex != -1 && 
                 cboIdentificationSpeed.SelectedIndex != -1 && 
                 cboDetectorMode.SelectedIndex != -1);
         }        
 
+        private int CheckTypeVideo(string description)
+        {
+            int device;
+            if (int.TryParse(description, out device))
+            {
+                return Configuration.VIDEO_TYPE_CAMERA;
+            }
+            if (description.Substring(0, 4) == "rtsp" ||
+                    description.Substring(0, 4) == "http" ||
+                    description.Substring(0, 5) == "https")
+            {
+                return Configuration.VIDEO_TYPE_IP;
+            }
+            if (description.Substring(description.LastIndexOf('.') + 1) == "mp4")
+            {
+                return Configuration.VIDEO_TYPE_FILE;
+            }
+            
+            return 0;
+        }
+
         private void btnSaveVideoList_Click(object sender, EventArgs e)
         {
             string quantityVideo = "video_" + (lvwVideo.Items.Count + 1).ToString();
-
+           
             ListViewItem item = new ListViewItem(quantityVideo,
                     lvwVideo.Items.Count);
             item.SubItems.Add(txtIpVideo.Text);
-            lvwVideo.Items.Add(item);
+            int typeVideo = CheckTypeVideo(txtIpVideo.Text);
+            switch (typeVideo)
+            {
+                case Configuration.VIDEO_TYPE_IP:
+                    item.SubItems.Add(Configuration.DESC_TYPE_IP);
+                    lvwVideo.Items.Add(item);
+                    break;
+                case Configuration.VIDEO_TYPE_FILE:
+                    item.SubItems.Add(Configuration.DESC_TYPE_FILE);
+                    lvwVideo.Items.Add(item);
+                    break;
+                case Configuration.VIDEO_TYPE_CAMERA:
+                    item.SubItems.Add(Configuration.DESC_TYPE_CAMERA);
+                    lvwVideo.Items.Add(item);
+                    break;
+                default:
+                    MessageBox.Show(ManagerResource.Instance.resourceManager
+                    .GetString("type_video_incorrect"));
+                    break;
+            }
+            
+        }
+
+        private string GetDescTypeVideo(int type)
+        {
+            switch (type)
+            {
+                case Configuration.VIDEO_TYPE_IP:
+                    return Configuration.DESC_TYPE_IP;
+                case Configuration.VIDEO_TYPE_FILE:
+                    return Configuration.DESC_TYPE_FILE;
+                case Configuration.VIDEO_TYPE_CAMERA:
+                    return Configuration.DESC_TYPE_CAMERA;
+                default:
+                    break;
+            }
+            return "";
+        }
+
+        private int GetTypeVideo(string description)
+        {
+            switch (description)
+            {
+                case Configuration.DESC_TYPE_IP:
+                    return Configuration.VIDEO_TYPE_IP;                    
+                case Configuration.DESC_TYPE_FILE:
+                    return Configuration.VIDEO_TYPE_FILE;
+                case Configuration.DESC_TYPE_CAMERA:
+                    return Configuration.VIDEO_TYPE_CAMERA;
+                default:
+                    break;
+            }
+            return 0;
         }
 
         private void SaveVideos()
@@ -236,6 +315,7 @@ namespace WhoIsDemo.form
                 Video video = new Video();
                 video.id = item.Text;
                 video.path = item.SubItems[1].Text;
+                video.type = GetTypeVideo(item.SubItems[2].Text);
                 list.Add(video);
             }
 
@@ -382,6 +462,92 @@ namespace WhoIsDemo.form
                 registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
                     RegistryValueDataReader.REFRESH_ENTRY_CONTROL, index.ToString());
             }
+        }
+
+        private void txtTrackingRefresh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.managerControlView.OnlyInteger(e);
+        }
+
+        private void txtMaxEyeTrack_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.managerControlView.OnlyInteger(e);
+        }
+
+        private void txtMinEyeTrack_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.managerControlView.OnlyInteger(e);
+        }
+
+        private void txtRefreshTrack_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.managerControlView.OnlyInteger(e);
+        }
+
+        private void txtConfidenceTrack_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.managerControlView.OnlyInteger(e);
+        }
+
+        private void btnSaveTracking_Click(object sender, EventArgs e)
+        {
+            registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.MAXEYE_KEY, txtMaxEyeTrack.Text.ToString());
+            Configuration.Instance.MaxEyeTrack = Convert.ToInt16(txtMaxEyeTrack.Text);
+
+            registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.MINEYE_KEY, txtMinEyeTrack.Text.ToString());
+            Configuration.Instance.MinEyeTrack = Convert.ToInt16(txtMinEyeTrack.Text);
+
+            registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.REFRESH_INTERVAL_KEY, txtRefreshTrack.Text.ToString());
+            Configuration.Instance.RefreshIntervalTrack = Convert.ToInt16(txtRefreshTrack.Text);
+
+            registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.CONFIDENCE_KEY, txtConfidenceTrack.Text.ToString());
+            Configuration.Instance.ConfidenceTrack = Convert.ToInt16(txtConfidenceTrack.Text);
+
+            lblTrackingOk.Text = "OK";
+        }
+
+        private void GetParamsTracking()
+        {
+            
+            if (!string.IsNullOrEmpty(registryValueDataReader
+                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                RegistryValueDataReader.MAXEYE_KEY)))
+            {
+                txtMaxEyeTrack.Text = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.MAXEYE_KEY);
+            }
+            if (!string.IsNullOrEmpty(registryValueDataReader
+                .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                RegistryValueDataReader.MINEYE_KEY)))
+            {
+                txtMinEyeTrack.Text = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.MINEYE_KEY);
+            }
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.REFRESH_INTERVAL_KEY)))
+            {
+                txtRefreshTrack.Text = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.REFRESH_INTERVAL_KEY);
+            }
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.CONFIDENCE_KEY)))
+            {
+                txtConfidenceTrack.Text = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.CONFIDENCE_KEY);
+            }
+
         }
     }
 }

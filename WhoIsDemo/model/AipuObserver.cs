@@ -2,27 +2,25 @@
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using ASSLibrary;
-using System.Threading;
+using Aipu2NetLib;
 
 namespace WhoIsDemo.model
 {
     public class AipuObserver: IDisposable
     {
         #region variables
-        private Aipu aipu;
+        private AipuNet aipu;
         private string errorBiometrics;
         private string userJson;
-        private float[] coordinates;
+        
         private IObservable<string> observableError;
         private IObservable<string> observableUser;
-        private IObservable<float[]> observableCoordinates;
+        
         IDisposable subscriptionUser;
         IDisposable subscriptionError;
-        IDisposable subscriptionCoordinates;
+        
         bool isHearObserverUser = false;
-        bool isHearObserverCoordinates = false;
-        //private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+        
         public string ErrorBiometrics
         {
             get
@@ -52,32 +50,16 @@ namespace WhoIsDemo.model
         }
 
         public bool IsHearObserverUser { get => isHearObserverUser; set => isHearObserverUser = value; }
-        public float[] Coordinates {
-            get
-            {
-                return coordinates;
-            }
-
-            set
-            {
-                coordinates = value;
-                OnCoordinates(coordinates);
-            }
-            
-        }
-
-        public bool IsHearObserverCoordinates { get => isHearObserverCoordinates; set => isHearObserverCoordinates = value; }
-
+        
         public delegate void MessageErrorDelegate(string error);
         public event MessageErrorDelegate OnError;
         public delegate void UserJsonDelegate(string dataUser);
         public event UserJsonDelegate OnUser;
-        public delegate void CoordinatesDelegate(float[] coordinateFlow);
-        public event CoordinatesDelegate OnCoordinates;
+        
         #endregion
 
         #region methods
-        public AipuObserver(Aipu workAipu)
+        public AipuObserver(AipuNet workAipu)
         {
             this.aipu = workAipu;
             ObserverError();
@@ -94,53 +76,6 @@ namespace WhoIsDemo.model
         {
             ObserverUser();
             isHearObserverUser = true;
-        }
-
-        public void EnableObserverCoordinates(bool enable)
-        {
-            if (enable)
-            {
-                ObserverCoordinates();
-                IsHearObserverCoordinates = true;
-            }
-            else
-            {
-                subscriptionCoordinates.Dispose();
-                IsHearObserverCoordinates = false;
-            }
-        }
-
-        private void ObserverCoordinates()
-        {
-            observableCoordinates = Observable.Create<float[]>(async observer =>
-            {
-                observer.OnNext(await GetCoordinatesAsync());
-
-            });
-            subscriptionCoordinates = observableCoordinates
-                .Where(res => res != null)
-                .Delay(TimeSpan.FromSeconds(0.1))
-                .Repeat()
-                .Subscribe(
-                    res => Coordinates = res
-                );
-        }
-
-        private Task<float[]> GetCoordinatesAsync()
-        {
-            return Task.Run(() =>
-            {
-                try
-                {
-                    return aipu.GetCoordinates();
-                }
-                catch (System.NullReferenceException ex)
-                {
-                    Console.WriteLine("ERROR NULL AIPU " + ex.Message);
-                }
-                return null;
-            });
-
         }
 
 
@@ -210,10 +145,7 @@ namespace WhoIsDemo.model
             {
                 subscriptionUser.Dispose();
             }
-            if (IsHearObserverCoordinates)
-            {
-                subscriptionCoordinates.Dispose();
-            }
+            
             subscriptionError.Dispose();            
         }
 

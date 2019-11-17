@@ -1,4 +1,4 @@
-﻿using ASSLibrary;
+﻿using Aipu2NetLib;
 using System;
 using System.Runtime.InteropServices;
 
@@ -11,7 +11,7 @@ namespace WhoIsDemo.model
         private const int finish = 0;
         #endregion
         #region variables
-        Aipu aipu;
+        AipuNet aipu;
         AipuObserver aipuObserver;
         private bool isLoadConfiguration = false;
         private bool isStopAipu = false;
@@ -27,7 +27,7 @@ namespace WhoIsDemo.model
         #region methods
         public AipuFace()
         {
-            aipu = new Aipu();
+            aipu = new AipuNet();
             aipuObserver = new AipuObserver(aipu);
         }
 
@@ -50,16 +50,57 @@ namespace WhoIsDemo.model
             aipu.InitLibrary();
         }
 
-        public void SetWorkMode(int mode)
+        public void SetFileVideo(string file)
         {
-            aipu.SetWorkMode(mode);
+            aipu.SetFileVideo(file);
+        }
+
+        public void SetNameWindow(string name)
+        {
+            aipu.SetNameWindow(name);
+        }
+
+        public void SetWidthFrame(int value)
+        {
+            aipu.SetWidthFrame(value);
             
         }
 
-        public void ResfreshBetweenFrame(int value)
+        public void SetHeightFrame(int value)
         {
-            aipu.ResfreshBetweenFrame(value);
+            aipu.SetHeightFrame(value);
 
+        }
+
+        public void CaptureFlow(int optionFlow)
+        {
+            isTracking = true;
+            aipu.CaptureFlow(optionFlow);
+        }
+
+        public void SetIpCamera(string ip)
+        {
+            aipu.SetIpCamera(ip);
+        }
+
+        public void SetFaceConfidenceThresh(int value)
+        {
+            aipu.SetFaceConfidenceThresh(value);
+        }
+
+        public void SetRefreshInterval(int value)
+        {
+            aipu.SetRefreshInterval(value);
+        }
+
+        public void SetMinEyeDistance(int minDistance)
+        {
+            aipu.SetMinEyeDistance(minDistance);
+        }
+
+        public void SetMaxEyeDistance(int maxDistance)
+        {
+            aipu.SetMaxEyeDistance(maxDistance);
         }
 
         public void SetSequenceFps(int value)
@@ -72,16 +113,21 @@ namespace WhoIsDemo.model
 
         }
 
-        public bool GetStateProccessRecognition()
+        public void SetClient(int value)
         {
-            return aipu.GetStateProccessRecognition;
+            aipu.SetClient(value);
         }
 
-        public void ResetIdUser()
+        public void SetFlagFlow(bool flag)
         {
-            aipu.ResetIdUser();
+            aipu.SetFlagFlow(flag);
         }
 
+        public void ShowWindow(int option)
+        {
+            aipu.ShowWindow(option);
+        }
+                
         public void SetConfigurationDatabase()
         {
             aipu.SetConfigurationDatabase();
@@ -91,7 +137,7 @@ namespace WhoIsDemo.model
         {
             if (isTracking)
             {
-                aipu.TerminateTracking();
+                aipu.SetFlagFlow(true);
             }
             
             isTracking = false;
@@ -100,55 +146,27 @@ namespace WhoIsDemo.model
         public void SetIsRegister(bool option)
         {
             aipu.SetIsRegister(option);
+        }                              
+        
+        public void RecognitionFaceFiles(string file, int client)
+        {
+            aipu.RecognitionFaceFiles(file, client);
         }
 
-        public void ResetLowScore()
+        public void SetIsFinishLoadFiles(bool value)
         {
-            aipu.ResetLowScore();
+            aipu.SetIsFinishLoadFiles(value);
         }
-        public int GetCountLowScore()
+        public bool GetIsFinishLoadFiles()
         {
-            return aipu.GetCountLowScore;
-        }
-        public void ResetCountRepeatUser()
-        {
-            aipu.ResetCountRepeatUser();
-        }
-        public int GetCountRepeatUser()
-        {
-            return aipu.GetCountRepeatUser;
+            return aipu.GetIsFinishLoadFiles;
         }
 
-        public void ResetCountNotDetect()
-        {
-            aipu.ResetCountNotDetect();
-        }
-        public int GetCountNotDetect()
-        {
-            return aipu.GetCountNotDetect;
-        }
+        //public void SendFrame(byte[] data, int rows, int cols, int client)
+        //{
+        //    aipu.SetFrame(data, rows, cols, client);
 
-        public void SendFrame(byte[] data, int rows, int cols, int client)
-        {
-            aipu.SetFrame(data, rows, cols, client);
-
-        }
-
-        public void SendFastFrame(byte[] data, int rows, int cols)
-        {
-            aipu.SetFastFrame(data, rows, cols);
-        }
-
-        public void InitTracking(byte[] data, int rows, int cols)
-        {
-            aipu.InitTracking(data, rows, cols);
-            isTracking = true;
-        }
-
-        public void Tracking(byte[] data, int rows, int cols)
-        {
-            aipu.Tracking(data, rows, cols);
-        }
+        //}       
 
         public AipuObserver GetObserver()
         {
@@ -158,45 +176,36 @@ namespace WhoIsDemo.model
         public void EnableObserverUser()
         {
             aipuObserver.EnableObserverUser();
-        }
-
-        public void EnableObserverCoordinates(bool enable)
-        {
-            aipuObserver.EnableObserverCoordinates(enable);
-        }
+        }        
 
         public bool IsObserverUser()
         {
             return aipuObserver.IsHearObserverUser;
-        }
+        }        
 
-        public bool IsObserverCoordinates()
+        public void ReloadAipu()
         {
-            return aipuObserver.IsHearObserverCoordinates;
+            if (IsLoadConfiguration && IsStopAipu)
+            {
+                aipu.ReloadRecognitionFace();
+                IsStopAipu = false;
+            }
         }
 
         public void StopAipu()
         {
             if (IsLoadConfiguration && !IsStopAipu)
             {
-                aipu.Terminate(reset);
+                aipu.Terminate();
                 IsStopAipu = true;
             }
         }
-
-        public void ReloadAipu()
-        {
-            if (IsLoadConfiguration && IsStopAipu)
-            {
-                aipu.Reset();
-                IsStopAipu = false;
-            }
-        }
+        
         public void Terminate()
         {
             if (IsLoadConfiguration)
             {
-                aipu.Terminate(finish);
+                aipu.Terminate();
                 aipu.Dispose();
                 aipuObserver.Dispose();
                 IsLoadConfiguration = false;

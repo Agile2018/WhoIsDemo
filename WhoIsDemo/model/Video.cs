@@ -10,5 +10,6 @@ namespace WhoIsDemo.model
     {
         public string id { get; set; }
         public string path { get; set; }
+        public int type { get; set; }
     }
 }

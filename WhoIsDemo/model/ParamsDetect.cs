@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WhoIsDemo.model
+﻿namespace WhoIsDemo.model
 {
     public class ParamsDetect
     {
@@ -13,7 +7,7 @@ namespace WhoIsDemo.model
         public int maxfaces { get; set; }
         public int mineye { get; set; }
         public int modedetect { get; set; }
-        //public int A_IdentificationSpeed { get; set; }
+        //public int refreshInterval { get; set; }
         //public int A_FaceDetectionForced { get; set; }
     }
 }

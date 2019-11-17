@@ -73,8 +73,8 @@
     <StartupObject>WhoIsDemo.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ASSLibrary">
-      <HintPath>..\..\ASSLibrary\x64\Release\ASSLibrary.dll</HintPath>
+    <Reference Include="Aipu2NetLib">
+      <HintPath>..\..\Aipu2NetLib\x64\Release\Aipu2NetLib.dll</HintPath>
     </Reference>
     <Reference Include="DnsClient, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
       <HintPath>..\packages\DnsClient.1.2.0\lib\net45\DnsClient.dll</HintPath>
@@ -139,7 +139,6 @@
   <ItemGroup>
     <Compile Include="domain\interactor\DropDatabase.cs" />
     <Compile Include="domain\interactor\FindImage.cs" />
-    <Compile Include="domain\interactor\HearCoordinates.cs" />
     <Compile Include="domain\interactor\HearUser.cs" />
     <Compile Include="domain\interactor\RequestAipu.cs" />
     <Compile Include="domain\interactor\SynchronizationOfPeopleWithDatabase.cs" />
@@ -221,7 +220,6 @@
     <Compile Include="presenter\DropDatabasePresenter.cs" />
     <Compile Include="presenter\FindImagePresenter.cs" />
     <Compile Include="presenter\GraffitsPresenter.cs" />
-    <Compile Include="presenter\HearCoordinatesPresenter.cs" />
     <Compile Include="presenter\HearInvalidPresenter.cs" />
     <Compile Include="presenter\HearUserPresenter.cs" />
     <Compile Include="presenter\QueueMatPresenter.cs" />

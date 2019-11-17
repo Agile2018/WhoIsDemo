@@ -13,6 +13,12 @@ namespace WhoIsDemo.model
         public const int templateWidth = 640;
         public const float scalingFontSize = 0.4f;
         public const float incrementHeight = 20;
+        public const int VIDEO_TYPE_CAMERA = 3;
+        public const int VIDEO_TYPE_IP = 1;
+        public const int VIDEO_TYPE_FILE = 2;
+        public const string DESC_TYPE_CAMERA = "CAM";
+        public const string DESC_TYPE_IP = "IP";
+        public const string DESC_TYPE_FILE = "FILE";
         #endregion
         #region variables
         private static readonly Configuration instance = new Configuration();
@@ -40,6 +46,11 @@ namespace WhoIsDemo.model
         public float FactorScalingIncrementHeight { get => factorScalingIncrementHeight; set => factorScalingIncrementHeight = value; }
         public List<int> ListTimeRefreshEntryControl { get => listTimeRefreshEntryControl; set => listTimeRefreshEntryControl = value; }
         public int TimeRefreshEntryControl { get => timeRefreshEntryControl; set => timeRefreshEntryControl = value; }
+        public int MaxEyeTrack { get => maxEyeTrack; set => maxEyeTrack = value; }
+        public int MinEyeTrack { get => minEyeTrack; set => minEyeTrack = value; }
+        public int RefreshIntervalTrack { get => refreshIntervalTrack; set => refreshIntervalTrack = value; }
+        public int ConfidenceTrack { get => confidenceTrack; set => confidenceTrack = value; }
+        public int VideoTypeDefault { get => videoTypeDefault; set => videoTypeDefault = value; }
 
         private List<Video> listVideo = new List<Video>();
         private List<int> listHeightResolution = new List<int>();
@@ -47,6 +58,7 @@ namespace WhoIsDemo.model
         private List<int> listTimeRefreshEntryControl = new List<int>();
         private int timeRefreshEntryControl = 1; 
         private string videoDefault;
+        private int videoTypeDefault;
         private int width = 320;
         private int height = 240;
         private int resolutionWidthDefault = 640;
@@ -63,6 +75,10 @@ namespace WhoIsDemo.model
         private int coordinatesYText = 40;
         private float factorScalingSizeFont = 0.4f;
         private float factorScalingIncrementHeight = 1;
+        private int maxEyeTrack = 200;
+        private int minEyeTrack = 20;
+        private int refreshIntervalTrack = 2000;
+        private int confidenceTrack = 450;
         #endregion
 
         #region constants
@@ -73,15 +89,13 @@ namespace WhoIsDemo.model
         public Configuration()
         {
             ListWidthResolution.Add(640);
-            ListHeightResolution.Add(400);
+            ListHeightResolution.Add(360);
             ListWidthResolution.Add(800);
-            ListHeightResolution.Add(500);
-            ListWidthResolution.Add(1024);
-            ListHeightResolution.Add(640);
+            ListHeightResolution.Add(450);
             ListWidthResolution.Add(1280);
-            ListHeightResolution.Add(800);
+            ListHeightResolution.Add(720);
             ListWidthResolution.Add(1920);
-            ListHeightResolution.Add(1200);
+            ListHeightResolution.Add(1080);
 
             ListTimeRefreshEntryControl.Add(1);
             ListTimeRefreshEntryControl.Add(5);

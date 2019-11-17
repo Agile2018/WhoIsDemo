@@ -187,6 +187,15 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type of video is incorrect..
+        /// </summary>
+        internal static string type_video_incorrect {
+            get {
+                return ResourceManager.GetString("type_video_incorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value key is empty.
         /// </summary>
         internal static string value_key_empty {

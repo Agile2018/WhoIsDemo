@@ -32,6 +32,11 @@ namespace WhoIsDemo.repository
         public const string TITLE_PRINT_KEY = "title_print";
         public const string BUILDING_KEY = "building";
         public const string DIRECTORY_KEY = "directory";
+        public const string MAXEYE_KEY = "max_eye";
+        public const string MINEYE_KEY = "min_eye";
+        public const string REFRESH_INTERVAL_KEY = "refresh_interval";
+        public const string CONFIDENCE_KEY = "confidence";
+        public const string DEEPTRACK_KEY = "deep_track";
         private static readonly int KEY_WOW64_32KEY = 0x200;
         private static readonly int KEY_WOW64_64KEY = 0x100;
         private static readonly UIntPtr HKEY_LOCAL_MACHINE = (UIntPtr)0x80000002;
