@@ -152,6 +152,41 @@ namespace WhoIsDemo.domain.interactor
         {
             return AipuFace.Instance.GetIsFinishLoadFiles();
         }
+
+        public void ResetLowScore()
+        {
+            AipuFace.Instance.ResetLowScore();
+        }
+        public int GetCountLowScore()
+        {
+            return AipuFace.Instance.GetCountLowScore();
+        }
+        public void ResetCountNotDetect()
+        {
+            AipuFace.Instance.ResetCountNotDetect();
+        }
+        public int GetCountNotDetect()
+        {
+            return AipuFace.Instance.GetCountNotDetect();
+        }
+
+        public void SetDeviceVideo(string device)
+        {
+            AipuFace.Instance.SetDeviceVideo(device);
+        }
+
+        public void SetDeepTrack(string value)
+        {
+            AipuFace.Instance.SetDeepTrack(value);
+        }
+        public void ResetCountRepeatUser()
+        {
+            AipuFace.Instance.ResetCountRepeatUser();
+        }
+        public int GetCountRepeatUser()
+        {
+            return AipuFace.Instance.GetCountRepeatUser();
+        }
         #endregion
     }
 }

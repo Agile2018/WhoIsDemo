@@ -313,9 +313,17 @@ namespace WhoIsDemo.form
             foreach (ListViewItem item in lvwVideo.Items)
             {
                 Video video = new Video();
-                video.id = item.Text;
-                video.path = item.SubItems[1].Text;
+                video.id = item.Text;                
                 video.type = GetTypeVideo(item.SubItems[2].Text);
+                if (video.type == Configuration.VIDEO_TYPE_CAMERA && !item.SubItems[1].Text.Contains("dev"))
+                {
+                    video.path = "/dev/video" + item.SubItems[1].Text;
+                }
+                else
+                {
+                    video.path = item.SubItems[1].Text;
+                }
+                
                 list.Add(video);
             }
 
@@ -507,6 +515,20 @@ namespace WhoIsDemo.form
                     RegistryValueDataReader.CONFIDENCE_KEY, txtConfidenceTrack.Text.ToString());
             Configuration.Instance.ConfidenceTrack = Convert.ToInt16(txtConfidenceTrack.Text);
 
+            if (chkDeepTrack.Checked == true)
+            {
+                registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.DEEPTRACK_KEY, "true");
+                Configuration.Instance.DeepTrack = "true";
+
+            }
+            else
+            {
+                registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.DEEPTRACK_KEY, "false");
+                Configuration.Instance.DeepTrack = "false";
+            }
+
             lblTrackingOk.Text = "OK";
         }
 
@@ -548,6 +570,26 @@ namespace WhoIsDemo.form
                     RegistryValueDataReader.CONFIDENCE_KEY);
             }
 
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.DEEPTRACK_KEY)))
+            {
+                if (registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.DEEPTRACK_KEY) == "true")
+                {
+                    chkDeepTrack.Checked = true;
+                }
+                else
+                {
+                    chkDeepTrack.Checked = false;
+                }
+                
+            }
+            else
+            {
+                chkDeepTrack.Checked = false;
+            }
         }
     }
 }

@@ -374,6 +374,7 @@ namespace WhoIsDemo.form
                 graffitsPresenter.SetMaxEyeDistance(Configuration.Instance.MaxEyeTrack);
                 graffitsPresenter.SetFaceConfidenceThresh(Configuration.Instance.ConfidenceTrack);
                 graffitsPresenter.SetRefreshInterval(Configuration.Instance.RefreshIntervalTrack);
+                graffitsPresenter.SetDeepTrack(Configuration.Instance.DeepTrack);
                 switch (Configuration.Instance.VideoTypeDefault)
                 {
                     case Configuration.VIDEO_TYPE_IP:
@@ -383,10 +384,11 @@ namespace WhoIsDemo.form
                         graffitsPresenter.SetFileVideo(Configuration.Instance.VideoDefault);
                         break;
                     case Configuration.VIDEO_TYPE_CAMERA:
+                        graffitsPresenter.SetDeviceVideo(Configuration.Instance.VideoDefault);
                         break;
 
                 }
-                string nameWindow = "video_" + LinkVideo.ToString();
+                string nameWindow = "Entry_Control_" + LinkVideo.ToString();
                 graffitsPresenter.SetNameWindow(nameWindow);
                 graffitsPresenter.SetFlagFlow(false);
                 //Configuration.Instance.CalculeArea();

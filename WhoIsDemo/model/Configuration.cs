@@ -51,6 +51,7 @@ namespace WhoIsDemo.model
         public int RefreshIntervalTrack { get => refreshIntervalTrack; set => refreshIntervalTrack = value; }
         public int ConfidenceTrack { get => confidenceTrack; set => confidenceTrack = value; }
         public int VideoTypeDefault { get => videoTypeDefault; set => videoTypeDefault = value; }
+        public string DeepTrack { get => deepTrack; set => deepTrack = value; }
 
         private List<Video> listVideo = new List<Video>();
         private List<int> listHeightResolution = new List<int>();
@@ -79,6 +80,7 @@ namespace WhoIsDemo.model
         private int minEyeTrack = 20;
         private int refreshIntervalTrack = 2000;
         private int confidenceTrack = 450;
+        private string deepTrack = "false";
         #endregion
 
         #region constants
@@ -94,6 +96,8 @@ namespace WhoIsDemo.model
             ListHeightResolution.Add(450);
             ListWidthResolution.Add(1280);
             ListHeightResolution.Add(720);
+            ListWidthResolution.Add(1584);
+            ListHeightResolution.Add(891);
             ListWidthResolution.Add(1920);
             ListHeightResolution.Add(1080);
 

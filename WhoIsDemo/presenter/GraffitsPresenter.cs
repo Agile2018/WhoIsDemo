@@ -416,6 +416,24 @@ namespace WhoIsDemo.presenter
             RequestAipu.Instance.SetIpCamera(ip);
         }
 
+        public void SetDeviceVideo(string device)
+        {
+            RequestAipu.Instance.SetDeviceVideo(device);
+        }
+
+        public void SetDeepTrack(string value)
+        {
+            RequestAipu.Instance.SetDeepTrack(value);
+        }
+        public void ResetCountRepeatUser()
+        {
+            RequestAipu.Instance.ResetCountRepeatUser();
+        }
+        public int GetCountRepeatUser()
+        {
+            return RequestAipu.Instance.GetCountRepeatUser();
+        }
+
         public void SetNameWindow(string name)
         {
             RequestAipu.Instance.SetNameWindow(name);

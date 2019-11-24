@@ -83,6 +83,24 @@ namespace WhoIsDemo.model
             aipu.SetIpCamera(ip);
         }
 
+        public void SetDeviceVideo(string device)
+        {
+            aipu.SetDeviceVideo(device);
+        }
+
+        public void SetDeepTrack(string value)
+        {
+            aipu.SetDeepTrack(value);
+        }
+        public void ResetCountRepeatUser()
+        {
+            aipu.ResetCountRepeatUser();
+        }
+        public int GetCountRepeatUser()
+        {
+            return aipu.GetCountRepeatUser;
+        }
+
         public void SetFaceConfidenceThresh(int value)
         {
             aipu.SetFaceConfidenceThresh(value);
@@ -162,6 +180,22 @@ namespace WhoIsDemo.model
             return aipu.GetIsFinishLoadFiles;
         }
 
+        public void ResetLowScore()
+        {
+            aipu.ResetLowScore();
+        }
+        public int GetCountLowScore()
+        {
+            return aipu.GetCountLowScore;
+        }
+        public void ResetCountNotDetect()
+        {
+            aipu.ResetCountNotDetect();
+        }
+        public int GetCountNotDetect()
+        {
+            return aipu.GetCountNotDetect;
+        }
         //public void SendFrame(byte[] data, int rows, int cols, int client)
         //{
         //    aipu.SetFrame(data, rows, cols, client);

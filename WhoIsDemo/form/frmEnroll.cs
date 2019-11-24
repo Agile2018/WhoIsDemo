@@ -242,25 +242,25 @@ namespace WhoIsDemo.form
                     .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
                     .GetString("complete"),
                     0, this.status)));
-               // int countLowScore = RequestAipu.Instance.GetCountLowScore();
-               // int countRepeatUser = RequestAipu.Instance.GetCountRepeatUser();
-               //// int countNotDetect = RequestAipu.Instance.GetCountNotDetect();
-               // this.lblLowScore.Invoke(new Action(() => this.lblLowScore.Text =
-               // ManagerResource.Instance.resourceManager
-               //     .GetString("low_score") + countLowScore.ToString()));
+               int countLowScore = RequestAipu.Instance.GetCountLowScore();
+               int countRepeatUser = RequestAipu.Instance.GetCountRepeatUser();
+               int countNotDetect = RequestAipu.Instance.GetCountNotDetect();
+                this.lblLowScore.Invoke(new Action(() => this.lblLowScore.Text =
+                ManagerResource.Instance.resourceManager
+                    .GetString("low_score") + countLowScore.ToString()));
 
-               // this.lblRepeated.Invoke(new Action(() => this.lblRepeated.Text =
-               // ManagerResource.Instance.resourceManager
-               //     .GetString("repetead_user") + countRepeatUser.ToString()));
+                this.lblRepeated.Invoke(new Action(() => this.lblRepeated.Text =
+                ManagerResource.Instance.resourceManager
+                    .GetString("repetead_user") + countRepeatUser.ToString()));
 
-                //this.lblNotDetect.Invoke(new Action(() => this.lblNotDetect.Text =
-                //"ND: " + countNotDetect.ToString()));
+                this.lblNotDetect.Invoke(new Action(() => this.lblNotDetect.Text =
+                "ND: " + countNotDetect.ToString()));
 
                 this.lblLowScore.Invoke(new Action(() => this.lblLowScore.Visible = true));
 
                 this.lblRepeated.Invoke(new Action(() => this.lblRepeated.Visible = true));
 
-                //this.lblNotDetect.Invoke(new Action(() => this.lblNotDetect.Visible = true));
+                this.lblNotDetect.Invoke(new Action(() => this.lblNotDetect.Visible = true));
 
             }
         }
@@ -458,6 +458,7 @@ namespace WhoIsDemo.form
                 graffitsPresenter.SetMaxEyeDistance(Configuration.Instance.MaxEyeTrack);
                 graffitsPresenter.SetFaceConfidenceThresh(Configuration.Instance.ConfidenceTrack);
                 graffitsPresenter.SetRefreshInterval(Configuration.Instance.RefreshIntervalTrack);
+                graffitsPresenter.SetDeepTrack(Configuration.Instance.DeepTrack);
                 switch (Configuration.Instance.VideoTypeDefault)
                 {
                     case Configuration.VIDEO_TYPE_IP:
@@ -467,11 +468,12 @@ namespace WhoIsDemo.form
                         graffitsPresenter.SetFileVideo(Configuration.Instance.VideoDefault);
                         break;
                     case Configuration.VIDEO_TYPE_CAMERA:
+                        graffitsPresenter.SetDeviceVideo(Configuration.Instance.VideoDefault);
                         break;
                     
                 }
 
-                string nameWindow = "video_" + LinkVideo.ToString();
+                string nameWindow = "Enroll_" + LinkVideo.ToString();
                 graffitsPresenter.SetNameWindow(nameWindow);
                 graffitsPresenter.SetFlagFlow(false);
                 //Configuration.Instance.CalculeArea();
@@ -804,10 +806,10 @@ namespace WhoIsDemo.form
                 this.lblFiles.Text = ManagerResource.Instance.resourceManager
                     .GetString("files") + openFileDialog.FileNames.Count().ToString();
                 managerControlView.StartProgressStatusStrip(1, this.status);
-                RequestAipu.Instance.SetIsFinishLoadFiles(true);
-                //RequestAipu.Instance.WorkMode(1);
-                //RequestAipu.Instance.ResetCountRepeatUser();
-                //RequestAipu.Instance.ResetLowScore();
+                RequestAipu.Instance.SetIsFinishLoadFiles(true);                
+                RequestAipu.Instance.ResetCountNotDetect();
+                RequestAipu.Instance.ResetLowScore();
+                RequestAipu.Instance.ResetCountRepeatUser();
                 Task taskRecognition = graffitsPresenter
                     .TaskImageFileForRecognition(openFileDialog.FileNames);
 

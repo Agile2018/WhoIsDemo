@@ -332,6 +332,15 @@ namespace WhoIsDemo
                 
             }
 
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.DEEPTRACK_KEY)))
+            {
+                Configuration.Instance.DeepTrack = registryValueDataReader
+                    .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.DEEPTRACK_KEY);
+
+            }
         }
     }
 }
