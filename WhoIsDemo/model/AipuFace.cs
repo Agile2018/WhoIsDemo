@@ -151,6 +151,27 @@ namespace WhoIsDemo.model
             aipu.SetConfigurationDatabase();
         }
 
+        public void StatePlay()
+        {
+            aipu.StatePlay();
+        }
+        public void StatePaused()
+        {
+            aipu.StatePaused();
+        }
+        public void SetTrackingMode(int mode)
+        {
+            aipu.SetTrackingMode(mode);
+        }
+        public void SetTrackSpeed(int speed)
+        {
+            aipu.SetTrackSpeed(speed);
+        }
+        public void SetMotionOptimization(int motion)
+        {
+            aipu.SetMotionOptimization(motion);
+        }
+
         public void TerminateTracking()
         {
             if (isTracking)
@@ -178,6 +199,11 @@ namespace WhoIsDemo.model
         public bool GetIsFinishLoadFiles()
         {
             return aipu.GetIsFinishLoadFiles;
+        }
+
+        public void InitLibraryIdentify()
+        {
+            aipu.InitLibraryIdentify();
         }
 
         public void ResetLowScore()

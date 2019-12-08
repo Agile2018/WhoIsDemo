@@ -117,16 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Reconocimiento</value>
-  </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Base de datos</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Rastreo</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 152</value>
+  </data>
+  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="label20.Text" xml:space="preserve">
+    <value>Mejor comparación:</value>
+  </data>
+  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 111</value>
+  </data>
+  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 13</value>
+  </data>
+  <data name="label19.Text" xml:space="preserve">
+    <value>Umbral similitud:</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 69</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Detección forzada:</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 26</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 13</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Velocidad de identificación:</value>
+  </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>Identificación</value>
+  </data>
+  <data name="cboTrackMotion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 315</value>
+  </data>
+  <data name="cboTrackSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 263</value>
+  </data>
+  <data name="cboTrackingMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 213</value>
+  </data>
+  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 291</value>
+  </data>
+  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 13</value>
+  </data>
+  <data name="label23.Text" xml:space="preserve">
+    <value>Movimiento rastreo:</value>
+  </data>
+  <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 241</value>
+  </data>
+  <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="label22.Text" xml:space="preserve">
+    <value>Velocidad rastreo:</value>
+  </data>
+  <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 191</value>
+  </data>
+  <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 13</value>
+  </data>
+  <data name="label21.Text" xml:space="preserve">
+    <value>Modo rastreo:</value>
+  </data>
+  <data name="chkDeepTrack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 162</value>
+  </data>
   <data name="chkDeepTrack.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 17</value>
   </data>
@@ -134,10 +203,10 @@
     <value>Rastreo profundo</value>
   </data>
   <data name="btnSaveTracking.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 273</value>
+    <value>136, 347</value>
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 89</value>
+    <value>10, 58</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 13</value>
@@ -146,7 +215,7 @@
     <value>Mínima distancia ojos:</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 41</value>
+    <value>10, 23</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 13</value>
@@ -155,10 +224,13 @@
     <value>Máxima distancia ojos:</value>
   </data>
   <data name="txtMinEyeTrack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 85</value>
+    <value>155, 54</value>
   </data>
   <data name="txtRefreshTrack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 133</value>
+    <value>155, 90</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 92</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 13</value>
@@ -167,10 +239,10 @@
     <value>Intervalo de refrescamiento:</value>
   </data>
   <data name="txtConfidenceTrack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 181</value>
+    <value>155, 126</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 185</value>
+    <value>10, 130</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 13</value>
@@ -179,7 +251,10 @@
     <value>Umbral de confianza:</value>
   </data>
   <data name="txtMaxEyeTrack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 37</value>
+    <value>155, 19</value>
+  </data>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Rastreo</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 13</value>
@@ -199,8 +274,17 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Nivel de resolución:</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Biometría</value>
+  <data name="cboExtractionMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 221</value>
+  </data>
+  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 225</value>
+  </data>
+  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 13</value>
+  </data>
+  <data name="label24.Text" xml:space="preserve">
+    <value>Modo de extracción:</value>
   </data>
   <data name="cboDetectorMode.Items" xml:space="preserve">
     <value>Modo balanceado</value>
@@ -208,29 +292,23 @@
   <data name="cboDetectorMode.Items1" xml:space="preserve">
     <value>Modo veloz</value>
   </data>
+  <data name="cboDetectorMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 178</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 182</value>
+  </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Modo de detección:</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 13</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Detección forzada:</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 13</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Velocidad de identificación:</value>
-  </data>
   <data name="txtAccurancy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 78</value>
+    <value>139, 59</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 82</value>
+    <value>12, 63</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -239,10 +317,10 @@
     <value>Precisión:</value>
   </data>
   <data name="txtMinEye.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 184</value>
+    <value>139, 136</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 188</value>
+    <value>12, 140</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 13</value>
@@ -251,10 +329,10 @@
     <value>Mínima distancia ojos:</value>
   </data>
   <data name="txtMaxEye.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 131</value>
+    <value>139, 96</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 135</value>
+    <value>12, 100</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 13</value>
@@ -266,13 +344,19 @@
     <value>139, 25</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 28</value>
+    <value>12, 28</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Detección Máxima:</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Detección</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Reconocimiento</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>28, 24</value>
@@ -285,9 +369,6 @@
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>Limpiar base de datos</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Cambiar base de datos</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>32, 86</value>
@@ -306,6 +387,12 @@
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Nombre base de datos:</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Cambiar base de datos</value>
+  </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Base de datos</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configuración</value>

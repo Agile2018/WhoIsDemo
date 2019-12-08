@@ -71,6 +71,11 @@ namespace WhoIsDemo.domain.interactor
             AipuFace.Instance.InitLibrary();
         }
 
+        public void InitLibraryIdentify()
+        {
+            AipuFace.Instance.InitLibraryIdentify();
+        }
+
         public void SetFileVideo(string file)
         {
             AipuFace.Instance.SetFileVideo(file);
@@ -186,6 +191,28 @@ namespace WhoIsDemo.domain.interactor
         public int GetCountRepeatUser()
         {
             return AipuFace.Instance.GetCountRepeatUser();
+        }
+
+        public void SetTrackingMode(int mode)
+        {
+            AipuFace.Instance.SetTrackingMode(mode);
+        }
+        public void SetTrackSpeed(int speed)
+        {
+            AipuFace.Instance.SetTrackSpeed(speed);
+        }
+        public void SetMotionOptimization(int motion)
+        {
+            AipuFace.Instance.SetMotionOptimization(motion);
+        }
+
+        public void StatePlay()
+        {
+            AipuFace.Instance.StatePlay();
+        }
+        public void StatePaused()
+        {
+            AipuFace.Instance.StatePaused();
         }
         #endregion
     }

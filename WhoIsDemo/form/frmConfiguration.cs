@@ -121,7 +121,14 @@ namespace WhoIsDemo.form
                 managerControlView.SetValueToComboBox(cboDetectForced,
                     identify.Params.A_FaceDetectionForced.ToString());
                 managerControlView.SetValueToComboBox(cboIdentificationSpeed,
-                    identify.Params.A_IdentificationSpeed.ToString());
+                    identify.Params.A_IdentificationSpeed.ToString());              
+
+                txtASimilarity.Text = (string.IsNullOrEmpty(identify.Params.A_SimilarityThreshold.ToString())) ? "0" :
+                    identify.Params.A_SimilarityThreshold.ToString();
+
+                txtBestMatched.Text = (string.IsNullOrEmpty(identify.Params.A_BestMatchedCandidates.ToString())) ? "0" :
+                    identify.Params.A_BestMatchedCandidates.ToString();
+
                 if (detect.Params.modedetect == 1)
                 {
                     cboDetectorMode.SelectedIndex = 0;
@@ -130,6 +137,8 @@ namespace WhoIsDemo.form
                 {
                     cboDetectorMode.SelectedIndex = 1;
                 }
+
+                cboExtractionMode.SelectedIndex = detect.Params.extractionmode;
             }
 
         }
@@ -170,47 +179,7 @@ namespace WhoIsDemo.form
         private void txtMinEye_KeyPress(object sender, KeyPressEventArgs e)
         {
             this.managerControlView.OnlyInteger(e);
-        }
-
-        private void btnDetect_Click(object sender, EventArgs e)
-        {
-            if (VerifyInputDetect())
-            {
-                Detect detect = new Detect();
-                Identify identify = new Identify();
-                identify.configuration = "identify_configuration";
-                detect.configuration = "detect_configuration";
-                ParamsIdentify paramsIdentify = new ParamsIdentify();
-                ParamsDetect paramsDetect = new ParamsDetect();
-                paramsDetect.accuracy = Convert.ToInt16(txtAccurancy.Text);
-                paramsDetect.maxeye = Convert.ToInt16(txtMaxEye.Text);
-                paramsIdentify.A_MaxEyeDist = Convert.ToInt16(txtMaxEye.Text);
-                paramsDetect.maxfaces = Convert.ToInt16(txtMaxDetect.Text); 
-                paramsDetect.mineye = Convert.ToInt16(txtMinEye.Text);
-                //paramsDetect.refreshInterval = Convert.ToInt16(txtTrackingRefresh.Text);
-                paramsIdentify.A_MinEyeDist = Convert.ToInt16(txtMinEye.Text);
-                paramsIdentify.A_FaceDetectionForced = Convert.ToInt16(cboDetectForced.Text);
-                paramsIdentify.A_IdentificationSpeed = Convert.ToInt16(cboIdentificationSpeed.Text);
-                if (cboDetectorMode.SelectedIndex == 0)
-                {
-                    paramsDetect.modedetect = 1;
-                }
-                else
-                {
-                    paramsDetect.modedetect = 2;
-                }
-
-                detect.Params = paramsDetect;
-                identify.Params = paramsIdentify;
-                diskPresenter.SaveDetectConfiguration(detect);
-                diskPresenter.SaveIdentifyConfiguration(identify);
-                this.lblOkDetect.Text = "Wait...";
-                RequestAipu.Instance.StopAipu();
-                Task.Delay(500).Wait();
-                RequestAipu.Instance.ReloadAipu();
-                this.lblOkDetect.Text = "OK";
-            }
-        }
+        }  
 
         private bool VerifyInputDetect()
         {
@@ -529,6 +498,18 @@ namespace WhoIsDemo.form
                 Configuration.Instance.DeepTrack = "false";
             }
 
+            registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.TRACKMODE_KEY, cboTrackingMode.SelectedIndex.ToString());
+            Configuration.Instance.TrackMode = cboTrackingMode.SelectedIndex;
+
+            registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.TRACKSPEED_KEY, cboTrackSpeed.SelectedIndex.ToString());
+            Configuration.Instance.TrackSpeed = cboTrackSpeed.SelectedIndex;
+
+            registryValueDataReader.setKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                    RegistryValueDataReader.TRACKMOTION_KEY, cboTrackMotion.SelectedIndex.ToString());
+            Configuration.Instance.TrackMotion = cboTrackMotion.SelectedIndex;
+
             lblTrackingOk.Text = "OK";
         }
 
@@ -590,6 +571,113 @@ namespace WhoIsDemo.form
             {
                 chkDeepTrack.Checked = false;
             }
+            string level = "0";
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.TRACKMODE_KEY)))
+            {
+                
+                level = registryValueDataReader
+                        .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                        RegistryValueDataReader.TRACKMODE_KEY);                
+                
+            }
+            cboTrackingMode.SelectedIndex = Convert.ToInt16(level);
+            level = "0";
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.TRACKSPEED_KEY)))
+            {
+
+                level = registryValueDataReader
+                        .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                        RegistryValueDataReader.TRACKSPEED_KEY);
+
+            }
+            cboTrackSpeed.SelectedIndex = Convert.ToInt16(level);
+            level = "0";
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.TRACKMOTION_KEY)))
+            {
+
+                level = registryValueDataReader
+                        .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                        RegistryValueDataReader.TRACKMOTION_KEY);
+
+            }
+            cboTrackMotion.SelectedIndex = Convert.ToInt16(level);
         }
+
+        private void btnDetect_Click(object sender, EventArgs e)
+        {
+            if (VerifyInputDetect())
+            {
+                Detect detect = new Detect();
+                Identify identify = new Identify();
+                identify.configuration = "identify_configuration";
+                detect.configuration = "detect_configuration";
+                ParamsIdentify paramsIdentify = new ParamsIdentify();
+                ParamsDetect paramsDetect = new ParamsDetect();
+                paramsDetect.accuracy = Convert.ToInt16(txtAccurancy.Text);
+                paramsDetect.maxeye = Convert.ToInt16(txtMaxEye.Text);
+                paramsDetect.maxfaces = Convert.ToInt16(txtMaxDetect.Text);
+                paramsDetect.mineye = Convert.ToInt16(txtMinEye.Text);
+                paramsDetect.extractionmode = cboExtractionMode.SelectedIndex;
+                //paramsDetect.refreshInterval = Convert.ToInt16(txtTrackingRefresh.Text);
+                paramsIdentify.A_MaxEyeDist = Convert.ToInt16(txtMaxEye.Text);
+                paramsIdentify.A_MinEyeDist = Convert.ToInt16(txtMinEye.Text);
+                paramsIdentify.A_FaceDetectionForced = Convert.ToInt16(cboDetectForced.Text);
+                paramsIdentify.A_IdentificationSpeed = Convert.ToInt16(cboIdentificationSpeed.Text);
+                paramsIdentify.A_SimilarityThreshold = Convert.ToInt16(txtASimilarity.Text);
+                paramsIdentify.A_FaceDetectThreshold = Convert.ToInt16(txtAccurancy.Text);
+                paramsIdentify.A_BestMatchedCandidates = Convert.ToInt16(txtBestMatched.Text);
+                if (cboDetectorMode.SelectedIndex == 0)
+                {
+                    paramsDetect.modedetect = 1;
+                }
+                else
+                {
+                    paramsDetect.modedetect = 2;
+                }
+
+                detect.Params = paramsDetect;
+                identify.Params = paramsIdentify;
+                diskPresenter.SaveDetectConfiguration(detect);
+                diskPresenter.SaveIdentifyConfiguration(identify);
+                this.lblOkDetect.Text = "Wait...";
+                RequestAipu.Instance.StopAipu();
+                Task.Delay(500).Wait();
+                RequestAipu.Instance.ReloadAipu();
+                this.lblOkDetect.Text = "OK";
+            }
+        }
+
+        //private void txtAMaxEye_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    this.managerControlView.OnlyInteger(e);
+        //}
+
+        //private void txtAMinEye_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    this.managerControlView.OnlyInteger(e);
+        //}
+
+        private void txtASimilarity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.managerControlView.OnlyInteger(e);
+        }
+
+        private void txtBestMatched_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.managerControlView.OnlyInteger(e);
+        }
+
+        //private void txtADetectThreshold_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    this.managerControlView.OnlyInteger(e);
+        //}
     }
 }

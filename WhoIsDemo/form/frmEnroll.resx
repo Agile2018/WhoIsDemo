@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="splitContainer1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -128,6 +131,9 @@
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
+  <metadata name="label2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -162,9 +168,15 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="panel2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
+  <metadata name="btnRestart.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnRestart.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -192,6 +204,9 @@
   <data name="&gt;&gt;btnRestart.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="btnStop.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnStop.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -219,6 +234,9 @@
   <data name="&gt;&gt;btnStop.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="btnStart.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnStart.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -264,9 +282,15 @@
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="panel1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
+  <metadata name="btnFrontVideo.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnFrontVideo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -294,6 +318,9 @@
   <data name="&gt;&gt;btnFrontVideo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="btnBackVideo.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnBackVideo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -321,6 +348,9 @@
   <data name="&gt;&gt;btnBackVideo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="btnClose.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -366,6 +396,9 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <metadata name="pic1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -393,6 +426,9 @@
   <data name="&gt;&gt;pic1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <metadata name="pic8.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -434,6 +470,9 @@
   <data name="&gt;&gt;pic8.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <metadata name="pic6.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -475,6 +514,9 @@
   <data name="&gt;&gt;pic6.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <metadata name="pic4.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -516,6 +558,9 @@
   <data name="&gt;&gt;pic4.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <metadata name="pic2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -557,6 +602,9 @@
   <data name="&gt;&gt;pic2.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <metadata name="pic3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -598,6 +646,9 @@
   <data name="&gt;&gt;pic3.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <metadata name="pic5.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -639,6 +690,9 @@
   <data name="&gt;&gt;pic5.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <metadata name="pic7.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -680,6 +734,9 @@
   <data name="&gt;&gt;pic7.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <metadata name="pic9.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="pic9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -733,6 +790,9 @@
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="lblNotDetect.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="lblNotDetect.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -769,6 +829,9 @@
   <data name="&gt;&gt;lblNotDetect.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="lblRepeated.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="lblRepeated.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -805,6 +868,9 @@
   <data name="&gt;&gt;lblRepeated.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="lblLowScore.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="lblLowScore.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -841,6 +907,9 @@
   <data name="&gt;&gt;lblLowScore.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <metadata name="lblFiles.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="lblFiles.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -877,6 +946,9 @@
   <data name="&gt;&gt;lblFiles.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <metadata name="lblCountNewPersons.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="lblCountNewPersons.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -907,6 +979,9 @@
   <data name="&gt;&gt;lblCountNewPersons.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <metadata name="lblQuantityRecords.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="lblQuantityRecords.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -937,6 +1012,9 @@
   <data name="&gt;&gt;lblQuantityRecords.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <metadata name="btnDownRecords.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnDownRecords.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -964,6 +1042,9 @@
   <data name="&gt;&gt;btnDownRecords.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <metadata name="btnUploadRecords.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnUploadRecords.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -988,6 +1069,9 @@
   <data name="&gt;&gt;btnUploadRecords.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <metadata name="btnStopLoadFile.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnStopLoadFile.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1015,6 +1099,9 @@
   <data name="&gt;&gt;btnStopLoadFile.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <metadata name="flpDatabase.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="flpDatabase.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
@@ -1042,6 +1129,9 @@
   <data name="&gt;&gt;flpDatabase.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <metadata name="btnLoadFile.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="btnLoadFile.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -1066,6 +1156,9 @@
   <data name="&gt;&gt;btnLoadFile.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <metadata name="label1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1096,6 +1189,9 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <metadata name="flowLayoutPanel1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="flowLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -1123,6 +1219,9 @@
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <metadata name="label4.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1187,6 +1286,9 @@
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">

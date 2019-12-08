@@ -46,6 +46,8 @@
             this.pic5 = new System.Windows.Forms.PictureBox();
             this.pic7 = new System.Windows.Forms.PictureBox();
             this.pic9 = new System.Windows.Forms.PictureBox();
+            this.btnStopLoadFile = new System.Windows.Forms.Button();
+            this.btnLoadFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -71,7 +73,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.btnFrontVideo);
             this.splitContainer1.Panel1.Controls.Add(this.btnBackVideo);
@@ -91,7 +92,8 @@
             // 
             // splitContainer1.Panel2
             // 
-            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
+            this.splitContainer1.Panel2.Controls.Add(this.btnStopLoadFile);
+            this.splitContainer1.Panel2.Controls.Add(this.btnLoadFile);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
             // 
@@ -231,6 +233,28 @@
             this.pic9.TabStop = false;
             this.pic9.Paint += new System.Windows.Forms.PaintEventHandler(this.pic9_Paint);
             // 
+            // btnStopLoadFile
+            // 
+            resources.ApplyResources(this.btnStopLoadFile, "btnStopLoadFile");
+            this.btnStopLoadFile.FlatAppearance.BorderSize = 0;
+            this.btnStopLoadFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnStopLoadFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.CadetBlue;
+            this.btnStopLoadFile.Image = global::WhoIsDemo.Properties.Resources.timer_off;
+            this.btnStopLoadFile.Name = "btnStopLoadFile";
+            this.btnStopLoadFile.UseVisualStyleBackColor = true;
+            this.btnStopLoadFile.Click += new System.EventHandler(this.btnStopLoadFile_Click);
+            // 
+            // btnLoadFile
+            // 
+            this.btnLoadFile.FlatAppearance.BorderSize = 0;
+            this.btnLoadFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Lime;
+            this.btnLoadFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.CadetBlue;
+            resources.ApplyResources(this.btnLoadFile, "btnLoadFile");
+            this.btnLoadFile.Image = global::WhoIsDemo.Properties.Resources.file;
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
@@ -294,5 +318,7 @@
         private System.Windows.Forms.Button btnBackVideo;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnStopLoadFile;
+        private System.Windows.Forms.Button btnLoadFile;
     }
 }

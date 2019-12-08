@@ -31,7 +31,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConfiguration));
             this.tcConfiguration = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnDetect = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtBestMatched = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtASimilarity = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cboDetectForced = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cboIdentificationSpeed = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cboTrackMotion = new System.Windows.Forms.ComboBox();
+            this.cboTrackSpeed = new System.Windows.Forms.ComboBox();
+            this.cboTrackingMode = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.lblTrackingOk = new System.Windows.Forms.Label();
             this.chkDeepTrack = new System.Windows.Forms.CheckBox();
             this.btnSaveTracking = new System.Windows.Forms.Button();
@@ -48,15 +64,12 @@
             this.cboRefreshCapture = new System.Windows.Forms.ComboBox();
             this.cboLevelResolution = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblOkDetect = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cboExtractionMode = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.cboDetectorMode = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cboDetectForced = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cboIdentificationSpeed = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblOkDetect = new System.Windows.Forms.Label();
-            this.btnDetect = new System.Windows.Forms.Button();
             this.txtAccurancy = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtMinEye = new System.Windows.Forms.TextBox();
@@ -85,6 +98,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.tcConfiguration.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -105,15 +119,124 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnDetect);
+            this.tabPage1.Controls.Add(this.groupBox6);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.lblOkDetect);
             this.tabPage1.Controls.Add(this.groupBox3);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnDetect
+            // 
+            this.btnDetect.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDetect.BackgroundImage = global::WhoIsDemo.Properties.Resources.ic_save_black_48dp;
+            resources.ApplyResources(this.btnDetect, "btnDetect");
+            this.btnDetect.Name = "btnDetect";
+            this.btnDetect.UseVisualStyleBackColor = false;
+            this.btnDetect.Click += new System.EventHandler(this.btnDetect_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.txtBestMatched);
+            this.groupBox6.Controls.Add(this.label20);
+            this.groupBox6.Controls.Add(this.txtASimilarity);
+            this.groupBox6.Controls.Add(this.label19);
+            this.groupBox6.Controls.Add(this.cboDetectForced);
+            this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.Controls.Add(this.cboIdentificationSpeed);
+            this.groupBox6.Controls.Add(this.label2);
+            resources.ApplyResources(this.groupBox6, "groupBox6");
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.TabStop = false;
+            // 
+            // txtBestMatched
+            // 
+            resources.ApplyResources(this.txtBestMatched, "txtBestMatched");
+            this.txtBestMatched.Name = "txtBestMatched";
+            this.txtBestMatched.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBestMatched_KeyPress);
+            // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
+            // 
+            // txtASimilarity
+            // 
+            resources.ApplyResources(this.txtASimilarity, "txtASimilarity");
+            this.txtASimilarity.Name = "txtASimilarity";
+            this.txtASimilarity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtASimilarity_KeyPress);
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // cboDetectForced
+            // 
+            this.cboDetectForced.FormattingEnabled = true;
+            this.cboDetectForced.Items.AddRange(new object[] {
+            resources.GetString("cboDetectForced.Items"),
+            resources.GetString("cboDetectForced.Items1"),
+            resources.GetString("cboDetectForced.Items2"),
+            resources.GetString("cboDetectForced.Items3"),
+            resources.GetString("cboDetectForced.Items4"),
+            resources.GetString("cboDetectForced.Items5"),
+            resources.GetString("cboDetectForced.Items6"),
+            resources.GetString("cboDetectForced.Items7"),
+            resources.GetString("cboDetectForced.Items8"),
+            resources.GetString("cboDetectForced.Items9"),
+            resources.GetString("cboDetectForced.Items10"),
+            resources.GetString("cboDetectForced.Items11"),
+            resources.GetString("cboDetectForced.Items12"),
+            resources.GetString("cboDetectForced.Items13"),
+            resources.GetString("cboDetectForced.Items14"),
+            resources.GetString("cboDetectForced.Items15"),
+            resources.GetString("cboDetectForced.Items16"),
+            resources.GetString("cboDetectForced.Items17"),
+            resources.GetString("cboDetectForced.Items18"),
+            resources.GetString("cboDetectForced.Items19")});
+            resources.ApplyResources(this.cboDetectForced, "cboDetectForced");
+            this.cboDetectForced.Name = "cboDetectForced";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // cboIdentificationSpeed
+            // 
+            this.cboIdentificationSpeed.FormattingEnabled = true;
+            this.cboIdentificationSpeed.Items.AddRange(new object[] {
+            resources.GetString("cboIdentificationSpeed.Items"),
+            resources.GetString("cboIdentificationSpeed.Items1"),
+            resources.GetString("cboIdentificationSpeed.Items2"),
+            resources.GetString("cboIdentificationSpeed.Items3"),
+            resources.GetString("cboIdentificationSpeed.Items4"),
+            resources.GetString("cboIdentificationSpeed.Items5"),
+            resources.GetString("cboIdentificationSpeed.Items6"),
+            resources.GetString("cboIdentificationSpeed.Items7"),
+            resources.GetString("cboIdentificationSpeed.Items8"),
+            resources.GetString("cboIdentificationSpeed.Items9"),
+            resources.GetString("cboIdentificationSpeed.Items10")});
+            resources.ApplyResources(this.cboIdentificationSpeed, "cboIdentificationSpeed");
+            this.cboIdentificationSpeed.Name = "cboIdentificationSpeed";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cboTrackMotion);
+            this.groupBox5.Controls.Add(this.cboTrackSpeed);
+            this.groupBox5.Controls.Add(this.cboTrackingMode);
+            this.groupBox5.Controls.Add(this.label23);
+            this.groupBox5.Controls.Add(this.label22);
+            this.groupBox5.Controls.Add(this.label21);
             this.groupBox5.Controls.Add(this.lblTrackingOk);
             this.groupBox5.Controls.Add(this.chkDeepTrack);
             this.groupBox5.Controls.Add(this.btnSaveTracking);
@@ -128,6 +251,52 @@
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            // 
+            // cboTrackMotion
+            // 
+            this.cboTrackMotion.FormattingEnabled = true;
+            this.cboTrackMotion.Items.AddRange(new object[] {
+            resources.GetString("cboTrackMotion.Items"),
+            resources.GetString("cboTrackMotion.Items1"),
+            resources.GetString("cboTrackMotion.Items2"),
+            resources.GetString("cboTrackMotion.Items3")});
+            resources.ApplyResources(this.cboTrackMotion, "cboTrackMotion");
+            this.cboTrackMotion.Name = "cboTrackMotion";
+            // 
+            // cboTrackSpeed
+            // 
+            this.cboTrackSpeed.FormattingEnabled = true;
+            this.cboTrackSpeed.Items.AddRange(new object[] {
+            resources.GetString("cboTrackSpeed.Items"),
+            resources.GetString("cboTrackSpeed.Items1"),
+            resources.GetString("cboTrackSpeed.Items2")});
+            resources.ApplyResources(this.cboTrackSpeed, "cboTrackSpeed");
+            this.cboTrackSpeed.Name = "cboTrackSpeed";
+            // 
+            // cboTrackingMode
+            // 
+            this.cboTrackingMode.FormattingEnabled = true;
+            this.cboTrackingMode.Items.AddRange(new object[] {
+            resources.GetString("cboTrackingMode.Items"),
+            resources.GetString("cboTrackingMode.Items1"),
+            resources.GetString("cboTrackingMode.Items2")});
+            resources.ApplyResources(this.cboTrackingMode, "cboTrackingMode");
+            this.cboTrackingMode.Name = "cboTrackingMode";
+            // 
+            // label23
+            // 
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // label21
+            // 
+            resources.ApplyResources(this.label21, "label21");
+            this.label21.Name = "label21";
             // 
             // lblTrackingOk
             // 
@@ -231,7 +400,8 @@
             resources.GetString("cboLevelResolution.Items"),
             resources.GetString("cboLevelResolution.Items1"),
             resources.GetString("cboLevelResolution.Items2"),
-            resources.GetString("cboLevelResolution.Items3")});
+            resources.GetString("cboLevelResolution.Items3"),
+            resources.GetString("cboLevelResolution.Items4")});
             resources.ApplyResources(this.cboLevelResolution, "cboLevelResolution");
             this.cboLevelResolution.Name = "cboLevelResolution";
             this.cboLevelResolution.SelectedIndexChanged += new System.EventHandler(this.cboLevelResolution_SelectedIndexChanged);
@@ -241,16 +411,18 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // lblOkDetect
+            // 
+            resources.ApplyResources(this.lblOkDetect, "lblOkDetect");
+            this.lblOkDetect.ForeColor = System.Drawing.Color.Red;
+            this.lblOkDetect.Name = "lblOkDetect";
+            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cboExtractionMode);
+            this.groupBox3.Controls.Add(this.label24);
             this.groupBox3.Controls.Add(this.cboDetectorMode);
             this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.cboDetectForced);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.cboIdentificationSpeed);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.lblOkDetect);
-            this.groupBox3.Controls.Add(this.btnDetect);
             this.groupBox3.Controls.Add(this.txtAccurancy);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.txtMinEye);
@@ -262,6 +434,20 @@
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
+            // 
+            // cboExtractionMode
+            // 
+            this.cboExtractionMode.FormattingEnabled = true;
+            this.cboExtractionMode.Items.AddRange(new object[] {
+            resources.GetString("cboExtractionMode.Items"),
+            resources.GetString("cboExtractionMode.Items1")});
+            resources.ApplyResources(this.cboExtractionMode, "cboExtractionMode");
+            this.cboExtractionMode.Name = "cboExtractionMode";
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
             // 
             // cboDetectorMode
             // 
@@ -276,76 +462,6 @@
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            // 
-            // cboDetectForced
-            // 
-            this.cboDetectForced.FormattingEnabled = true;
-            this.cboDetectForced.Items.AddRange(new object[] {
-            resources.GetString("cboDetectForced.Items"),
-            resources.GetString("cboDetectForced.Items1"),
-            resources.GetString("cboDetectForced.Items2"),
-            resources.GetString("cboDetectForced.Items3"),
-            resources.GetString("cboDetectForced.Items4"),
-            resources.GetString("cboDetectForced.Items5"),
-            resources.GetString("cboDetectForced.Items6"),
-            resources.GetString("cboDetectForced.Items7"),
-            resources.GetString("cboDetectForced.Items8"),
-            resources.GetString("cboDetectForced.Items9"),
-            resources.GetString("cboDetectForced.Items10"),
-            resources.GetString("cboDetectForced.Items11"),
-            resources.GetString("cboDetectForced.Items12"),
-            resources.GetString("cboDetectForced.Items13"),
-            resources.GetString("cboDetectForced.Items14"),
-            resources.GetString("cboDetectForced.Items15"),
-            resources.GetString("cboDetectForced.Items16"),
-            resources.GetString("cboDetectForced.Items17"),
-            resources.GetString("cboDetectForced.Items18"),
-            resources.GetString("cboDetectForced.Items19")});
-            resources.ApplyResources(this.cboDetectForced, "cboDetectForced");
-            this.cboDetectForced.Name = "cboDetectForced";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // cboIdentificationSpeed
-            // 
-            this.cboIdentificationSpeed.FormattingEnabled = true;
-            this.cboIdentificationSpeed.Items.AddRange(new object[] {
-            resources.GetString("cboIdentificationSpeed.Items"),
-            resources.GetString("cboIdentificationSpeed.Items1"),
-            resources.GetString("cboIdentificationSpeed.Items2"),
-            resources.GetString("cboIdentificationSpeed.Items3"),
-            resources.GetString("cboIdentificationSpeed.Items4"),
-            resources.GetString("cboIdentificationSpeed.Items5"),
-            resources.GetString("cboIdentificationSpeed.Items6"),
-            resources.GetString("cboIdentificationSpeed.Items7"),
-            resources.GetString("cboIdentificationSpeed.Items8"),
-            resources.GetString("cboIdentificationSpeed.Items9"),
-            resources.GetString("cboIdentificationSpeed.Items10")});
-            resources.ApplyResources(this.cboIdentificationSpeed, "cboIdentificationSpeed");
-            this.cboIdentificationSpeed.Name = "cboIdentificationSpeed";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // lblOkDetect
-            // 
-            resources.ApplyResources(this.lblOkDetect, "lblOkDetect");
-            this.lblOkDetect.ForeColor = System.Drawing.Color.Red;
-            this.lblOkDetect.Name = "lblOkDetect";
-            // 
-            // btnDetect
-            // 
-            this.btnDetect.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDetect.BackgroundImage = global::WhoIsDemo.Properties.Resources.ic_save_black_48dp;
-            resources.ApplyResources(this.btnDetect, "btnDetect");
-            this.btnDetect.Name = "btnDetect";
-            this.btnDetect.UseVisualStyleBackColor = false;
-            this.btnDetect.Click += new System.EventHandler(this.btnDetect_Click);
             // 
             // txtAccurancy
             // 
@@ -540,6 +656,9 @@
             this.Load += new System.EventHandler(this.frmConfiguration_Load);
             this.tcConfiguration.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -577,7 +696,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnClearDatabase;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnDetect;
         private System.Windows.Forms.TextBox txtAccurancy;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtMinEye;
@@ -590,10 +708,6 @@
         private System.Windows.Forms.Label lblOkDetect;
         private System.Windows.Forms.Label lblVideoOk;
         private System.Windows.Forms.Label lblOkClearDatabase;
-        private System.Windows.Forms.ComboBox cboDetectForced;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cboIdentificationSpeed;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cboDetectorMode;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -613,5 +727,23 @@
         private System.Windows.Forms.Button btnSaveTracking;
         private System.Windows.Forms.CheckBox chkDeepTrack;
         private System.Windows.Forms.Label lblTrackingOk;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.ComboBox cboDetectForced;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cboIdentificationSpeed;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtBestMatched;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox txtASimilarity;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btnDetect;
+        private System.Windows.Forms.ComboBox cboTrackMotion;
+        private System.Windows.Forms.ComboBox cboTrackSpeed;
+        private System.Windows.Forms.ComboBox cboTrackingMode;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cboExtractionMode;
+        private System.Windows.Forms.Label label24;
     }
 }

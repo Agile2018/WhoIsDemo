@@ -52,6 +52,9 @@ namespace WhoIsDemo.model
         public int ConfidenceTrack { get => confidenceTrack; set => confidenceTrack = value; }
         public int VideoTypeDefault { get => videoTypeDefault; set => videoTypeDefault = value; }
         public string DeepTrack { get => deepTrack; set => deepTrack = value; }
+        public int TrackMode { get => trackMode; set => trackMode = value; }
+        public int TrackSpeed { get => trackSpeed; set => trackSpeed = value; }
+        public int TrackMotion { get => trackMotion; set => trackMotion = value; }
 
         private List<Video> listVideo = new List<Video>();
         private List<int> listHeightResolution = new List<int>();
@@ -81,6 +84,10 @@ namespace WhoIsDemo.model
         private int refreshIntervalTrack = 2000;
         private int confidenceTrack = 450;
         private string deepTrack = "false";
+        private int trackMode = 0;
+        private int trackSpeed = 0;
+        private int trackMotion = 0;
+
         #endregion
 
         #region constants

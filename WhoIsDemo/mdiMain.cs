@@ -165,6 +165,7 @@ namespace WhoIsDemo
             paramsDetect.maxfaces = 1;
             paramsDetect.mineye = 35;
             paramsDetect.modedetect = 1;
+            paramsDetect.extractionmode = 0;
             //paramsDetect.refreshInterval = 2000;
             detect.Params = paramsDetect;
             diskPresenter.SaveDetectConfiguration(detect);
@@ -179,6 +180,9 @@ namespace WhoIsDemo
             paramsIdentify.A_MaxEyeDist = 250;
             paramsIdentify.A_FaceDetectionForced = 2;
             paramsIdentify.A_IdentificationSpeed = 5;
+            paramsIdentify.A_SimilarityThreshold = 40;
+            paramsIdentify.A_FaceDetectThreshold = 450;
+            paramsIdentify.A_BestMatchedCandidates = 1;
             identify.Params = paramsIdentify;
             diskPresenter.SaveIdentifyConfiguration(identify);
             
@@ -341,6 +345,45 @@ namespace WhoIsDemo
                     RegistryValueDataReader.DEEPTRACK_KEY);
 
             }
+
+            string level = "0";
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.TRACKMODE_KEY)))
+            {
+
+                level = registryValueDataReader
+                        .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                        RegistryValueDataReader.TRACKMODE_KEY);
+
+            }
+            Configuration.Instance.TrackMode = Convert.ToInt16(level);
+            level = "0";
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.TRACKSPEED_KEY)))
+            {
+
+                level = registryValueDataReader
+                        .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                        RegistryValueDataReader.TRACKSPEED_KEY);
+
+            }
+            Configuration.Instance.TrackSpeed = Convert.ToInt16(level);
+            level = "0";
+
+            if (!string.IsNullOrEmpty(registryValueDataReader
+               .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+               RegistryValueDataReader.TRACKMOTION_KEY)))
+            {
+
+                level = registryValueDataReader
+                        .getKeyValueRegistry(RegistryValueDataReader.PATH_KEY,
+                        RegistryValueDataReader.TRACKMOTION_KEY);
+
+            }
+            Configuration.Instance.TrackMotion = Convert.ToInt16(level);
         }
     }
 }

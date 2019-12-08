@@ -179,13 +179,7 @@ namespace WhoIsDemo.presenter
 
         //}
 
-        //private void LaunchImageForRecognition(Mat img)
-        //{
-        //    isWritingImage = true;
-
-        //    WriteImageForRecognition(img);
-
-        //}
+        
 
         public async Task TaskImageFileForRecognition(string[] listPath)
         {
@@ -416,6 +410,19 @@ namespace WhoIsDemo.presenter
             RequestAipu.Instance.SetIpCamera(ip);
         }
 
+        public void SetTrackingMode(int mode)
+        {
+            RequestAipu.Instance.SetTrackingMode(mode);
+        }
+        public void SetTrackSpeed(int speed)
+        {
+            RequestAipu.Instance.SetTrackSpeed(speed);
+        }
+        public void SetMotionOptimization(int motion)
+        {
+            RequestAipu.Instance.SetMotionOptimization(motion);
+        }
+
         public void SetDeviceVideo(string device)
         {
             RequestAipu.Instance.SetDeviceVideo(device);
@@ -432,6 +439,15 @@ namespace WhoIsDemo.presenter
         public int GetCountRepeatUser()
         {
             return RequestAipu.Instance.GetCountRepeatUser();
+        }
+
+        public void StatePlay()
+        {
+            RequestAipu.Instance.StatePlay();
+        }
+        public void StatePaused()
+        {
+            RequestAipu.Instance.StatePaused();
         }
 
         public void SetNameWindow(string name)
@@ -489,18 +505,7 @@ namespace WhoIsDemo.presenter
         //    //Configuration.Instance.FactorScalingSizeFont
         //}
 
-        //public int SetFps(int fps)
-        //{
-        //    int indexProtocol = Configuration.Instance.VideoDefault.IndexOf(":");
-        //    if (indexProtocol >= 0)
-        //    {
-        //        return 0;
-        //    }
-        //    else
-        //    {
-        //        return 1000 / fps;
-        //    }
-        //}
+        
         #endregion
     }
 }
