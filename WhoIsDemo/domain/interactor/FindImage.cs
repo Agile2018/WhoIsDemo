@@ -41,6 +41,11 @@ namespace WhoIsDemo.domain.interactor
                         
         }
 
+        public void ClearPlanCacheImages()
+        {
+            database.ClearPlanCacheImages();
+        }
+
         public void GetListImageByIdFace(int idFace)
         {
 

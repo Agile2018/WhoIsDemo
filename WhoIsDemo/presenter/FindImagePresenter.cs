@@ -144,6 +144,10 @@ namespace WhoIsDemo.presenter
             return bmpReturn;
         }
 
+        public void ClearPlanCacheImages()
+        {
+            findImage.ClearPlanCacheImages();
+        }
         public Bitmap ResizeBitmap(Bitmap bmp)
         {
             int width = (int)(bmp.Width * 0.5);

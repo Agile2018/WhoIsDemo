@@ -197,15 +197,20 @@ namespace WhoIsDemo.presenter
             int count = 0;
             while (count < listPath.Count() && !CancelLoad)
             {
+                //Task.Delay(20).Wait();
                 if (RequestAipu.Instance.GetIsFinishLoadFiles())
                 {
 
                     //WriteImageForRecognition(listPath[count]);
-                    RequestAipu.Instance.RecognitionFaceFiles(listPath[count], linkVideo);
+                    string fileImage = listPath[count];
+                    
+                    RequestAipu.Instance.RecognitionFaceFiles(fileImage, linkVideo);
                     count++;
+                    
                 }
-                //Task.Delay(10).Wait();
+                //
             }
+            //Task.Delay(300).Wait();
             CancelLoad = false;
             subjectLoad.OnNext(true);
         }

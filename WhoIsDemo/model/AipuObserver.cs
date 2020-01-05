@@ -120,7 +120,7 @@ namespace WhoIsDemo.model
             });
             subscriptionUser = observableUser
                 .Where(res => res != UserJson && !string.IsNullOrEmpty(res))      // res != UserJson &&
-                .Delay(TimeSpan.FromSeconds(0.2))
+                .Delay(TimeSpan.FromMilliseconds(5))
                 .Repeat()
                 .Subscribe(
                     res => UserJson = res

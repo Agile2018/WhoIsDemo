@@ -190,7 +190,11 @@ namespace WhoIsDemo.model
         {
             try
             {
-                session.Client.DropDatabase(nameDatabase);
+                var filterUser = Builders<PersonDb>.Filter.Empty;
+                users.DeleteMany(filterUser);
+                var filterImage = Builders<Image>.Filter.Empty;
+                images.DeleteMany(filterImage);
+                //session.Client.DropDatabase(nameDatabase);
                 return true;
             }
             catch (MongoException exception)
@@ -201,6 +205,18 @@ namespace WhoIsDemo.model
             }
             
            
+        }
+
+        public void ClearPlanCacheImages()
+        {                        
+
+            var doc = new BsonDocument()
+            {
+                { "planCacheClear", "images" }
+            };
+
+            var command = new BsonDocumentCommand<BsonDocument>(doc);
+            var response = database.RunCommand(command);
         }
 
         public string Connection { get => connection; set => connection = value; }

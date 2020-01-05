@@ -26,24 +26,27 @@ namespace WhoIsDemo.form
         const int HWND_BOTTOM = 1;
         #endregion
         #region variables
-        
-       
+        private bool isSetImageToSlider = true;       
         public string strNameMenu;        
         private int indexPerson = 0;
-        
+        private bool isFinishSlider = false;
+        private bool isRunSlider = false;
+        private bool isRunNewCard = false;
         private int countFlowLayoutControls = 0;
-        
+        private bool isAddNewCard = true;
         private double totalFrame;
         private double fps;
-        private int countNewPerson = 0;        
-        
+        private int countNewPerson = 0;
+        private bool isFinishNewCard = false;
         private StatusStrip status;
         private Person personTransition = new Person();
         private List<Person> listPersonSlider = new List<Person>();
         ManagerControlView managerControlView = new ManagerControlView();
         HearUserPresenter hearUserPresenter = new HearUserPresenter();
         FindImagePresenter findImagePresenter = new FindImagePresenter();
-        
+        private List<Bitmap> imagesSlider = new List<Bitmap>();
+        private List<Bitmap> imagesNewCard = new List<Bitmap>();
+        private List<Person> listPersonNewCard = new List<Person>();
         GraffitsPresenter graffitsPresenter = new GraffitsPresenter();
         IDisposable subscriptionHearUser;
         IDisposable subscriptionFindImage;
@@ -83,7 +86,8 @@ namespace WhoIsDemo.form
             try
             {
                 imgLeft = new Bitmap(pic1.Image);
-                pic1.Image = imgRight;                
+                //pic1.Image = imgRight; 
+                pic1.Image = image;
                 imgRight = new Bitmap(pic2.Image);
                 pic2.Image = findImagePresenter
                     .AdjustAlpha(new Bitmap(imgLeft), 0.7f);
@@ -107,11 +111,30 @@ namespace WhoIsDemo.form
 
                 Console.WriteLine(ex.Message);
             }
-            finally
+            catch (System.InvalidOperationException ex)
             {
-                pic1.Image = image;
+
+                Console.WriteLine(ex.Message);
             }
- 
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            //finally
+            //{
+            //    //try
+            //    //{
+            //    //    pic1.Image = image;
+            //    //}
+            //    //catch (System.InvalidOperationException ex)
+            //    //{
+
+            //    //    Console.WriteLine(ex.Message);
+            //    //}
+            //    //isSetImageToSlider = true;
+            //}
+            
         }
 
         private void frmEnroll_Load(object sender, EventArgs e)
@@ -224,7 +247,7 @@ namespace WhoIsDemo.form
                 graffitsPresenter.IsLoadFile = false;
                 this.btnStopLoadFile.Invoke(new Action(() => this.btnStopLoadFile.Enabled = false));
                 this.btnLoadFile.Invoke(new Action(() => this.btnLoadFile.Enabled = true));
-                this.btnStart.Invoke(new Action(() => this.btnStart.Enabled = true));
+                //this.btnStart.Invoke(new Action(() => this.btnStart.Enabled = true));
                 this.status.Invoke(new Action(() => managerControlView
                 .StopProgressStatusStrip(1, this.status)));
                 this.lblQuantityRecords.Invoke(new Action(() => this.lblQuantityRecords.Text = SynchronizationPeoplePresenter
@@ -252,42 +275,184 @@ namespace WhoIsDemo.form
                 this.lblRepeated.Invoke(new Action(() => this.lblRepeated.Visible = true));
 
                 this.lblNotDetect.Invoke(new Action(() => this.lblNotDetect.Visible = true));
-
+                
             }
-        }        
+        }
+
+        //private async Task TaskAddPersonTemp(Bitmap image)
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        AddPersonTemp(image);
+
+        //    });
+        //}
+       
+        private void AddPersonTemp(Bitmap image)
+        {
+
+            SetPersonInList();
+            this.imagesSlider.Add(image);
+            //if (isSetImageToSlider)
+            //{
+            //    isSetImageToSlider = false;
+            //    this.Invoke(new Action(() => this.SetImage(image)));
+            //}
+
+        }
+
+        private async Task TaskSetImageToSlider()
+        {
+            await Task.Run(() =>
+            {
+                SetImageToSlider();
+
+            });
+        }
+
+        private void RunSetImageToSlider()
+        {
+            if (!isRunSlider)
+            {
+                isRunSlider = true;
+                InitSetImageToSlider();
+                Task tpt = this.TaskSetImageToSlider();
+            }
+            
+        }
+
+        private void InitSetImageToSlider()
+        {
+            this.imagesSlider.Clear();
+            this.isFinishSlider = false;
+            this.isSetImageToSlider = true;
+        }
+
+        private void SetImageToSlider()
+        {
+            while (!isFinishSlider)
+            {
+                if (imagesSlider.Count > 0 && isSetImageToSlider)
+                {
+                    try
+                    {
+                        isSetImageToSlider = false;
+                        Bitmap img = imagesSlider[0];
+                        this.Invoke(new Action(() => this.SetImage(img)));
+                        imagesSlider.RemoveAt(0);
+                    }
+                    catch (System.InvalidOperationException ex)
+                    {
+
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        isSetImageToSlider = true;
+                    }
+                }
+            }
+        }
+
+        private void RunNewCardToFlowLayout()
+        {
+            if (!isRunNewCard)
+            {
+                isRunNewCard = true;
+                InitSetNewCardToFlowLayout();
+                Task tnc = this.TaskNewCardToFlowLayout();
+            }
+
+        }
+
+        private void InitSetNewCardToFlowLayout()
+        {
+            this.imagesNewCard.Clear();
+            this.isFinishNewCard = false;
+            this.isAddNewCard = true;
+        }
+
+        private void SetNewCardToFlowLayout()
+        {
+            while (!isFinishNewCard)
+            {
+                if (imagesNewCard.Count > 0 && isAddNewCard)
+                {
+                    isAddNewCard = false;
+                    Bitmap img = this.imagesNewCard[0];
+                    Person personNewCard = this.listPersonNewCard[0];
+                    this.imagesNewCard.RemoveAt(0);
+                    this.listPersonNewCard.RemoveAt(0);
+                    AddPersonToCard(img, personNewCard);
+                    isAddNewCard = true;
+                }
+            }
+        }
+
+        private async Task TaskNewCardToFlowLayout()
+        {
+            await Task.Run(() =>
+            {
+                SetNewCardToFlowLayout();
+
+            });
+        }
+
+        //private async Task TaskAddPersonToCard(Bitmap image)
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        AddPersonToCard(image);
+
+        //    });
+        //}
+
+        private void AddPersonToCard(Bitmap image, Person personNewCard)
+        {
+            countNewPerson++;
+            this.AddNewCardPerson(image, personNewCard);
+            this.lblCountNewPersons.Invoke(new Action(() =>
+            this.lblCountNewPersons.Text = countNewPerson.ToString()));
+        }
+
 
         private void ThreadAddImageOfPerson(Bitmap image)
         {
             if (!SearchPersonList(Convert.ToInt32(personTransition.Params.Id_face),
                     this.listPersonSlider))
             {
-                SetPersonInList();
-                
-                this.Invoke(new Action(() => this.SetImage(image)));
+                //SetPersonInList();
+
+                //this.Invoke(new Action(() => this.SetImage(image)));
+
+                //Task tpt = this.TaskAddPersonTemp(image);
+                AddPersonTemp(image);
             }
 
             if (personTransition.Params.Register == "1")
             {
-                countNewPerson++;                
-                this.AddNewCardPerson(image);
-                this.lblCountNewPersons.Invoke(new Action(() =>
-                this.lblCountNewPersons.Text = countNewPerson.ToString()));
-                
+                //countNewPerson++;                
+                //this.AddNewCardPerson(image);
+                //this.lblCountNewPersons.Invoke(new Action(() =>
+                //this.lblCountNewPersons.Text = countNewPerson.ToString()));
+                //Task tpc = this.TaskAddPersonToCard(image);
+                this.imagesNewCard.Add(image);
             }
         }
 
         private void AddImageOfPerson(Bitmap image)
         {
-            Task t = this.TaskAddImageOfPerson(image);
+            //Task t = this.TaskAddImageOfPerson(image);
+            ThreadAddImageOfPerson(image);
         }
-        private async Task TaskAddImageOfPerson(Bitmap image)
-        {
-            await Task.Run(() =>
-            {
-                ThreadAddImageOfPerson(image);
+        //private async Task TaskAddImageOfPerson(Bitmap image)
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        ThreadAddImageOfPerson(image);
 
-            });
-        }
+        //    });
+        //}
         private bool SearchPersonList(int id, List<Person> people)
         {
             Person personSearch = people
@@ -310,31 +475,44 @@ namespace WhoIsDemo.form
                 indexPerson = 0;
             }
         }
-        private void AddNewCardPerson(Bitmap image)
+        private void AddNewCardPerson(Bitmap image, Person personNewCard)
         {
-
-            if (this.countFlowLayoutControls >= sizeMaxFlowLayout)
+            try
             {
-                this.countFlowLayoutControls = 0;
+                if (this.countFlowLayoutControls >= sizeMaxFlowLayout)
+                {
+                    this.countFlowLayoutControls = 0;
+                    this.flowLayoutPanel1.Invoke(new Action(() =>
+                    this.flowLayoutPanel1.Controls.Clear()));
+                    Task.Delay(20);
+                }
+                CardPerson cardPerson = new CardPerson();
+                cardPerson.IdFace = personNewCard.Params.Id_face;
+                cardPerson.Id = personNewCard.Params.Identification;
+                cardPerson.FirstName = personNewCard.Params.Name;
+                cardPerson.LastName = personNewCard.Params.Lastname;
+                if (image != null)
+                {
+                    Bitmap imgResize = findImagePresenter.ResizeBitmap(image);
+                    cardPerson.Photo = imgResize;
+                }
                 this.flowLayoutPanel1.Invoke(new Action(() =>
-                this.flowLayoutPanel1.Controls.Clear()));
-                Task.Delay(20);
+                this.flowLayoutPanel1.Controls.Add(cardPerson)));
+                this.flowLayoutPanel1.Invoke(new Action(() =>
+                this.flowLayoutPanel1.Refresh()));
+                this.countFlowLayoutControls++;
             }
-            CardPerson cardPerson = new CardPerson();
-            cardPerson.IdFace = personTransition.Params.Id_face;
-            cardPerson.Id = personTransition.Params.Identification;
-            cardPerson.FirstName = personTransition.Params.Name;
-            cardPerson.LastName = personTransition.Params.Lastname;
-            if (image != null)
+            catch (Exception ex)
             {
-                Bitmap imgResize = findImagePresenter.ResizeBitmap(image);
-                cardPerson.Photo = imgResize;
+
+                Console.WriteLine(ex.Message);
             }
-            this.flowLayoutPanel1.Invoke(new Action(() =>
-            this.flowLayoutPanel1.Controls.Add(cardPerson)));
-            this.flowLayoutPanel1.Invoke(new Action(() =>
-            this.flowLayoutPanel1.Refresh()));
-            this.countFlowLayoutControls++;
+            //finally
+            //{
+            //    isAddNewCard = true;
+            //}
+         
+            
         }
 
         private async Task TaskUploadPeopleOfDatabase(List<People> list)
@@ -350,13 +528,11 @@ namespace WhoIsDemo.form
         {
             this.flpDatabase.Invoke(new Action(() =>
             this.flpDatabase.Controls.Clear()));
-
+            findImagePresenter.ClearPlanCacheImages();
             foreach (People people in list)
             {
                 AddCardSimple(people);
-            }
-
-            
+            }            
         }
 
         private void AddCardSimple(People people)
@@ -377,6 +553,11 @@ namespace WhoIsDemo.form
         private void AddPersonIndentify(Person person)
         {
             personTransition = person;
+            if (personTransition.Params.Register == "1")
+            {
+                this.listPersonNewCard.Add(person);
+            }
+            
             findImagePresenter.GetImage64ByUser(Convert
                 .ToInt16(person.Params.Id_face));
 
@@ -447,17 +628,15 @@ namespace WhoIsDemo.form
         private void frmEnroll_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
-            {
-                
-
+            {                
                 if (graffitsPresenter.IsLoadFile)
                 {
                     graffitsPresenter.IsLoadFile = false;
                     graffitsPresenter.CancelLoad = true;
                     Task.Delay(300).Wait();
                 }
-                
-                
+                isFinishSlider = true;
+                isFinishNewCard = true;
                 if (subscriptionHearUser != null) subscriptionHearUser.Dispose();
                 if (subscriptionFindImage != null) subscriptionFindImage.Dispose();
                 
@@ -617,8 +796,10 @@ namespace WhoIsDemo.form
             this.lblLowScore.Visible = false;
             this.lblRepeated.Visible = false;
             this.lblNotDetect.Visible = false;
-            
+            RunSetImageToSlider();
+            RunNewCardToFlowLayout();
             graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
+            
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -665,9 +846,11 @@ namespace WhoIsDemo.form
                 RequestAipu.Instance.ResetCountNotDetect();
                 RequestAipu.Instance.ResetLowScore();
                 RequestAipu.Instance.ResetCountRepeatUser();
+                RunSetImageToSlider();
+                RunNewCardToFlowLayout();
                 Task taskRecognition = graffitsPresenter
                     .TaskImageFileForRecognition(openFileDialog.FileNames);
-
+                
             }
         }
 
@@ -683,9 +866,7 @@ namespace WhoIsDemo.form
 
         private void flpDatabase_Scroll(object sender, ScrollEventArgs e)
         {
-            //Console.WriteLine(flpDatabase.VerticalScroll.Maximum);
-            //Console.WriteLine(e.NewValue);
-            //Console.WriteLine(e.OldValue);
+            
             
             flpDatabase.Refresh();
 

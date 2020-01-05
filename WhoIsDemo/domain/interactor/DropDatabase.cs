@@ -22,6 +22,7 @@ namespace WhoIsDemo.domain.interactor
         {
             database.Connect();
             database.GetUsers();
+            database.GetImages();
         }
 
         public bool DropCurrentDatabase()
