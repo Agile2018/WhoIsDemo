@@ -10,7 +10,7 @@ namespace WhoIsDemo.domain.interactor
     class SynchronizationOfPeopleWithDatabase
     {
         #region variables             
-        private Database database = new Database();
+        //private Database database = new Database();
         private List<People> listPeople = new List<People>();  
         private List<People> syncUpPeople = new List<People>();
 
@@ -35,16 +35,17 @@ namespace WhoIsDemo.domain.interactor
         #region methods
         public SynchronizationOfPeopleWithDatabase()
         {
-            this.database.Connection = Configuration.Instance.ConnectDatabase;
-            this.database.NameDatabase = Configuration.Instance.NameDatabase;
-            database.Connect();
-            database.GetImages();
-            database.GetUsers();
+            //this.database.Connection = Configuration.Instance.ConnectDatabase;
+            //this.database.NameDatabase = Configuration.Instance.NameDatabase;
+            //database.Connect();
+            //database.GetImages();
+            //database.GetUsers();
         }
 
         public void SyncUpDatabase(int indexSkip)
         {
-            database.IndexSkip = indexSkip;
+            //database.IndexSkip = indexSkip;
+            Database.Instance.IndexSkip = indexSkip;
             GetAllPeople();
             GetImagesOfPeople();
             SyncUpPeople = this.listPeople;
@@ -53,7 +54,8 @@ namespace WhoIsDemo.domain.interactor
         private void GetAllPeople()
         {
             this.listPeople.Clear();
-            List<PersonDb> list = database.GetAllPeople();
+            //List<PersonDb> list = database.GetAllPeople();
+            List<PersonDb> list = Database.Instance.GetAllPeople();
             if (list.Count != 0)
             {
                 listPeople = list.Select(l => new People {Id_face = l.Id_face,
@@ -65,7 +67,8 @@ namespace WhoIsDemo.domain.interactor
 
         private void GetImagesOfPeople()
         {
-            List<Image> list = database.GetImagesOfPepople();
+            //List<Image> list = database.GetImagesOfPepople();
+            List<Image> list = Database.Instance.GetImagesOfPepople();
             if (list.Count != 0)
             {
                 for(int i = 0; i < listPeople.Count; i++)
@@ -86,7 +89,8 @@ namespace WhoIsDemo.domain.interactor
 
         public long GetNumberOfUsers()
         {
-            return database.GetNumberOfUsers();
+            //return database.GetNumberOfUsers();
+            return Database.Instance.GetNumberOfUsers();
         }
 
         #endregion

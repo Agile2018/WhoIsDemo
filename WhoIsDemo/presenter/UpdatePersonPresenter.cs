@@ -47,15 +47,15 @@ namespace WhoIsDemo.presenter
         #region methods
         public UpdatePersonPresenter()
         {
-            Connection = "mongodb://localhost:27017";
-            NameDatabase = "dbass";
-            Connect();
+            //Connection = "mongodb://localhost:27017";
+            //NameDatabase = "dbass";
+            //Connect();
         }
 
-        private void Connect()
-        {
-            updatePerson.Connect();
-        }
+        //private void Connect()
+        //{
+        //    updatePerson.Connect();
+        //}
 
         public void UpdateUser(int idFace, string namePerson, 
             string lastName, string identification)

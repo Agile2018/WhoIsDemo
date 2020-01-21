@@ -42,7 +42,7 @@ namespace WhoIsDemo.form
                 SetValueRegistryLevelResolution();
                 SetValueRegistryTimeRefreshEntryControl();
                 GetParamsTracking();
-                dropDatabasePresenter.Connect();
+                //dropDatabasePresenter.Connect();
             }
             catch (FieldAccessException fe)
             {
@@ -358,15 +358,18 @@ namespace WhoIsDemo.form
         {
             if (MessageBox.Show(ManagerResource.Instance.resourceManager
                     .GetString("delete_database"), "Confirm", 
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, 
+                MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 if (dropDatabasePresenter.DropCurrentDatabase())
                 {
                     diskPresenter.FileDelete("iengine.db");
                     lblOkClearDatabase.Text = "OK";
-                    managerControlView.SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
-                        .GetString("complete"),
-                        0, this.status);
+                    //managerControlView.SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
+                    //    .GetString("complete"),
+                    //    0, this.status);
+
+                    System.Windows.Forms.Application.Exit();
                 }
                 else
                 {

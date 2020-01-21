@@ -12,22 +12,24 @@ namespace WhoIsDemo.domain.interactor
         #region variables
         private string connection;
         private string nameDatabase;
-        private Database database = new Database();
+        //private Database database = new Database();
         #endregion
 
         #region methods
         public UpdatePerson() { }
 
-        public void Connect()
-        {
-            database.Connect();
-            database.GetUsers();
-        }
+        //public void Connect()
+        //{
+        //    database.Connect();
+        //    database.GetUsers();
+        //}
 
         public void UpdateUser(int idFace, string namePerson, 
             string lastName, string identification)
         {
-            Task task = database.UpdateUser(idFace, namePerson, 
+            //Task task = database.UpdateUser(idFace, namePerson, 
+            //    lastName, identification);
+            Task task = Database.Instance.UpdateUser(idFace, namePerson,
                 lastName, identification);
             if (task.IsCompleted)
             {
@@ -46,7 +48,7 @@ namespace WhoIsDemo.domain.interactor
             set
             {
                 connection = value;
-                database.Connection = connection;
+                //database.Connection = connection;
             }
 
         }
@@ -61,7 +63,7 @@ namespace WhoIsDemo.domain.interactor
             set
             {
                 nameDatabase = value;
-                database.NameDatabase = nameDatabase;
+                //database.NameDatabase = nameDatabase;
             }
 
         }

@@ -16,14 +16,16 @@ namespace WhoIsDemo.model
         public const int LIMIT_RECORDS = 20;
         #endregion
         #region variables
-        private string connection;
-        private string nameDatabase;
+        private string connection = "mongodb://localhost:27017/?minPoolSize=3&maxPoolSize=3";
+        private string nameDatabase = "dbass";
         private int indexSkip = 0;
         private MongoClient client;
         private IClientSessionHandle session;
         private IMongoDatabase database;
         private IMongoCollection<PersonDb> users;
         private IMongoCollection<Image> images;
+        private static readonly Database instance = new Database();
+        public static Database Instance => instance;
         #endregion
 
         #region methods
@@ -97,6 +99,20 @@ namespace WhoIsDemo.model
             }
             
 
+        }
+
+        public void GetTables()
+        {
+            try
+            {
+                GetUsers();
+                GetImages();
+                
+            }
+            catch (MongoException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public async Task<bool> UpdateUser(int idFace, string namePerson, 
@@ -217,6 +233,7 @@ namespace WhoIsDemo.model
 
             var command = new BsonDocumentCommand<BsonDocument>(doc);
             var response = database.RunCommand(command);
+            
         }
 
         public string Connection { get => connection; set => connection = value; }

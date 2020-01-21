@@ -80,6 +80,25 @@ namespace WhoIsDemo.repository
             }
         }
 
+        public void WriteFileOfFiles(string strPath, string[] content)
+        {
+            try
+            {
+                StreamWriter streamWriter = new StreamWriter(strPath);
+                for (int i = 0; i < content.Count(); i++)
+                {
+                    streamWriter.WriteLine(content[i]);
+                }
+                
+                streamWriter.Dispose();
+            }
+            catch (System.IO.IOException e)
+            {
+                throw new FileNotFoundException("Write File", e);
+
+            }
+        }
+
         #endregion
     }
 }

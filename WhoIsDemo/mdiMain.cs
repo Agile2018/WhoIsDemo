@@ -153,6 +153,7 @@ namespace WhoIsDemo
             diskPresenter.SaveDatabaseConfiguration(databaseConfig);
             Configuration.Instance.ConnectDatabase = databaseConfig.Params.connect;
             Configuration.Instance.NameDatabase = databaseConfig.Params.name;
+            InitDatabase();
         }
 
         private void CreateParamsDetect()
@@ -236,8 +237,19 @@ namespace WhoIsDemo
             {
                 Configuration.Instance.ConnectDatabase = databaseConfig.Params.connect;
                 Configuration.Instance.NameDatabase = databaseConfig.Params.name;
-                
+                InitDatabase();
+
+
             }
+        }
+
+        private void InitDatabase()
+        {
+            Database.Instance.Connection = Configuration.Instance.ConnectDatabase;
+            Database.Instance.NameDatabase = Configuration.Instance.NameDatabase;
+            Database.Instance.Connect();
+            Database.Instance.GetTables();
+
         }
 
         private void cboVideo_SelectedIndexChanged(object sender, EventArgs e)

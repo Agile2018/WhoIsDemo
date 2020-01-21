@@ -21,6 +21,7 @@ namespace WhoIsDemo.presenter
         public const string file_video = "video.txt";
         public const string directory = "directory.txt";
         public const string file_identify = "identify.txt";
+        public const string file_list_images = "images_temp.txt";
         #endregion
 
         #region variables
@@ -62,6 +63,20 @@ namespace WhoIsDemo.presenter
 
         }
 
+        public void WriteFileOfFiles(string[] content)
+        {
+            try
+            {                
+                string pathFile = directoryConfiguration + "/" + file_list_images;
+                disk.WriteFileOfFiles(pathFile, content);
+
+            }
+            catch (System.IO.IOException e)
+            {
+                Console.WriteLine(e.Message);
+
+            }
+        }
         public void SaveIdentifyConfiguration(Identify identify)
         {
 

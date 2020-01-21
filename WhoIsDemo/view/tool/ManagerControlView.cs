@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using System.Security.Permissions;
 using System.Windows.Forms;
 
 
@@ -408,6 +410,15 @@ namespace WhoIsDemo.view.tool
                 }
             }
         }
+
+        [ReflectionPermission(SecurityAction.Demand, MemberAccess = true)]
+        public void ResetExceptionState(Control control)
+        {
+            typeof(Control).InvokeMember("SetState", BindingFlags.NonPublic |
+              BindingFlags.InvokeMethod | BindingFlags.Instance, null,
+              control, new object[] { 0x400000, false });
+        }
+
         #endregion
     }
 }

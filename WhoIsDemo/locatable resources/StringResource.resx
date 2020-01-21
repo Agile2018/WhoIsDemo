@@ -127,7 +127,7 @@
     <value>Define configuration parameters, please</value>
   </data>
   <data name="delete_database" xml:space="preserve">
-    <value>Are you sure to delete the database?</value>
+    <value>Are you sure to delete the database? The application will close.</value>
   </data>
   <data name="directory_config_empty" xml:space="preserve">
     <value>The configuration directory es empty </value>

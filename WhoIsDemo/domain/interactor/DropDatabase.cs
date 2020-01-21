@@ -12,22 +12,23 @@ namespace WhoIsDemo.domain.interactor
         #region variables
         private string connection;
         private string nameDatabase;
-        private Database database = new Database();
+        //private Database database = new Database();
         #endregion
 
         #region methods
         public DropDatabase() { }
 
-        public void Connect()
-        {
-            database.Connect();
-            database.GetUsers();
-            database.GetImages();
-        }
+        //public void Connect()
+        //{
+        //    database.Connect();
+        //    database.GetUsers();
+        //    database.GetImages();
+        //}
 
         public bool DropCurrentDatabase()
         {
-            return database.DropDatabase();
+            //return database.DropDatabase();
+            return Database.Instance.DropDatabase();
         }
 
         public string Connection
@@ -40,7 +41,7 @@ namespace WhoIsDemo.domain.interactor
             set
             {
                 connection = value;
-                database.Connection = connection;
+                //database.Connection = connection;
             }
 
         }
@@ -55,7 +56,7 @@ namespace WhoIsDemo.domain.interactor
             set
             {
                 nameDatabase = value;
-                database.NameDatabase = nameDatabase;
+                //database.NameDatabase = nameDatabase;
             }
 
         }

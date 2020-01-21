@@ -13,7 +13,7 @@ namespace WhoIsDemo.domain.interactor
         private string connection;
         private string nameDatabase;
         private string imageBase64;
-        private Database database = new Database();
+        //private Database database = new Database();
         private List<String> listImage = new List<string>();
         public delegate void ImageDelegate(string imageBase64);
         public event ImageDelegate OnImage;
@@ -24,16 +24,17 @@ namespace WhoIsDemo.domain.interactor
         #region methods
         public FindImage() { }
 
-        public void Connect()
-        {
-            database.Connect();
-            database.GetImages();
-        }
+        //public void Connect()
+        //{
+        //    database.Connect();
+        //    database.GetImages();
+        //}
 
         public void GetImageByIdFace(int idFace)
         {
-            
-            Image imageDb = database.GetImageByUser(idFace);
+
+            //Image imageDb = database.GetImageByUser(idFace);
+            Image imageDb = Database.Instance.GetImageByUser(idFace);
             if (imageDb != null)
             {
                 ImageBase64 = imageDb.data_64;
@@ -43,13 +44,15 @@ namespace WhoIsDemo.domain.interactor
 
         public void ClearPlanCacheImages()
         {
-            database.ClearPlanCacheImages();
+            //database.ClearPlanCacheImages();
+            Database.Instance.ClearPlanCacheImages();
         }
 
         public void GetListImageByIdFace(int idFace)
         {
 
-            Image imageDb = database.GetImageByUser(idFace);
+            //Image imageDb = database.GetImageByUser(idFace);
+            Image imageDb = Database.Instance.GetImageByUser(idFace);
             if (imageDb != null)
             {
                 List<String> list = new List<string>();
@@ -69,7 +72,7 @@ namespace WhoIsDemo.domain.interactor
             set
             {
                 connection = value;
-                database.Connection = connection;
+                //database.Connection = connection;
             }
             
         }
@@ -83,7 +86,7 @@ namespace WhoIsDemo.domain.interactor
             set
             {
                 nameDatabase = value;
-                database.NameDatabase = nameDatabase;
+                //database.NameDatabase = nameDatabase;
             }
             
         }

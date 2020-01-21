@@ -60,7 +60,7 @@ namespace WhoIsDemo.model
         private List<int> listHeightResolution = new List<int>();
         private List<int> listWidthResolution = new List<int>();
         private List<int> listTimeRefreshEntryControl = new List<int>();
-        private int timeRefreshEntryControl = 1; 
+        private int timeRefreshEntryControl = 0; 
         private string videoDefault;
         private int videoTypeDefault;
         private int width = 320;
@@ -108,6 +108,7 @@ namespace WhoIsDemo.model
             ListWidthResolution.Add(1920);
             ListHeightResolution.Add(1080);
 
+            ListTimeRefreshEntryControl.Add(0);
             ListTimeRefreshEntryControl.Add(1);
             ListTimeRefreshEntryControl.Add(5);
             ListTimeRefreshEntryControl.Add(10);

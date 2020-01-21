@@ -388,7 +388,8 @@
             resources.GetString("cboRefreshCapture.Items3"),
             resources.GetString("cboRefreshCapture.Items4"),
             resources.GetString("cboRefreshCapture.Items5"),
-            resources.GetString("cboRefreshCapture.Items6")});
+            resources.GetString("cboRefreshCapture.Items6"),
+            resources.GetString("cboRefreshCapture.Items7")});
             resources.ApplyResources(this.cboRefreshCapture, "cboRefreshCapture");
             this.cboRefreshCapture.Name = "cboRefreshCapture";
             this.cboRefreshCapture.SelectedIndexChanged += new System.EventHandler(this.cboRefreshCapture_SelectedIndexChanged);

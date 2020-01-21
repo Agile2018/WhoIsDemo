@@ -57,12 +57,12 @@ namespace WhoIsDemo.presenter
             this.findImage.OnListImage += new FindImage
                 .ListImageDelegate(SendListBitmap);
         }
-        public void Connect()
-        {
-            Connection = Configuration.Instance.ConnectDatabase; // "mongodb://localhost:27017";
-            NameDatabase = Configuration.Instance.NameDatabase; //"dbass";
-            findImage.Connect();
-        }
+        //public void Connect()
+        //{
+        //    Connection = Configuration.Instance.ConnectDatabase; // "mongodb://localhost:27017";
+        //    NameDatabase = Configuration.Instance.NameDatabase; //"dbass";
+        //    findImage.Connect();
+        //}
 
         public void GetImage64ByUser(int idFace)
         {

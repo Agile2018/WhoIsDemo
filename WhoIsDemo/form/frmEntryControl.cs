@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,7 +43,7 @@ namespace WhoIsDemo.form
 
         private int countIN = 0;
         private int countOut = 0;
-        private int countList = 0;
+        //private int countList = 0;
 
         private int countFlowLayoutControls = 0;
         
@@ -98,46 +100,78 @@ namespace WhoIsDemo.form
             Bitmap imgRight = null;
             try
             {
-                imgLeft = new Bitmap(pic1.Image);
+                pic1.Invoke(new Action(() => imgLeft = new Bitmap(pic1.Image)));
+                //imgLeft = new Bitmap(pic1.Image);
                 //pic1.Image = imgRight;
-                pic1.Image = image;
-                imgRight = new Bitmap(pic2.Image);
-                pic2.Image = findImagePresenter
-                    .AdjustAlpha(new Bitmap(imgLeft), 0.7f);
-                imgLeft = new Bitmap(pic3.Image);
-                pic3.Image = imgRight;
-                imgRight = new Bitmap(pic4.Image);
-                pic4.Image = imgLeft;
-                imgLeft = new Bitmap(pic5.Image);
-                pic5.Image = imgRight;
-                imgRight = new Bitmap(pic6.Image);
-                pic6.Image = imgLeft;
-                imgLeft = new Bitmap(pic7.Image);
-                pic7.Image = imgRight;
-                imgRight = new Bitmap(pic8.Image);
-                pic8.Image = imgLeft;
-                imgLeft = new Bitmap(pic9.Image);
-                pic9.Image = imgRight;
+                //pic1.Image = image;
+                pic2.Invoke(new Action(() => imgRight = new Bitmap(pic2.Image)));
+                pic2.Invoke(new Action(() => pic2.Image = findImagePresenter
+                    .AdjustAlpha(new Bitmap(imgLeft), 0.7f)));
+                pic3.Invoke(new Action(() => imgLeft = new Bitmap(pic3.Image)));
+                pic3.Invoke(new Action(() => pic3.Image = imgRight));
+                pic4.Invoke(new Action(() => imgRight = new Bitmap(pic4.Image)));
+                pic4.Invoke(new Action(() => pic4.Image = imgLeft));
+                pic5.Invoke(new Action(() => imgLeft = new Bitmap(pic5.Image)));
+                pic5.Invoke(new Action(() => pic5.Image = imgRight));
+                pic6.Invoke(new Action(() => imgRight = new Bitmap(pic6.Image)));
+                pic6.Invoke(new Action(() => pic6.Image = imgLeft));
+                pic7.Invoke(new Action(() => imgLeft = new Bitmap(pic7.Image)));
+                pic7.Invoke(new Action(() => pic7.Image = imgRight));
+                pic8.Invoke(new Action(() => imgRight = new Bitmap(pic8.Image)));
+                pic8.Invoke(new Action(() => pic8.Image = imgLeft));
+                pic9.Invoke(new Action(() => imgLeft = new Bitmap(pic9.Image)));
+                pic9.Invoke(new Action(() => pic9.Image = imgRight));
+
+                //imgRight = new Bitmap(pic2.Image);
+                //pic2.Image = findImagePresenter
+                //    .AdjustAlpha(new Bitmap(imgLeft), 0.7f);
+                //imgLeft = new Bitmap(pic3.Image);
+                //pic3.Image = imgRight;
+                //imgRight = new Bitmap(pic4.Image);
+                //pic4.Image = imgLeft;
+                //imgLeft = new Bitmap(pic5.Image);
+                //pic5.Image = imgRight;
+                //imgRight = new Bitmap(pic6.Image);
+                //pic6.Image = imgLeft;
+                //imgLeft = new Bitmap(pic7.Image);
+                //pic7.Image = imgRight;
+                //imgRight = new Bitmap(pic8.Image);
+                //pic8.Image = imgLeft;
+                //imgLeft = new Bitmap(pic9.Image);
+                //pic9.Image = imgRight;
             }
             catch (NullReferenceException ex)
             {
 
                 Console.WriteLine(ex.Message);
             }
-            catch (System.InvalidOperationException ex)
+            catch (System.InvalidOperationException)
             {
-
-                Console.WriteLine(ex.Message);
+                
+                managerControlView.ResetExceptionState(pic1);
+                pic1.Invalidate();
             }
             catch (Exception ex)
             {
 
                 Console.WriteLine(ex.Message);
             }
-            //finally
-            //{
-            //    pic1.Image = image;
-            //}
+            finally
+            {
+                try
+                {
+                    pic1.Invoke(new Action(() => pic1.Image = image));
+                    //pic1.Invoke(new Action(() => pic1.Update()));
+                }
+                catch (System.InvalidOperationException)
+                {
+                    
+                    managerControlView.ResetExceptionState(pic1);
+                    pic1.Invalidate();
+                }
+                
+                
+            }
             //isSetImageToSlider = true;
         }
 
@@ -194,7 +228,7 @@ namespace WhoIsDemo.form
 
         private void ConnectDatabase()
         {
-            findImagePresenter.Connect();
+            //findImagePresenter.Connect();
         }
 
         private void EnableObservers()
@@ -233,12 +267,11 @@ namespace WhoIsDemo.form
                 //this.btnStart.Invoke(new Action(() => this.btnStart.Enabled = true));
                 this.status.Invoke(new Action(() => managerControlView
                 .StopProgressStatusStrip(1, this.status)));
-                
+                this.openFileDialog.FileNames.ToList().Clear();
                 this.status.Invoke(new Action(() => managerControlView
                     .SetValueTextStatusStrip(ManagerResource.Instance.resourceManager
                     .GetString("complete"),
                     0, this.status)));                
-
             }
         }
 
@@ -287,8 +320,10 @@ namespace WhoIsDemo.form
                     try
                     {
                         isSetImageToSlider = false;
-                        Bitmap img = imagesSlider[0];
-                        this.Invoke(new Action(() => this.SetImage(img)));
+                        Bitmap img = new Bitmap(imagesSlider[0]);
+                        //this.Invoke(new Action(() => this.SetImage(img)));
+                        SetImage(img);
+                        Task.Delay(10).Wait();
                         imagesSlider.RemoveAt(0);
                     }
                     catch (System.InvalidOperationException ex)
@@ -443,6 +478,7 @@ namespace WhoIsDemo.form
             {
                 DateTime now = DateTime.Now;
                 TimeSpan ts = now - timePerson.income;
+                Console.WriteLine("TIME LAPSE PERSON: " + ts.Minutes.ToString());
                 if (ts.Minutes > Configuration.Instance.TimeRefreshEntryControl)
                 {
                     this.lisTimePerson[index].income = now;
@@ -479,6 +515,7 @@ namespace WhoIsDemo.form
                     this.countFlowLayoutControls = 0;
                     this.flowLayoutPanel1.Invoke(new Action(() =>
                     this.flowLayoutPanel1.Controls.Clear()));
+                    findImagePresenter.ClearPlanCacheImages();
                     Task.Delay(20);
                 }
 
@@ -653,11 +690,33 @@ namespace WhoIsDemo.form
                 isFinishNewCard = true;
                 if (subscriptionHearUser != null) subscriptionHearUser.Dispose();
                 if (subscriptionFindImage != null) subscriptionFindImage.Dispose();
-                                
+                if (subscriptionGraffits != null) subscriptionGraffits.Dispose();
                 System.Threading.Thread closeTracking = new System
                     .Threading.Thread(new System.Threading
                .ThreadStart(graffitsPresenter.TerminateTracking));
                 closeTracking.Start();
+
+                System.Threading.Thread reloadAPI = new System
+                    .Threading.Thread(new System.Threading
+               .ThreadStart(graffitsPresenter.ReloadAipu));
+                reloadAPI.Start();
+
+                this.pic1.Dispose();
+                this.pic2.Dispose();
+                this.pic3.Dispose();
+                this.pic4.Dispose();
+                this.pic5.Dispose();
+                this.pic6.Dispose();
+                this.pic7.Dispose();
+                this.pic8.Dispose();
+                this.pic9.Dispose();
+                this.flowLayoutPanel1.Dispose();
+                this.listPersonSlider.Clear();
+                this.listPersonRegister.Clear();
+                this.lisTimePerson.Clear();
+                this.imagesSlider.Clear();
+                this.imagesNewCard.Clear();
+                this.listPersonNewCard.Clear();
                 managerControlView.EnabledOptionMenu(strNameMenu, mdiMain.NAME);
                 managerControlView.EnabledOptionMenu("enrolamientoToolStripMenuItem", mdiMain.NAME);
                 managerControlView.EnabledOptionMenu("configuraciónToolStripMenuItem", mdiMain.NAME);
@@ -671,14 +730,37 @@ namespace WhoIsDemo.form
 
         }
 
+        
+
         private void pic1_Paint(object sender, PaintEventArgs e)
         {
-            Rectangle rect = new Rectangle(0, 0, pic1.Width, pic1.Height);
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddEllipse(rect);
-            Region reg = new Region(gp);
-            pic1.Region = reg;
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            try
+            {
+                Rectangle rect = new Rectangle(0, 0, pic1.Width, pic1.Height);
+                GraphicsPath gp = new GraphicsPath();
+                gp.AddEllipse(rect);
+                Region reg = new Region(gp);
+                pic1.Region = reg;
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            }
+            catch (System.InvalidOperationException)
+            {
+                
+                managerControlView.ResetExceptionState((sender as PictureBox));
+                (sender as PictureBox).Invalidate();
+            }
+            //try
+            //{
+            //    throw new Exception("Boom");
+            //}
+            //catch (Exception ex)
+            //{
+            //    ResetExceptionState(pic1);
+            //    pic1.Invalidate();
+
+            //}
+            
+
         }
 
         private void pic2_Paint(object sender, PaintEventArgs e)
@@ -819,6 +901,7 @@ namespace WhoIsDemo.form
         private void btnStopLoadFile_Click(object sender, EventArgs e)
         {
             graffitsPresenter.CancelLoad = true;
+            
         }
     }
 

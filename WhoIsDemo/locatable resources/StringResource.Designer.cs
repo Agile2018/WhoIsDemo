@@ -88,7 +88,7 @@ namespace WhoIsDemo.locatable_resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to delete the database?.
+        ///   Looks up a localized string similar to Are you sure to delete the database? The application will close..
         /// </summary>
         internal static string delete_database {
             get {

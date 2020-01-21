@@ -34,7 +34,7 @@ namespace WhoIsDemo.presenter
         private bool cancelLoad = false;
         private bool isLoadFile = false;
         private static readonly object _balanceLocker = new object();
-        
+        DiskPresenter diskPresenter = new DiskPresenter();
         #endregion
 
         #region methods
@@ -179,7 +179,13 @@ namespace WhoIsDemo.presenter
 
         //}
 
-        
+        public void ReloadAipu()
+        {
+            RequestAipu.Instance.StopAipu();
+            Task.Delay(500).Wait();
+            RequestAipu.Instance.ReloadAipu();
+            Task.Delay(500).Wait();
+        }
 
         public async Task TaskImageFileForRecognition(string[] listPath)
         {
@@ -202,17 +208,28 @@ namespace WhoIsDemo.presenter
                 {
 
                     //WriteImageForRecognition(listPath[count]);
+                    //if ((count % 100) == 0)
+                    //{
+                    //    RequestAipu.Instance.StopAipu();
+                    //    Task.Delay(500).Wait();
+                    //    RequestAipu.Instance.ReloadAipu();
+                    //    Task.Delay(500).Wait();
+                    //}
                     string fileImage = listPath[count];
                     
                     RequestAipu.Instance.RecognitionFaceFiles(fileImage, linkVideo);
                     count++;
-                    
+
                 }
-                //
+                
             }
             //Task.Delay(300).Wait();
             CancelLoad = false;
             subjectLoad.OnNext(true);
+
+            //diskPresenter.WriteFileOfFiles(listPath);
+            //RequestAipu.Instance.RecognitionFaceFiles(DiskPresenter.file_list_images, linkVideo);
+            //subjectLoad.OnNext(true);
         }
         //public async Task TaskImageForRecognition(Mat img)
         //{

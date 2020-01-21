@@ -47,12 +47,12 @@ namespace WhoIsDemo.presenter
         #region methods
         public DropDatabasePresenter() { }
 
-        public void Connect()
-        {            
-            Connection = Configuration.Instance.ConnectDatabase; // "mongodb://localhost:27017";
-            NameDatabase = Configuration.Instance.NameDatabase; //"dbass";
-            dropDatabase.Connect();
-        }
+        //public void Connect()
+        //{            
+        //    Connection = Configuration.Instance.ConnectDatabase; // "mongodb://localhost:27017";
+        //    NameDatabase = Configuration.Instance.NameDatabase; //"dbass";
+        //    dropDatabase.Connect();
+        //}
 
         public bool DropCurrentDatabase()
         {
