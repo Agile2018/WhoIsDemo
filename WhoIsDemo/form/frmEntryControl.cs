@@ -633,7 +633,6 @@ namespace WhoIsDemo.form
             
         }       
 
-
         private void BringToFrontImageViewer(int position)
         {
             graffitsPresenter.ShowWindow(position);
@@ -666,6 +665,12 @@ namespace WhoIsDemo.form
             RunSetImageToSlider();
             RunNewCardToFlowLayout();
             graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
+           
+        }
+
+        private void RunFlowVideo()
+        {
+            graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
         }
 
         private void btnRestart_Click(object sender, EventArgs e)
@@ -686,6 +691,7 @@ namespace WhoIsDemo.form
         {
             try
             {
+                VerifyIfVideoRun();
                 isFinishSlider = true;
                 isFinishNewCard = true;
                 if (subscriptionHearUser != null) subscriptionHearUser.Dispose();
@@ -730,7 +736,15 @@ namespace WhoIsDemo.form
 
         }
 
-        
+        private void VerifyIfVideoRun()
+        {
+            
+            if (!this.btnStart.Enabled && this.btnStop.Enabled)
+            {
+                graffitsPresenter.StatePaused();
+                Task.Delay(300).Wait();
+            }
+        }
 
         private void pic1_Paint(object sender, PaintEventArgs e)
         {

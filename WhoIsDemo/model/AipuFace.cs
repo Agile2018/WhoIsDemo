@@ -1,6 +1,7 @@
 ﻿using Aipu2NetLib;
 using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace WhoIsDemo.model
 {
@@ -29,7 +30,16 @@ namespace WhoIsDemo.model
         {
             aipu = new AipuNet();
             aipuObserver = new AipuObserver(aipu);
+            //Thread thr = new Thread(InitProcessAipu);
+            //thr.Start();
+            //thr.Join();
         }
+
+        private void InitProcessAipu()
+        {
+            aipu = new AipuNet();
+            aipuObserver = new AipuObserver(aipu);
+        }       
 
         public void LoadConfiguration(string nameFileConfiguration)
         {

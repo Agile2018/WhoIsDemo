@@ -71,7 +71,8 @@ namespace WhoIsDemo
             this.Top = 0;
             this.Left = (int)((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2);
             Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.Black;
-            managerControlView.CreateStatusBar(this, statusStrip);            
+            managerControlView.CreateStatusBar(this, statusStrip);
+            
             SubscriptionReactive();
             diskPresenter.CreateDirectoryWork();
             VerifyFileConfiguration();

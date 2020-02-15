@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WhoIsDemo.domain.interactor;
@@ -642,7 +643,6 @@ namespace WhoIsDemo.form
 
         }      
         
-
         #endregion
 
         private void BringToFrontImageViewer(int position)
@@ -654,7 +654,8 @@ namespace WhoIsDemo.form
         private void frmEnroll_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
-            {                
+            {
+                VerifyIfVideoRun();
                 if (graffitsPresenter.IsLoadFile)
                 {
                     graffitsPresenter.IsLoadFile = false;
@@ -702,6 +703,16 @@ namespace WhoIsDemo.form
            
             
                 
+        }
+
+        private void VerifyIfVideoRun()
+        {
+
+            if (!this.btnStart.Enabled && this.btnStop.Enabled)
+            {
+                graffitsPresenter.StatePaused();
+                Task.Delay(300).Wait();
+            }
         }
 
         private void pic1_Paint(object sender, PaintEventArgs e)
@@ -853,10 +864,16 @@ namespace WhoIsDemo.form
             this.lblNotDetect.Visible = false;
             RunSetImageToSlider();
             RunNewCardToFlowLayout();
+            //Thread thr = new Thread(RunFlowVideo);
+            //thr.Start();
             graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
             
         }
 
+        private void RunFlowVideo()
+        {
+            graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
+        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             
