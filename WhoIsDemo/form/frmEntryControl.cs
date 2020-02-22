@@ -291,6 +291,7 @@ namespace WhoIsDemo.form
                 isRunSlider = true;
                 InitSetImageToSlider();
                 Task tpt = this.TaskSetImageToSlider();
+                //ThreadPool.QueueUserWorkItem(new WaitCallback(SetImageToSlider));
             }
 
         }
@@ -310,7 +311,7 @@ namespace WhoIsDemo.form
             this.isFinishSlider = false;
             this.isSetImageToSlider = true;
         }
-
+        //object callback
         private void SetImageToSlider()
         {
             while (!isFinishSlider)
@@ -369,6 +370,7 @@ namespace WhoIsDemo.form
                 isRunNewCard = true;
                 InitSetNewCardToFlowLayout();
                 Task tnc = this.TaskNewCardToFlowLayout();
+                //ThreadPool.QueueUserWorkItem(new WaitCallback(SetNewCardToFlowLayout));
             }
 
         }
@@ -388,7 +390,7 @@ namespace WhoIsDemo.form
 
             });
         }
-
+        //object callback
         private void SetNewCardToFlowLayout()
         {
             while (!isFinishNewCard)
@@ -618,7 +620,7 @@ namespace WhoIsDemo.form
                 string nameWindow = "Entry_Control_" + LinkVideo.ToString();
                 graffitsPresenter.SetNameWindow(nameWindow);
                 graffitsPresenter.SetFlagFlow(false);
-                
+                captureInit.Stop();
                 captureInit.Dispose();
             }
             else
@@ -664,8 +666,15 @@ namespace WhoIsDemo.form
             this.btnBackVideo.Enabled = true;
             RunSetImageToSlider();
             RunNewCardToFlowLayout();
-            graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
-           
+
+            Thread myThread = new Thread(new ThreadStart(RunFlowVideo));
+
+            //myThread.IsBackground = true;
+            myThread.Priority = ThreadPriority.AboveNormal;
+            //myThread.SetApartmentState(ApartmentState.STA);
+            myThread.Start();
+            //graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
+
         }
 
         private void RunFlowVideo()

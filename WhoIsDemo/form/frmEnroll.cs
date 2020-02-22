@@ -629,7 +629,7 @@ namespace WhoIsDemo.form
                 string nameWindow = "Enroll_" + LinkVideo.ToString();
                 graffitsPresenter.SetNameWindow(nameWindow);
                 graffitsPresenter.SetFlagFlow(false);
-                
+                captureInit.Stop();
                 captureInit.Dispose();
             }
             else
@@ -864,9 +864,10 @@ namespace WhoIsDemo.form
             this.lblNotDetect.Visible = false;
             RunSetImageToSlider();
             RunNewCardToFlowLayout();
-            //Thread thr = new Thread(RunFlowVideo);
-            //thr.Start();
-            graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
+            Thread myThread = new Thread(new ThreadStart(RunFlowVideo));            
+            myThread.Priority = ThreadPriority.AboveNormal;            
+            myThread.Start();
+            //graffitsPresenter.CaptureFlow(Configuration.Instance.VideoTypeDefault);
             
         }
 
